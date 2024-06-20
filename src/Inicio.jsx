@@ -4,10 +4,19 @@ import { ButtonbyAdam } from './components/ButtonbyAdam'
 
 const Hero = () => {
     return (
-        <div className='text-center flex justify-evenly items-center w-full m-auto'>
-            <div className='w-1/2 flex flex-col '>
+        <div className='
+        text-center 
+        flex justify-evenly items-center 
+        w-full m-auto
+        xl:gap-3'>
+            <div className='w-1/2 flex flex-col gap-2 '>
                 <div className='mr-5 lg:mb-5 xl:w-full xl:flex justify-end'>
-                    <div className='xl:w-1/2 xl:text-center'>
+                    <div className='
+                    text-xl
+                    md:text-3xl
+                    xl:w-1/2 
+                    xl:text-center 
+                    xl:text-4xl'>
                         <h1 >Gabriel Cabrera Sirlopu</h1>
                         <h2 >Web developer</h2>
                     </div>
@@ -27,7 +36,7 @@ const Hero = () => {
 
             </div>
             <div className='w-1/2 xl:ml-5'>
-                <img className='xl:w-1/3 rounded-xl' src="relajo.png" alt="" />
+                <img className='xl:w-2/5 rounded-xl' src="relajo.png" alt="" />
             </div>
 
         </div>

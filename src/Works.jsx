@@ -36,7 +36,8 @@ const ListProjects = () => {
                 </div>
 
 
-                <article className='xl:flex xl:p-3'>
+                <article className='
+                xl:flex xl:p-3 mt-3 mb-2'>
 
                     <div className='
                 flex items-center justify-center
@@ -44,8 +45,16 @@ const ListProjects = () => {
                 xl:w-2/3
                 '>
                         <a
+                            className=""
                             href={proyect.url_link} target='_blank'>
-                            <img className="rounded-xl" src={proyect.img_url} alt="" />
+                            <img className="
+                            lg:border
+                            lg:border-black
+                            lg:transform hover:scale-105
+                            lg:transition-transform 
+                            lg:duration-400
+                            lg:hover:border-emerald-400
+                            rounded-xl" src={proyect.img_url} alt="" />
                         </a>
                     </div>
 
@@ -54,6 +63,7 @@ const ListProjects = () => {
                 bg-black 
                 bg-opacity-75 
                 p-4 
+                lg:ml-2
                 xl:rounded-xl 
                 xl:w-full'>
                         {proyect.description_app}

@@ -42,25 +42,35 @@ export function FormContact({ urlPing }) {
             handleReset('YA ENVIO LOS MAILS PERMITIDOS.')
             return
         }
-        console.log('Form values:', formValues);
-        sendEmail()
-    };
 
-    function sendEmail() {
-        setLoadingEmail(true)
         const formData = {
             name: formValues.name,
             addresse: formValues.email,
             subject: formValues.reason,
             message: formValues.message
         };
+
+        const isFormValid = Object.values(formData).every(value => value.trim() !== '');
+
+        if (!isFormValid) {
+            console.log("Todos los campos son obligatorios. Por favor, complete todos los campos.");
+            return
+        }
+        sendEmail(formData)
+    };
+
+    function sendEmail(form) {
+
+        console.log("Formulario válido. Enviando datos...");
+        setLoadingEmail(true)
+
         try {
             fetch('https://portf-617-express.onrender.com/enviar-correo', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(form),
             })
                 .then((response) => response.text())
                 .then((data) => {
@@ -88,6 +98,9 @@ export function FormContact({ urlPing }) {
         } catch {
             console.error('Error en try, error')
         }
+
+
+
     }
 
 
