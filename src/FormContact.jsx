@@ -94,7 +94,14 @@ export function FormContact({ urlPing }) {
 
 
     return (
-        <section id='contacto' className='bg-white bg-opacity-40 rounded-md p-2 xl:w-80 xl:m-auto xl:bg-opacity-40'>
+        <section id='contacto' 
+        className='
+        mb-4
+        bg-white 
+        bg-opacity-40 
+        rounded-md p-2 
+        xl:w-80 xl:m-auto 
+        xl:bg-opacity-40'>
 
             <h1 className='text-center mb-4 text-3xl bg-black bg-opacity-75'>Contacto</h1>
             {(

@@ -67,9 +67,12 @@ const ListProjects = () => {
                 <div className='m-auto w-70 flex justify-center items-center gap-2 sm:w-1/2 lg:w-1/3 xl:w-1/5'>
                     {proyect.tecs.map(tec => {
                         return (
-                            <div className='mt-2'>
-                                <img className='w-full img-tecs rounded-full' src={tec} alt="" />
+                            <div className="w-full">
+                                <div className='mt-2'>
+                                    <img className='xl:w-80 img-tecs rounded-full' src={tec} alt="" />
+                                </div>
                             </div>
+
                         )
                     })}
                 </div>
