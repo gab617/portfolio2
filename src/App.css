@@ -1,8 +1,9 @@
 body {
-    color:white;
+    color: white;
     /* background-image: url('/fondo2.webp'); */
-    background: rgb(25,59,47);
-    background: linear-gradient(90deg, rgba(25,59,47,1) 0%, rgba(11,74,78,1) 100%);}
+    background: rgb(25, 59, 47);
+    background: linear-gradient(90deg, rgba(25, 59, 47, 1) 0%, rgba(11, 74, 78, 1) 100%);
+}
 
 .img-tecs {
     box-shadow: 10px 10px 259px 68px rgba(255, 255, 255, 1) inset;
@@ -175,8 +176,7 @@ body {
     }
 
     .ul-header li a:hover {
-        background-color: rgb(226, 225, 225);
-        color: rgb(7, 7, 7);
+        background: rgba(9, 136, 26, 0.219);
 
     }
 }

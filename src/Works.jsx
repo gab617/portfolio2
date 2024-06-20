@@ -10,14 +10,13 @@ const ListProjects = () => {
         return (
             <div className='
             mb-10 
-            xl:bg-black 
             sm:rounded-xl
-            xl:bg-opacity-50 
+            xl:bg-black 
+            xl:bg-opacity-10 
             xl:p-2'>
                 <div className='flex justify-between mb-2 sm:mt-3'>
                     <div className="flex items-center">
                         <h1 className='text-xl md:text-3xl font-bold text-gray-200'>{proyect.title}</h1>
-
                     </div>
                     <div className="flex">
                         <a className="w-11 mr-5" href={proyect.url_repo} target='_blank'>
@@ -62,10 +61,10 @@ const ListProjects = () => {
                     <p className='
                         sm:text-xl                           
                         bg-black 
-                        bg-opacity-75 
+                        bg-opacity-35 
                         p-4 
+                        rounded-xl 
                         lg:ml-2
-                        xl:rounded-xl 
                         xl:w-full'>
                         {proyect.description_app}
                         <br />
@@ -108,7 +107,11 @@ const ListProjects = () => {
 const Tiltle = () => {
     return (
         <div>
-            <h1 className='text-center mb-4 text-3xl sm:bg-black sm:bg-opacity-75 md:text-4xl'>Proyectos</h1>
+            <h1 className='
+            text-center 
+            mb-4 text-3xl 
+            sm:bg-black sm:bg-opacity-15 
+            md:text-4xl'>Proyectos</h1>
         </div>
     )
 }

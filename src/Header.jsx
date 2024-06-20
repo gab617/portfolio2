@@ -5,7 +5,7 @@ export function Header() {
         sticky top-0 
         bg-black 
         p-1 
-        bg-opacity-80 z-50
+        bg-opacity-10 z-50
         sm:text-xl 
         xl:m-auto 
         '>

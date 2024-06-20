@@ -47,7 +47,7 @@ const AboutMe = () => {
         <div className='
         mb-10 mt-4 
         sm:bg-black 
-        sm:bg-opacity-60 
+        sm:bg-opacity-10 
         sm:p-3
         sm:pb-5
         xl:max-w-7xl
@@ -72,7 +72,7 @@ const Tecnologies = () => {
 
         <div>
             <div>
-                <h1 className='text-center mb-4 text-3xl sm:bg-black sm:bg-opacity-75'>Tecnologías</h1>
+                <h1 className='text-center mb-4 text-3xl sm:bg-black sm:bg-opacity-10 sm:rounded-xl'>Tecnologías</h1>
             </div>
             <div className='grid grid-cols-3 gap-4 sm:gap-2 md:w-80 md:m-auto md:gap-1 xl:w-2/5'>
                 {

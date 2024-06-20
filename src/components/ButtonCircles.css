@@ -21,7 +21,7 @@
     transform: translate(-50%, -50%);
     height: 30px;
     width: 30px;
-    background-color: #0c66ed;
+    background-color: rgba(9, 136, 26, 0.705);
     border-radius: 50%;
     transition: .6s ease;
 }
