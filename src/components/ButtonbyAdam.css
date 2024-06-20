@@ -23,7 +23,7 @@
     height: 100%;
     background: transparent;
     z-index: -1;
-    border: .2em solid royalblue;
+    border: .2em solid rgb(8, 100, 50);
 }
 
 .btn-adam span::before {
@@ -42,7 +42,7 @@
 .btn-adam:hover span::before {
     transform: translate(-50%, -50%) rotate(-90deg);
     width: 100%;
-    background: royalblue;
+    background: rgba(9, 136, 26, 0.541);
 }
 
 .btn-adam:hover {

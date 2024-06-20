@@ -11,9 +11,10 @@ const ListProjects = () => {
             <div className='
             mb-10 
             xl:bg-black 
+            sm:rounded-xl
             xl:bg-opacity-50 
             xl:p-2'>
-                <div className='flex justify-between mb-2'>
+                <div className='flex justify-between mb-2 sm:mt-3'>
                     <div className="flex items-center">
                         <h1 className='text-xl md:text-3xl font-bold text-gray-200'>{proyect.title}</h1>
 
@@ -59,13 +60,13 @@ const ListProjects = () => {
                     </div>
 
                     <p className='
-                sm:text-xl                           
-                bg-black 
-                bg-opacity-75 
-                p-4 
-                lg:ml-2
-                xl:rounded-xl 
-                xl:w-full'>
+                        sm:text-xl                           
+                        bg-black 
+                        bg-opacity-75 
+                        p-4 
+                        lg:ml-2
+                        xl:rounded-xl 
+                        xl:w-full'>
                         {proyect.description_app}
                         <br />
                         <br />

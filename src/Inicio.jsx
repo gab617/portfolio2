@@ -44,11 +44,24 @@ const Hero = () => {
 }
 const AboutMe = () => {
     return (
-        <div className='mb-10 mt-4 sm:bg-black sm:bg-opacity-50 sm:p-3'>
-            <h1>Sobre mí:</h1>
-            <p>
+        <div className='
+        mb-10 mt-4 
+        sm:bg-black 
+        sm:bg-opacity-60 
+        sm:p-3
+        sm:pb-5
+        xl:max-w-7xl
+        xl:m-auto
+        xl:mt-2
+        xl:mb-2
+        xl:rounded-xl
+        '>
+            <h1 className='sm:text-center mb-1'>Sobre mí:</h1>
+            <p className='xl:p-5'>
                 Soy un desarrollador web enfocado en el diseño lógico y algorítmico de aplicaciones, mejorando estructuras de datos para asegurar la escalabilidad y eficiencia de los proyectos.
                 Acompañado de un diseño atractivo, acorde a las necesidades y para cualquier dispositivo (resposive). <br /> <br />
+            </p>
+            <p className='lg:text-center'>
                 Mejora continua.
             </p>
         </div>
@@ -83,7 +96,7 @@ export function Inicio() {
             <div className='mt-3'>
                 <Hero />
                 <AboutMe />
-                <Tecnologies/>
+                <Tecnologies />
             </div>
         </section>
     )
