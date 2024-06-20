@@ -9,6 +9,11 @@ body {
     -moz-box-shadow: 10px 10px 259px 68px rgba(255, 255, 255, 0.452) inset;
 }
 
+.img-repo {
+    filter: drop-shadow(0 0 0.50rem rgb(0, 255, 234));
+
+}
+
 
 .chaotic-orbit {
     --uib-size: 1.4em;

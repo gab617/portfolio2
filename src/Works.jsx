@@ -13,13 +13,32 @@ export function Works() {
                 {
                     projectsF.map(proyect => {
                         return (
-                            <div className='mb-10 xl:bg-black xl:bg-opacity-50 xl:p-2'>
-                                <div className='flex justify-between'>
-                                    <h1 className='text-xl md:text-3xl'>{proyect.title}</h1>
+                            <div className='
+                                mb-10 
+                                xl:bg-black 
+                                xl:bg-opacity-50 
+                                xl:p-2'>
+                                <div className='flex justify-between mb-2'>
+                                    <div className="flex items-center">
+                                        <h1 className='text-xl md:text-3xl'>{proyect.title}</h1>
 
-                                    <LoaderProject
-                                        proyectUrl={proyect.url_ping}
-                                    />
+
+                                    </div>
+                                    <div className="flex">
+                                        <a className="w-11 mr-5" href={proyect.url_repo} target='_blank'>
+                                            <img className="
+                                        img-repo
+                                        rounded-full
+                                        opacity-80
+                                        ml-3
+                                        cursor-pointer
+                                        " src="icons_tecs/github-logo.png" alt="" title="repository" />
+                                        </a>
+                                        <LoaderProject
+                                            proyectUrl={proyect.url_ping}
+                                        />
+                                    </div>
+
                                 </div>
 
 

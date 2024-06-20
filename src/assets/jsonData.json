@@ -11,12 +11,31 @@
         "icons_tecs/node-icon.png"
     ],
     "projectsF": [
-        {   "id": 0,
+        {
+            "id": 1,
+            "title": "D2 app",
+            "url_link": "https://dota2-app-front-617.vercel.app/",
+            "url_ping": "https://dota2-6174.onrender.com/api/ping",
+            "url_repo":"https://github.com/gab617/dota2-app-FRONT-617",
+            "img_url": "proys_imgs/d2.png",
+            "description_app": "Esta aplicación para fanáticos de Dota 2 permite explorar y aprender sobre los héroes del juego. Presenta una lista completa de héroes, y al hacer clic en uno, se muestra una página con sus detalles, incluyendo estadísticas y habilidades.",
+            "description_dev": "La aplicación está desarrollada utilizando React para el front-end y Express con Node.js para el back-end. En el front-end, React se encarga de renderizar dos componentes principales: una lista de héroes y un componente de detalles para cada héroe seleccionado. La lista de héroes presenta una vista general de todos los héroes disponibles en Dota 2, mientras que el componente de detalles proporciona información detallada sobre un héroe específico cuando se hace clic en él.",
+            "tecs": [
+                "icons_tecs/react-icon.png",
+                "icons_tecs/tailwind-icon.png",
+                "icons_tecs/node-icon.png",
+                "icons_tecs/git-icon.png"
+            ],
+            "responsive": true
+        },
+        {
+            "id": 0,
             "title": "Basic words",
-            "url_link":"https://r-f-traducciones.vercel.app/",
-            "url_ping":"https://e-b-js-traduciones.onrender.com/ping",
+            "url_link": "https://r-f-traducciones.vercel.app/",
+            "url_ping": "https://e-b-js-traduciones.onrender.com/ping",
+            "url_repo":"https://github.com/gab617/r-f-traducciones",
             "img_url": "proys_imgs/traducc.png",
-            "description_app":"La app muestra imágenes y opciones de palabras al azar dentro de un rango de categorias seleccionables, para que el aprendizaje sea variado y divertido. Cuando aciertas la palabra, recibes una respuesta inmediata, lo que ayuda a memorizar y entender mejor el vocabulario. Además, su diseño modular facilita agregar nuevas palabras e imágenes sin problemas.",
+            "description_app": "La app muestra imágenes y opciones de palabras al azar dentro de un rango de categorias seleccionables, para que el aprendizaje sea variado y divertido. Cuando aciertas la palabra, recibes una respuesta inmediata, lo que ayuda a memorizar y entender mejor el vocabulario. Además, su diseño modular facilita agregar nuevas palabras e imágenes sin problemas.",
             "description_dev": "El front-end de la aplicación está desarrollado en React, lo que permite una creación dinámica de componentes y una actualización eficiente del DOM. Utilizando React Router y Context, se garantiza una navegación fluida y una gestión eficiente del estado de la aplicación. El back-end, construido con Express y Node.js, forma una API RESTful que maneja las solicitudes HTTP del front-end. Esta API sirve imágenes y palabras, gestionando la lógica de aprendizaje y enviando datos en formato JSON para una comunicación rápida y eficiente. Node.js permite alta concurrencia y escalabilidad, manejando múltiples conexiones simultáneas de manera eficaz.",
             "tecs": [
                 "icons_tecs/react-icon.png",
@@ -27,39 +46,27 @@
             "responsive": true
         },
         {
-            "id": 1,
-            "title": "D2 app",
-            "url_link":"https://dota2-app-front-617.vercel.app/",
-            "url_ping":"https://dota2-6174.onrender.com/api/ping",
-            "img_url": "proys_imgs/d2.png",
-            "description_app":"Esta aplicación para fanáticos de Dota 2 permite explorar y aprender sobre los héroes del juego. Presenta una lista completa de héroes, y al hacer clic en uno, se muestra una página con sus detalles, incluyendo estadísticas y habilidades.",
-            "description_dev": "La aplicación está desarrollada utilizando React para el front-end y Express con Node.js para el back-end. En el front-end, React se encarga de renderizar dos componentes principales: una lista de héroes y un componente de detalles para cada héroe seleccionado. La lista de héroes presenta una vista general de todos los héroes disponibles en Dota 2, mientras que el componente de detalles proporciona información detallada sobre un héroe específico cuando se hace clic en él.",
-            "tecs": [
-                "icons_tecs/react-icon.png",
-                "icons_tecs/node-icon.png",
-                "icons_tecs/css-icon.png",
-                "icons_tecs/git-icon.png"
-            ],
-            "responsive": false
-
-        },
-        {
             "id": 2,
             "title": "Giphy",
-            "url_link":"https://giphy-react-front-617.vercel.app/ ",
-            "url_ping":"https://giphy617.onrender.com/ping",
+            "url_link": "https://giphy-react-front-617.vercel.app/ ",
+            "url_repo":"https://github.com/gab617/giphy-react-front",
+            "url_ping": "https://giphy617.onrender.com/ping",
             "img_url": "proys_imgs/giph2.png",
-            "description_app":"Esta aplicación permite a los usuarios navegar y buscar GIFs mediante categorías predefinidas y búsquedas manuales, ofreciendo contenido relevante sobre temas específicos a través de la API de Giphy.com. La aplicación está desarrollada en React para el front-end y utiliza Express con Node.js para el back-end.",
+            "description_app": "Esta aplicación permite a los usuarios navegar y buscar GIFs mediante categorías predefinidas y búsquedas manuales, ofreciendo contenido relevante sobre temas específicos a través de la API de Giphy.com. La aplicación está desarrollada en React para el front-end y utiliza Express con Node.js para el back-end.",
             "description_dev": "La aplicación interactúa directamente con la API de Giphy.com para obtener y mostrar los GIFs en función de las solicitudes de los usuarios. El back-end, desarrollado con Express y Node.js, maneja funcionalidades específicas de la aplicación. Este servidor se encarga de integrar y gestionar la comunicación con la API de Giphy, así como de procesar las solicitudes del front-end. De esta manera, la aplicación utiliza dos puntos de integración distintos: uno para obtener las categorías y búsquedas generales directamente desde la API de Giphy y otro para funcionalidades específicas gestionadas por el servidor Express.",
             "tecs": [
                 "icons_tecs/react-icon.png",
+                "icons_tecs/tailwind-icon.png",
                 "icons_tecs/node-icon.png",
-                "icons_tecs/css-icon.png",
                 "icons_tecs/git-icon.png"
             ],
             "responsive": true
         }
     ],
-
-    "urls_ping": ["https://e-b-js-traduciones.onrender.com/ping", "https://dota2-6174.onrender.com/api/ping", "https://giphy617.onrender.com/ping","https://portf-617-express.onrender.com/ping"]
+    "urls_ping": [
+        "https://e-b-js-traduciones.onrender.com/ping",
+        "https://dota2-6174.onrender.com/api/ping",
+        "https://giphy617.onrender.com/ping",
+        "https://portf-617-express.onrender.com/ping"
+    ]
 }

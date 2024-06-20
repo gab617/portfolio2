@@ -19,7 +19,7 @@ export function LoaderProject({ proyectUrl }) {
         <>
             {loader && (
                 <>
-                    <div>
+                    <div className="mt-1">
                         <div className='flex'>
                             <div className="chaotic-orbit"></div>
                             <p className='text-xs mt-1'>Solicitando servidor</p>
