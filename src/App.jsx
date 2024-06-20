@@ -20,9 +20,6 @@ function App() {
       <FormContact
           urlPing={urls_ping[3]}
       />
-
-
-
     </>
   )
 }
