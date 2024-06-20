@@ -15,8 +15,7 @@ const ListProjects = () => {
             xl:p-2'>
                 <div className='flex justify-between mb-2'>
                     <div className="flex items-center">
-                        <h1 className='text-xl md:text-3xl'>{proyect.title}</h1>
-
+                        <h1 className='text-xl md:text-3xl font-bold text-gray-200'>{proyect.title}</h1>
 
                     </div>
                     <div className="flex">

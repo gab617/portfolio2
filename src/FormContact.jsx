@@ -94,8 +94,8 @@ export function FormContact({ urlPing }) {
 
 
     return (
-        <section id='contacto' 
-        className='
+        <section id='contacto'
+            className='
         mb-4
         bg-white 
         bg-opacity-40 
@@ -144,19 +144,22 @@ export function FormContact({ urlPing }) {
                         />
                     </div>
                     <div className='w-80 flex text-center flex-col m-auto'>
-                        <h1 className='w-full text-2xl'>Enlaces</h1>
+                        <h1 className='w-full text-2xl mb-2'>Enlaces</h1>
                         <div className='flex w-full justify-center gap-2'>
-                            <a
-                                className='w-1/4 bg-slate-50 rounded-full bg-opacity-75' 
-                                href="https://github.com/gab617?tab=repositories" target='_blank'
+                            <div className='w-1/2 flex xl:w-1/2 gap-1'>
+                                <a
+                                    className='w-1/2 bg-slate-50 rounded-full bg-opacity-75'
+                                    href="https://github.com/gab617?tab=repositories" target='_blank'
                                 >
                                     <img src='icons_tecs/github-logo.png' alt="" />
-                            </a>
-                            <a className='w-1/4 rounded-full' 
-                            href="https://www.linkedin.com/in/gabriel-cabrera-sirlopu-0a5700267/" target='_blank'>
-                                <img src='linkedin-icon.png' alt="" />
+                                </a>
+                                <a className='w-1/2 rounded-full'
+                                    href="https://www.linkedin.com/in/gabriel-cabrera-sirlopu-0a5700267/" target='_blank'>
+                                    <img src='linkedin-icon.png' alt="" />
 
-                            </a>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
 
