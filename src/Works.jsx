@@ -40,6 +40,7 @@ const ListProjects = () => {
                 xl:flex xl:p-3 mt-3 mb-2'>
 
                     <div className='
+                    drop-shad-tecno
                 flex items-center justify-center
                 w-full 
                 xl:w-2/3
@@ -76,7 +77,10 @@ const ListProjects = () => {
                 <div className='m-auto w-70 flex justify-center items-center gap-2 sm:w-1/2 lg:w-1/3 xl:w-1/5'>
                     {proyect.tecs.map(tec => {
                         return (
-                            <div className="w-full">
+                            <div className="
+                            drop-shad-tecno
+                            w-full
+                            ">
                                 <div className='mt-2'>
                                     <img className='xl:w-80 img-tecs rounded-full' src={tec} alt="" />
                                 </div>
@@ -111,6 +115,7 @@ const Tiltle = () => {
             text-center 
             mb-4 text-3xl 
             sm:bg-black sm:bg-opacity-15 
+            sm:rounded-xl
             md:text-4xl'>Proyectos</h1>
         </div>
     )

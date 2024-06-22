@@ -120,6 +120,10 @@ body {
     }
 }
 
+.drop-shad-tecno{
+    filter: drop-shadow(.2em 0px .1em #000000);
+}
+
 /* FADE IN */
 
 .fade-in {

@@ -72,13 +72,21 @@ const Tecnologies = () => {
 
         <div>
             <div>
-                <h1 className='text-center mb-4 text-3xl sm:bg-black sm:bg-opacity-10 sm:rounded-xl'>Tecnologías</h1>
+                <h1 className='
+                m-auto
+                text-center 
+                mb-4 text-3xl 
+                sm:bg-black sm:bg-opacity-10 sm:rounded-xl
+                xl:max-w-7xl
+                '>Tecnologías</h1>
             </div>
             <div className='grid grid-cols-3 gap-4 sm:gap-2 md:w-80 md:m-auto md:gap-1 xl:w-2/5'>
                 {
                     icons_urls.map(icon => {
                         return (
-                            <div className='w-80 text-center m-auto sm:w-60 md:w-1/2 xl:w-2/5'>
+                            <div className='
+                            drop-shad-tecno
+                            w-80 text-center m-auto sm:w-60 md:w-1/2 xl:w-2/5'>
                                 <img className='w-full rounded-full img-tecs' src={icon} alt="" />
                             </div>
                         )
