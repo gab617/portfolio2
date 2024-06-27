@@ -1,7 +1,7 @@
-import { LoaderProject } from './components/LoaderProject'
-import { InputContact } from './components/InputContact'
-import { TextAreaContact } from './components/TextAreaContact'
-import { ButtonCircles } from './components/ButtonCircles'
+import { LoaderProject } from '../../components/LoaderProject'
+import { InputContact } from '../../components/InputContact'
+import { TextAreaContact } from '../../components/TextAreaContact'
+import { ButtonCircles } from '../../components/ButtonCircles'
 import { useState } from 'react';
 
 

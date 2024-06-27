@@ -1,0 +1,4 @@
+.btn-endpoint:is(:focus, :focus-visible, :active) {
+    outline: none;
+    border: 2px solid rgba(4, 183, 1, 0.95) ;
+}

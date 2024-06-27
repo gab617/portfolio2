@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-key */
-import { icons_urls } from './assets/jsonData.json'
-import { ButtonbyAdam } from './components/ButtonbyAdam'
+import { icons_urls } from '../../assets/jsonData.json'
+import { ButtonbyAdam } from '../../components/ButtonbyAdam'
 
 const Hero = () => {
     return (
@@ -36,7 +36,11 @@ const Hero = () => {
 
             </div>
             <div className='w-1/2 xl:ml-5'>
-                <img className='xl:w-2/5 rounded-xl' src="relajo.png" alt="" />
+                <img className='
+                rounded-xl
+                lg:w-60 lg:m-auto 
+                xl:m-0 xl:w-2/5' 
+                src="relajo.png" alt="" />
             </div>
 
         </div>

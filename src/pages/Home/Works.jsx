@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
-import { LoaderProject } from "./components/LoaderProject"
-import { projectsF } from './assets/jsonData.json'
+import { LoaderProject } from "../../components/LoaderProject"
+import { projectsF } from '../../assets/jsonData.json'
 
 
 
