@@ -14,23 +14,41 @@ const ListProjects = () => {
             xl:bg-black 
             xl:bg-opacity-10 
             xl:p-2'>
-                <div className='flex justify-between mb-2 sm:mt-3'>
+                <div className='
+
+                flex justify-between mb-2 sm:mt-3'>
                     <div className="flex items-center">
                         <h1 className='text-xl md:text-3xl font-bold text-gray-200'>{proyect.title}</h1>
                     </div>
-                    <div className="flex">
-                        <a className="w-11 mr-5" href={proyect.url_repo} target='_blank'>
+                    {/* LOADER */}
+                    <div className="
+        
+                        W-full
+                        flex
+
+                    ">
+                        <a className="
+                        w-11 mr-5 
+        "
+                            href={proyect.url_repo} target='_blank'>
                             <img className="
-                    img-repo
-                    rounded-full
-                    opacity-80
-                    ml-3
-                    cursor-pointer
-                    " src="icons_tecs/github-logo.png" alt="" title="repository" />
+            
+                            img-repo
+                            rounded-full
+                            opacity-80
+                            ml-3
+                            cursor-pointer"
+                                src="icons_tecs/github-logo.png" alt="" title="repository" />
                         </a>
-                        <LoaderProject
-                            proyectUrl={proyect.url_ping}
-                        />
+                        <div className="
+                        flex
+                        ">
+                            <LoaderProject
+                                url={proyect.url_ping}
+                                text={'Solicitando server'}
+                            />
+                        </div>
+
                     </div>
 
                 </div>

@@ -73,6 +73,7 @@
         "d2": {
             "title": "Dota2 App",
             "api": "https://dota2-6174.onrender.com",
+            "url_ping": "https://dota2-6174.onrender.com/api/ping",
             "image": "",
             "endpoints": [
                 {
@@ -80,22 +81,27 @@
                         "/api/dota2"
                     ],
                     "description": "Este objeto proporciona toda la información básica, esencial para representar un héroe de Dota 2, incluyendo identificadores, nombres localizados, atributos principales, niveles de complejidad y URLs para imágenes asociadas. Esto permite a una aplicación cliente presentar de manera adecuada la información visual y textual de cada héroe.",
-                    "details": ["GET /api/dota2"]
-
+                    "details": [
+                        "GET /api/dota2"
+                    ]
                 },
                 {
                     "url": [
                         "/api/dota2/:id"
                     ],
                     "description": "Esta estructura detallada permite a los desarrolladores obtener toda la información necesaria sobre un héroe específico de Dota 2 mediante una única llamada a este endpoint.",
-                    "details": ["GET /api/dota2/:id","Parámetro id: \nUn número entero que representa el identificador único del objeto", "Ejemplo: /api/dota2/3"]
-
+                    "details": [
+                        "GET /api/dota2/:id",
+                        "Parámetro id: \nUn número entero que representa el identificador único del objeto",
+                        "Ejemplo: /api/dota2/3"
+                    ]
                 }
             ]
         },
         "bw": {
             "title": "Basic words",
             "api": "https://e-b-js-traduciones.onrender.com",
+            "url_ping": "https://e-b-js-traduciones.onrender.com/ping",
             "image": "",
             "endpoints": [
                 {
@@ -103,21 +109,29 @@
                         "/data-elements"
                     ],
                     "description": "Este endpoint devuelve datos organizados en diferentes categorías, donde cada categoría es representada por una clave del objeto JSON. Cada categoría contiene una lista de objetos que representan elementos específicos dentro de esa categoría.",
-                    "details": ["GET /api/data-elements"]
+                    "details": [
+                        "GET /api/data-elements"
+                    ]
                 },
                 {
                     "url": [
                         "/categories/keys"
                     ],
                     "description": "Este endpoint proporciona una lista de categorías disponibles. Estas categorías pueden representar diferentes temáticas sobre las cuales se puede interactuar o jugar en la aplicación. La respuesta es un array de strings, donde cada string es el nombre de una categoría.",
-                    "details": ["GET /categories"]
+                    "details": [
+                        "GET /categories"
+                    ]
                 },
                 {
                     "url": [
                         "/element/:id"
                     ],
                     "description": "Este endpoint permite buscar y recuperar un elemento específico dentro de un conjunto de categorías basándose en un id proporcionado como parámetro de la URL. Las categorías y sus elementos se encuentran en una estructura de datos predefinida, y cada elemento tiene un identificador único (id), una URL de imagen, y traducciones en inglés y español.",
-                    "details": ["GET /element/:id","Parámetro id: \nUn número entero que representa el identificador único del objeto", "Ejemplo: /element/10"]
+                    "details": [
+                        "GET /element/:id",
+                        "Parámetro id: \nUn número entero que representa el identificador único del objeto",
+                        "Ejemplo: /element/10"
+                    ]
                 }
             ]
         }

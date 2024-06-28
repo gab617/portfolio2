@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { endPointsProjects } from "../../assets/jsonData.json"
 import { useState } from "react";
 import './Apis.css'
+import { EndpointSelector } from "./components/EndpointSelector";
 
 export function Apis() {
   const [data, setData] = useState('')
@@ -31,7 +32,7 @@ export function Apis() {
   }
 
   function handleClickRequest() {
-    if (loaderData){
+    if (loaderData) {
       console.log('Ya hay una peticion en marcha')
       return
     }
@@ -98,6 +99,7 @@ export function Apis() {
           <div
             className="
             flex
+            flex-col
             gap-2
             mb-1
             "
@@ -105,21 +107,18 @@ export function Apis() {
             {
               Object.keys(endPointsProjects).map(key => {
                 let title = endPointsProjects[key]?.title
+                let url = endPointsProjects[key]?.url_ping
 
                 return (
-                  <div className="
-              bg-emerald-950 rounded-lg p-2 
-              w-full
-              text-center
-              cursor-pointer
-              drop-shad-tecno
-              hover:bg-emerald-800
-              "
+                  <div
                     onClick={() => handleClickKey(key)}
                   >
-                    <h1
-                      className=""
-                    >{title}</h1>
+                    <EndpointSelector
+                      url={url}
+                      title={title}
+                    />
+
+
                   </div>
                 )
               })
