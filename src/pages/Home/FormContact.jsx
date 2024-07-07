@@ -120,7 +120,8 @@ export function FormContact({ urlPing }) {
             {(
                 <div className='w-full flex justify-center'>
                     <LoaderProject
-                        proyectUrl={urlPing}
+                        url={urlPing}
+                        text={'Solicitando servicio'}
                     ></LoaderProject>
                 </div>
             )}
