@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { ThemeSelector } from "../../components/ThemeSelector";
 
 export function Header() {
     return (
@@ -6,14 +7,15 @@ export function Header() {
         
         sticky top-0 
         bg-black 
-        p-1 
+        sm:p-1 
+        text-sm
         bg-opacity-10 z-50
         sm:text-xl 
         xl:m-auto 
         '>
             <nav className='
             flex justify-between items-center 
-            xl:w-90 xl:m-auto'>
+            xl:w-95 xl:m-auto'>
                 <div className='
                 m-1
                 w-1/6 
@@ -38,9 +40,13 @@ export function Header() {
                     </li>
                     <li>
                         <Link to='apis'>APIs</Link>
-
                     </li>
+                    <li>
+                        <ThemeSelector></ThemeSelector>
+                    </li>
+
                 </ul>
+
             </nav>
 
         </header>

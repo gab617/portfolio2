@@ -1,10 +1,10 @@
 body {
-    color: white;
+    transition: background 2s ease, color 2s ease;
     /* background-image: url('/fondo2.webp'); */
-   /*  background: rgb(25, 59, 47);
+    /*  background: rgb(25, 59, 47);
     background: linear-gradient(90deg, rgba(25, 59, 47, 1) 0%, rgba(11, 74, 78, 1) 100%); */
-background: radial-gradient(circle, rgba(26,125,131,1) 41%, rgba(16,61,62,1) 89%);
-    
+    background: radial-gradient(circle, rgba(26, 125, 131, 1) 41%, rgba(16, 61, 62, 1) 89%);
+
 }
 
 .img-tecs {
@@ -17,6 +17,7 @@ background: radial-gradient(circle, rgba(26,125,131,1) 41%, rgba(16,61,62,1) 89%
     filter: drop-shadow(0 0 0.50rem rgb(0, 255, 234));
 
 }
+
 
 
 .chaotic-orbit {
