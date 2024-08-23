@@ -33,16 +33,16 @@ const ButtonVolver = () => {
 export function Cv() {
   return (
     <div>
-      <div className="sm:w-80 m-auto mt-2">
+      <div className="xl:w-80 m-auto mt-2">
         <Link to="/">
-            <ButtonVolver></ButtonVolver>
+          <ButtonVolver></ButtonVolver>
         </Link>
       </div>
-      <div className="sm:w-80 m-auto mt-2 mb-7">
+      <div className="xl:w-80 m-auto mt-2 mb-1">
         <div className="bg-white text-black rounded-3xl">
           <div className=" bg-slate-400 w-full h-5"></div>
-          <div className="flex sm:flex-row flex-col">
-            <div className="sm:w-70 sm:border-r-4 border-black">
+          <div className="flex lg:flex-row flex-col">
+            <div className="lg:w-70 lg:border-r-4 border-black">
               <div className="flex bg-cyan-200 h-20 w-full items-center">
                 <h1 className="w-full text-center font-bold text-2xl">
                   Gabriel Cabrera Sirlopu
@@ -54,7 +54,7 @@ export function Cv() {
                     <div className="mb-3 flex xl:items-end">
                       <h1 className="font-semibold">EXPERIENCIA</h1>
                       <p className="text-sm pr-2 pl-2 ml-2 font-semibold bg-slate-300 mb-1">
-                        Autodidacta - Universidad Informática UNLP (2015-2018)
+                        Universidad Informática UNLP (2015-2018) / Autodidacta
                       </p>
                     </div>
                     <div className="ml-3">
@@ -73,10 +73,11 @@ export function Cv() {
                         <li>Context API y Hooks</li>
                         <li>Integración de APIs </li>
                         <li>Optimización de Renderizado</li>
-                        <li>Gestión de Estado Local </li>
+                        <li>Gestión de Estado Local y Global </li>
                         <li>Enrutamiento</li>
                         <li>Desarrollo Mobile con React Native</li>
                         <li>Estilos y Diseño Manejo de Formularios</li>
+                        <li>Diseño Responsive</li>
                       </ul>
                     </div>
                   </div>
@@ -248,6 +249,10 @@ export function Cv() {
             </div>
           </div>
         </div>
+      </div>
+      <div className="justify-center sm:w-80 gap-1 m-auto mb-5 flex items-center sm:justify-end">
+        <p>CV Maquetado con tailwind</p>
+        <img className="w-11" src="/icons_tecs/tailwind-icon.png" alt="" />
       </div>
     </div>
   );
