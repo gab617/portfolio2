@@ -1,24 +1,22 @@
 /* eslint-disable react/jsx-key */
-import { urls_ping } from './assets/jsonData.json'
+import { urls_ping } from "./assets/jsonData.json";
 
-import './App.css'
-import { FormContact } from './pages/Home/FormContact.jsx'
-import { Header } from './pages/Home/Header.jsx'
-import { Inicio } from './pages/Home/Inicio.jsx'
-import { Works } from './pages/Home/Works.jsx'
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { Apis } from './pages/APIs/Apis.jsx'
+import "./App.css";
+import { FormContact } from "./pages/Home/FormContact.jsx";
+import { Header } from "./pages/Home/Header.jsx";
+import { Inicio } from "./pages/Home/Inicio.jsx";
+import { Works } from "./pages/Home/Works.jsx";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Apis } from "./pages/APIs/Apis.jsx";
+import { Cv } from "./pages/CV/Cv.jsx";
 
 function App() {
-
   return (
     <>
-
       <Router>
         <Routes>
-
           <Route
-            path='/'
+            path="/"
             element={
               <>
                 <Header />
@@ -27,32 +25,32 @@ function App() {
                 {/* PROYECTOS */}
                 <Works />
                 {/* CONTACTO */}
-                <FormContact
-                  urlPing={urls_ping[3]}
-                />
+                <FormContact urlPing={urls_ping[3]} />
               </>
             }
           />
 
           <Route
-            path='/apis'
+            path="/apis"
             element={
               <>
-                <Apis
-                
-                />
+                <Apis />
               </>
             }
-
           />
 
+          <Route
+            path="/cv"
+            element={
+              <>
+                <Cv/>
+              </>
+            }
+          />
         </Routes>
       </Router>
-
-
-
     </>
-  )
+  );
 }
 
-export default App
+export default App;

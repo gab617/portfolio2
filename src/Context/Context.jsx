@@ -32,7 +32,10 @@ export function ContextProvider({ children }) {
     useEffect(() => {
         document.body.style.background = currentTheme.background;
         document.body.style.color = currentTheme.color;
+        
+
     }, [currentTheme]);
+    
     return (
         <Context.Provider
             value={{
