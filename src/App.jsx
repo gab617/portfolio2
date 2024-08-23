@@ -9,6 +9,7 @@ import { Works } from "./pages/Home/Works.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Apis } from "./pages/APIs/Apis.jsx";
 import { Cv } from "./pages/CV/Cv.jsx";
+import ReactToPrint from 'react-to-print'
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
             element={
               <>
                 <Cv/>
+                
               </>
             }
           />

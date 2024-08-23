@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import ReactToPrint from "react-to-print";
 
 const ButtonVolver = () => {
   return (
@@ -31,6 +32,7 @@ const ButtonVolver = () => {
 };
 
 export function Cv() {
+  const cvRef = useRef();
   return (
     <div>
       <div className="xl:w-80 m-auto mt-2">
@@ -38,12 +40,12 @@ export function Cv() {
           <ButtonVolver></ButtonVolver>
         </Link>
       </div>
-      <div className="xl:w-80 m-auto mt-2 mb-1">
+      <div className="xl:w-80 m-auto mt-2 mb-1 print-container" ref={cvRef}>
         <div className="bg-white text-black rounded-3xl ">
           <div className=" bg-slate-400 w-full h-5"></div>
           <div className="flex lg:flex-row flex-col font-semibold">
             <div className="lg:w-70 lg:border-r-4 border-black">
-              <div className="flex bg-cyan-200 h-20 w-full items-center">
+              <div className="flex bg-cyan-200 h-12 w-full items-center">
                 <h1 className="w-full text-center font-bold text-2xl">
                   Gabriel Cabrera Sirlopu
                 </h1>
@@ -51,7 +53,7 @@ export function Cv() {
               <div className="bg-slate-400 pb-6 pt-6 ">
                 <div>
                   <div className="ml-10 mr-5">
-                    <div className="mb-3 flex xl:items-end">
+                    <div className="mb-2 flex xl:items-end">
                       <h1 className="font-bold">EXPERIENCIA</h1>
                       <p className="text-sm pr-2 pl-2 ml-2 font-semibold bg-slate-300 mb-1">
                         Universidad Informática UNLP (2015-2018) / Autodidacta
@@ -69,6 +71,7 @@ export function Cv() {
                         mejores prácticas en desarrollo web y móvil.
                       </p>
                       <ul className="ml-3 list-disc">
+                        <li>Proyectos propios desplegados</li>
                         <li>Desarrollo de Interfaces </li>
                         <li>Context API y Hooks</li>
                         <li>Integración de APIs </li>
@@ -83,10 +86,8 @@ export function Cv() {
                   </div>
 
                   <div className="ml-10 mr-5  mt-5">
-                    <div className="mb-3 flex xl:items-end">
-                      <h2 className="font-bold">
-                        AUTOCONTROL DE PRODUCCIÓN
-                      </h2>
+                    <div className="mb-2 flex xl:items-end">
+                      <h2 className="font-bold">AUTOCONTROL DE PRODUCCIÓN</h2>
                       <p className="text-sm pr-2 pl-2 ml-2 font-semibold bg-slate-300 mb-1">
                         Albano Cozzuol S.A. (2018-2023)
                       </p>
@@ -116,7 +117,111 @@ export function Cv() {
             <div className="w-30">
               <div className="w-80 m-auto flex flex-col gap-5 mt-5">
                 <div>
+                  <h2 className="font-semibold">Formación</h2>
+                  <ul class="list-disc pl-5 text-gray-700">
+                    <li>
+                      Secundario completo en EET N6 Albert Thomas
+                      (Especialización en Electrónica).
+                    </li>
+                    <li>
+                      Estudios universitarios en la UNLP en Informática (3
+                      años).
+                    </li>
+                    <li>
+                      Autodidacta con prácticas continuas del conocimiento
+                      adquirido.
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h2 className="font-semibold">Aptitudes</h2>
+                  <ul class="list-disc pl-5 text-gray-700">
+                    <li>
+                      Desarrollo de proyectos desde la idea inicial hasta la
+                      ejecución, resolviendo problemas reales.
+                    </li>
+                    <li>
+                      Capacidad para crear soluciones completas, desde la
+                      planificación hasta la puesta en marcha.
+                    </li>
+                    <li>Comunicación acertiva.</li>
+                    <li>Algoritmos e implementaciones.</li>
+                    <li>
+                      Resolución de desafíos mediante enfoques prácticos y
+                      creativos.
+                    </li>
+                    <li>
+                      Experiencia en combinar diferentes tecnologías para
+                      construir aplicaciones útiles.
+                    </li>
+                    <li>
+                      Compromiso con el aprendizaje continuo para mejorar y
+                      actualizar habilidades.
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h2 className="font-semibold">Contacto</h2>
                   <ul className="">
+                    <li className="flex gap-2">
+                      <div className="">
+                        <svg
+                          width="25px"
+                          height="25px"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                          <g
+                            id="SVGRepo_tracerCarrier"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                          ></g>
+                          <g id="SVGRepo_iconCarrier">
+                            {" "}
+                            <g clip-path="url(#clip0_429_11072)">
+                              {" "}
+                              <path
+                                d="M11 3.99994H4V17.9999C4 19.1045 4.89543 19.9999 6 19.9999H18C19.1046 19.9999 20 19.1045 20 17.9999V12.9999"
+                                stroke="#292929"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              ></path>{" "}
+                              <path
+                                d="M9 14.9999L20 3.99994"
+                                stroke="#292929"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              ></path>{" "}
+                              <path
+                                d="M15 3.99994H20V8.99994"
+                                stroke="#292929"
+                                stroke-width="2.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                              ></path>{" "}
+                            </g>{" "}
+                            <defs>
+                              {" "}
+                              <clipPath id="clip0_429_11072">
+                                {" "}
+                                <rect
+                                  width="24"
+                                  height="24"
+                                  fill="white"
+                                ></rect>{" "}
+                              </clipPath>{" "}
+                            </defs>{" "}
+                          </g>
+                        </svg>
+                      </div>
+                      <p>https://portfolio-gab-zeta.vercel.app/</p>
+                    </li>
                     <li className="flex gap-2">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -201,58 +306,23 @@ export function Cv() {
                     </li>
                   </ul>
                 </div>
-
-                <div>
-                  <h2 className="font-semibold">Formación</h2>
-                  <ul class="list-disc pl-5 text-gray-700">
-                    <li>
-                      Secundario completo en EET N6 Albert Thomas
-                      (Especialización en Electrónica).
-                    </li>
-                    <li>
-                      Estudios universitarios en la UNLP en Informática (3
-                      años).
-                    </li>
-                    <li>
-                      Autodidacta con prácticas continuas del conocimiento
-                      adquirido.
-                    </li>
-                  </ul>
-                </div>
-
-                <div>
-                  <h2 className="font-semibold">Aptitudes</h2>
-                  <ul class="list-disc pl-5 text-gray-700">
-                    <li>
-                      Desarrollo de proyectos desde la idea inicial hasta la
-                      ejecución, resolviendo problemas reales.
-                    </li>
-                    <li>
-                      Capacidad para crear soluciones completas, desde la
-                      planificación hasta la puesta en marcha.
-                    </li>
-                    <li>
-                      Resolución de desafíos mediante enfoques prácticos y
-                      creativos.
-                    </li>
-                    <li>
-                      Experiencia en combinar diferentes tecnologías para
-                      construir aplicaciones útiles.
-                    </li>
-                    <li>
-                      Compromiso con el aprendizaje continuo para mejorar y
-                      actualizar habilidades.
-                    </li>
-                  </ul>
-                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div className="justify-center sm:w-80 gap-1 m-auto mb-5 flex items-center sm:justify-end">
-        <p>CV Maquetado con tailwind</p>
-        <img className="w-11" src="/icons_tecs/tailwind-icon.png" alt="" />
+      <div className=" flex justify-between sm:w-80 gap-1 m-auto mb-5 items-center">
+        <div className="bg-teal-500 bg-opacity-30 rounded-sm p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
+          <ReactToPrint
+            trigger={() => <button>Guardar como PDF</button>}
+            content={() => cvRef.current}
+          />
+        </div>
+
+        <div className="flex  items-center gap-2">
+          <p>CV Maquetado con tailwind</p>
+          <img className="w-11" src="/icons_tecs/tailwind-icon.png" alt="" />
+        </div>
       </div>
     </div>
   );

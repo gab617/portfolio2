@@ -16,6 +16,7 @@ export default {
         '10': '10%'
       },
     },
+    display: ['print'],
     dropShadow: {
       '3xl': '0 35px 35px rgba(0, 0, 0, 0.25)',
       '4xl': [

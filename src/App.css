@@ -1,185 +1,207 @@
 body {
-    transition: background 2s ease, color 2s ease;
-    /* background-image: url('/fondo2.webp'); */
-    /*  background: rgb(25, 59, 47);
+  transition: background 2s ease, color 2s ease;
+  /* background-image: url('/fondo2.webp'); */
+  /*  background: rgb(25, 59, 47);
     background: linear-gradient(90deg, rgba(25, 59, 47, 1) 0%, rgba(11, 74, 78, 1) 100%); */
-    background: radial-gradient(circle, rgba(26, 125, 131, 1) 41%, rgba(16, 61, 62, 1) 89%);
-
+  background: radial-gradient(
+    circle,
+    rgba(26, 125, 131, 1) 41%,
+    rgba(16, 61, 62, 1) 89%
+  );
 }
 
 .img-tecs {
-    box-shadow: 10px 10px 259px 68px rgba(255, 255, 255, 1) inset;
-    -webkit-box-shadow: 10px 10px 259px 68px rgba(255, 255, 255, 0.959) inset;
-    -moz-box-shadow: 10px 10px 259px 68px rgba(255, 255, 255, 0.452) inset;
+  box-shadow: 10px 10px 259px 68px rgba(255, 255, 255, 1) inset;
+  -webkit-box-shadow: 10px 10px 259px 68px rgba(255, 255, 255, 0.959) inset;
+  -moz-box-shadow: 10px 10px 259px 68px rgba(255, 255, 255, 0.452) inset;
 }
 
 .img-repo {
-    filter: drop-shadow(0 0 0.50rem rgb(0, 255, 234));
-
+  filter: drop-shadow(0 0 0.5rem rgb(0, 255, 234));
 }
 
-
-
 .chaotic-orbit {
-    --uib-size: 1.4em;
-    --uib-speed: 1.5s;
-    --uib-color: rgb(255, 255, 255);
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: var(--uib-size);
-    width: var(--uib-size);
-    animation: rotate936 calc(var(--uib-speed) * 1.667) infinite linear;
+  --uib-size: 1.4em;
+  --uib-speed: 1.5s;
+  --uib-color: rgb(255, 255, 255);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--uib-size);
+  width: var(--uib-size);
+  animation: rotate936 calc(var(--uib-speed) * 1.667) infinite linear;
 }
 
 .chaotic-orbit::before,
 .chaotic-orbit::after {
-    content: '';
-    position: absolute;
-    height: 60%;
-    width: 60%;
-    border-radius: 50%;
-    background-color: var(--uib-color);
-    will-change: transform;
-    flex-shrink: 0;
+  content: "";
+  position: absolute;
+  height: 60%;
+  width: 60%;
+  border-radius: 50%;
+  background-color: var(--uib-color);
+  will-change: transform;
+  flex-shrink: 0;
 }
 
 .chaotic-orbit::before {
-    animation: orbit var(--uib-speed) linear infinite;
+  animation: orbit var(--uib-speed) linear infinite;
 }
 
 .chaotic-orbit::after {
-    animation: orbit var(--uib-speed) linear calc(var(--uib-speed) / -2) infinite;
+  animation: orbit var(--uib-speed) linear calc(var(--uib-speed) / -2) infinite;
 }
 
 @keyframes rotate936 {
-    0% {
-        transform: rotate(0deg);
-    }
+  0% {
+    transform: rotate(0deg);
+  }
 
-    100% {
-        transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes orbit {
-    0% {
-        transform: translate(calc(var(--uib-size) * 0.5)) scale(0.73684);
-        opacity: 0.65;
-    }
+  0% {
+    transform: translate(calc(var(--uib-size) * 0.5)) scale(0.73684);
+    opacity: 0.65;
+  }
 
-    5% {
-        transform: translate(calc(var(--uib-size) * 0.4)) scale(0.684208);
-        opacity: 0.58;
-    }
+  5% {
+    transform: translate(calc(var(--uib-size) * 0.4)) scale(0.684208);
+    opacity: 0.58;
+  }
 
-    10% {
-        transform: translate(calc(var(--uib-size) * 0.3)) scale(0.631576);
-        opacity: 0.51;
-    }
+  10% {
+    transform: translate(calc(var(--uib-size) * 0.3)) scale(0.631576);
+    opacity: 0.51;
+  }
 
-    15% {
-        transform: translate(calc(var(--uib-size) * 0.2)) scale(0.578944);
-        opacity: 0.44;
-    }
+  15% {
+    transform: translate(calc(var(--uib-size) * 0.2)) scale(0.578944);
+    opacity: 0.44;
+  }
 
-    20% {
-        transform: translate(calc(var(--uib-size) * 0.1)) scale(0.526312);
-        opacity: 0.37;
-    }
+  20% {
+    transform: translate(calc(var(--uib-size) * 0.1)) scale(0.526312);
+    opacity: 0.37;
+  }
 
-    25% {
-        transform: translate(0%) scale(0.47368);
-        opacity: 0.3;
-    }
+  25% {
+    transform: translate(0%) scale(0.47368);
+    opacity: 0.3;
+  }
 
-    30% {
-        transform: translate(calc(var(--uib-size) * -0.1)) scale(0.526312);
-        opacity: 0.37;
-    }
+  30% {
+    transform: translate(calc(var(--uib-size) * -0.1)) scale(0.526312);
+    opacity: 0.37;
+  }
 
-    35% {
-        transform: translate(calc(var(--uib-size) * -0.2)) scale(0.578944);
-        opacity: 0.44;
-    }
+  35% {
+    transform: translate(calc(var(--uib-size) * -0.2)) scale(0.578944);
+    opacity: 0.44;
+  }
 
-    40% {
-        transform: translate(calc(var(--uib-size) * -0.3)) scale(0.631576);
-        opacity: 0.51;
-    }
+  40% {
+    transform: translate(calc(var(--uib-size) * -0.3)) scale(0.631576);
+    opacity: 0.51;
+  }
 
-    45% {
-        transform: translate(calc(var(--uib-size) * -0.4)) scale(0.684208);
-        opacity: 0.58;
-    }
+  45% {
+    transform: translate(calc(var(--uib-size) * -0.4)) scale(0.684208);
+    opacity: 0.58;
+  }
 
-    50% {
-        transform: translate(calc(var(--uib-size) * -0.5)) scale(0.73684);
-        opacity: 0.65;
-    }
+  50% {
+    transform: translate(calc(var(--uib-size) * -0.5)) scale(0.73684);
+    opacity: 0.65;
+  }
 
-    55% {
-        transform: translate(calc(var(--uib-size) * -0.4)) scale(0.789472);
-        opacity: 0.72;
-    }
+  55% {
+    transform: translate(calc(var(--uib-size) * -0.4)) scale(0.789472);
+    opacity: 0.72;
+  }
 
-    60% {
-        transform: translate(calc(var(--uib-size) * -0.3)) scale(0.842104);
-        opacity: 0.79;
-    }
+  60% {
+    transform: translate(calc(var(--uib-size) * -0.3)) scale(0.842104);
+    opacity: 0.79;
+  }
 
-    65% {
-        transform: translate(calc(var(--uib-size) * -0.2)) scale(0.894736);
-        opacity: 0.86;
-    }
+  65% {
+    transform: translate(calc(var(--uib-size) * -0.2)) scale(0.894736);
+    opacity: 0.86;
+  }
 
-    70% {
-        transform: translate(calc(var(--uib-size) * -0.1)) scale(0.947368);
-        opacity: 0.93;
-    }
+  70% {
+    transform: translate(calc(var(--uib-size) * -0.1)) scale(0.947368);
+    opacity: 0.93;
+  }
 
-    75% {
-        transform: translate(0%) scale(1);
-        opacity: 1;
-    }
+  75% {
+    transform: translate(0%) scale(1);
+    opacity: 1;
+  }
 
-    80% {
-        transform: translate(calc(var(--uib-size) * 0.1)) scale(0.947368);
-        opacity: 0.93;
-    }
+  80% {
+    transform: translate(calc(var(--uib-size) * 0.1)) scale(0.947368);
+    opacity: 0.93;
+  }
 
-    85% {
-        transform: translate(calc(var(--uib-size) * 0.2)) scale(0.894736);
-        opacity: 0.86;
-    }
+  85% {
+    transform: translate(calc(var(--uib-size) * 0.2)) scale(0.894736);
+    opacity: 0.86;
+  }
 
-    90% {
-        transform: translate(calc(var(--uib-size) * 0.3)) scale(0.842104);
-        opacity: 0.79;
-    }
+  90% {
+    transform: translate(calc(var(--uib-size) * 0.3)) scale(0.842104);
+    opacity: 0.79;
+  }
 
-    95% {
-        transform: translate(calc(var(--uib-size) * 0.4)) scale(0.789472);
-        opacity: 0.72;
-    }
+  95% {
+    transform: translate(calc(var(--uib-size) * 0.4)) scale(0.789472);
+    opacity: 0.72;
+  }
 
-    100% {
-        transform: translate(calc(var(--uib-size) * 0.5)) scale(0.73684);
-        opacity: 0.65;
-    }
+  100% {
+    transform: translate(calc(var(--uib-size) * 0.5)) scale(0.73684);
+    opacity: 0.65;
+  }
 }
 
 @media (min-width: 640px) {
-    .ul-header li a {
-        background-color: rgba(0, 0, 0, 0.425);
-        color: white;
-        padding: .5em;
-        border-radius: .3em;
-    }
+  .ul-header li a {
+    background-color: rgba(0, 0, 0, 0.425);
+    color: white;
+    padding: 0.5em;
+    border-radius: 0.3em;
+  }
 
-    .ul-header li a:hover {
-        background: rgba(9, 136, 26, 0.219);
+  .ul-header li a:hover {
+    background: rgba(9, 136, 26, 0.219);
+  }
+}
 
-    }
+@media print {
+
+  @page {
+    size: A4; /* Ajusta al tamaño de página que desees */
+    margin: 0; /* Ajusta los márgenes según sea necesario */
+  }
+
+  /* Ocultar elementos que no se deben imprimir */
+  .no-print {
+    @apply hidden;
+  }
+
+  .print-container {
+    transform-origin: top;
+    font-size: .9em;
+    width: 100%;
+    box-sizing: border-box;
+    height: auto;
+    page-break-inside: avoid; /* Evita los saltos de página dentro del contenido */
+
+  }
 }
