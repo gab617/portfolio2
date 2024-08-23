@@ -39,9 +39,9 @@ export function Cv() {
         </Link>
       </div>
       <div className="xl:w-80 m-auto mt-2 mb-1">
-        <div className="bg-white text-black rounded-3xl">
+        <div className="bg-white text-black rounded-3xl ">
           <div className=" bg-slate-400 w-full h-5"></div>
-          <div className="flex lg:flex-row flex-col">
+          <div className="flex lg:flex-row flex-col font-semibold">
             <div className="lg:w-70 lg:border-r-4 border-black">
               <div className="flex bg-cyan-200 h-20 w-full items-center">
                 <h1 className="w-full text-center font-bold text-2xl">
@@ -52,7 +52,7 @@ export function Cv() {
                 <div>
                   <div className="ml-10 mr-5">
                     <div className="mb-3 flex xl:items-end">
-                      <h1 className="font-semibold">EXPERIENCIA</h1>
+                      <h1 className="font-bold">EXPERIENCIA</h1>
                       <p className="text-sm pr-2 pl-2 ml-2 font-semibold bg-slate-300 mb-1">
                         Universidad Informática UNLP (2015-2018) / Autodidacta
                       </p>
@@ -84,11 +84,11 @@ export function Cv() {
 
                   <div className="ml-10 mr-5  mt-5">
                     <div className="mb-3 flex xl:items-end">
-                      <h2 className="font-semibold">
+                      <h2 className="font-bold">
                         AUTOCONTROL DE PRODUCCIÓN
                       </h2>
                       <p className="text-sm pr-2 pl-2 ml-2 font-semibold bg-slate-300 mb-1">
-                        2018-2023
+                        Albano Cozzuol S.A. (2018-2023)
                       </p>
                     </div>
 
