@@ -1,99 +1,98 @@
 /* eslint-disable react/jsx-key */
 import { Link } from "react-router-dom";
-import { endPointsProjects } from "../../assets/jsonData.json"
+import { endPointsProjects } from "../../assets/jsonData.json";
 import { useState } from "react";
-import './Apis.css'
+import "./Apis.css";
 import { EndpointSelector } from "./components/EndpointSelector";
+import { ButtonVolver } from "../../components/ButtonVolver";
 
 export function Apis() {
-  const [data, setData] = useState('')
-  const [image, setImage] = useState()
-  const [urlServer, setUrlServer] = useState('')
-  const [currentEndpoint, setEndpoint] = useState('')
-  const [descriptionEndPoint, setDescriptionEndpoint] = useState('')
-  const [detailsEndpoint, setDetailsEndpoint] = useState([])
-  const [loaderData, setLoaderData] = useState(false)
+  const [data, setData] = useState("");
+  const [image, setImage] = useState();
+  const [urlServer, setUrlServer] = useState("");
+  const [currentEndpoint, setEndpoint] = useState("");
+  const [descriptionEndPoint, setDescriptionEndpoint] = useState("");
+  const [detailsEndpoint, setDetailsEndpoint] = useState([]);
+  const [loaderData, setLoaderData] = useState(false);
 
-  const [key, setKey] = useState('')
-  const [endpoints, setEndpoints] = useState([])
+  const [key, setKey] = useState("");
+  const [endpoints, setEndpoints] = useState([]);
 
   function handleClickEndP(ep, urlApi) {
-    const { url, description, details } = ep
-    setEndpoint(url)
-    setUrlServer(urlApi)
-    setDescriptionEndpoint(description)
-    setDetailsEndpoint(details)
+    const { url, description, details } = ep;
+    setEndpoint(url);
+    setUrlServer(urlApi);
+    setDescriptionEndpoint(description);
+    setDetailsEndpoint(details);
   }
 
   function handleChangeRequest(evt) {
-    evt.preventDefault()
-    let nwEndpoint = evt.target.value
-    setEndpoint(nwEndpoint)
+    evt.preventDefault();
+    let nwEndpoint = evt.target.value;
+    setEndpoint(nwEndpoint);
   }
 
   function handleClickRequest() {
     if (loaderData) {
-      console.log('Ya hay una peticion en marcha')
-      return
+      console.log("Ya hay una peticion en marcha");
+      return;
     }
-    let fullUrlRequest = urlServer + currentEndpoint
-    setLoaderData(true)
+    let fullUrlRequest = urlServer + currentEndpoint;
+    setLoaderData(true);
     fetchData(fullUrlRequest)
       .then(({ status, data }) => {
-        console.log('Estado de la respuesta:', status);
-        console.log('Datos recibidos:', data);
-        let dataFormat = JSON.stringify(data, null, 3)
-        setData(dataFormat)
-
+        console.log("Estado de la respuesta:", status);
+        console.log("Datos recibidos:", data);
+        let dataFormat = JSON.stringify(data, null, 3);
+        setData(dataFormat);
       })
-      .catch(error => {
-        console.error('Error al obtener datos:', error);
-        setData(error)
+      .catch((error) => {
+        console.error("Error al obtener datos:", error);
+        setData(error);
       })
       .finally(() => {
-        setLoaderData(false)
-      })
+        setLoaderData(false);
+      });
   }
 
-
-
   function handleClickKey(k) {
-    setKey(k)
-    setEndpoints(endPointsProjects[k].endpoints)
-    setDescriptionEndpoint('')
-    setDetailsEndpoint([])
-    setEndpoint('')
+    setKey(k);
+    setEndpoints(endPointsProjects[k].endpoints);
+    setDescriptionEndpoint("");
+    setDetailsEndpoint([]);
+    setEndpoint("");
   }
 
   return (
     <div>
-      <header className='
+      <header
+        className="
         sticky top-0 
         bg-black 
         p-1 
         bg-opacity-10 z-50
         sm:text-xl 
         xl:m-auto 
-        '>
-        <nav className='flex justify-between items-center xl:w-90 xl:m-auto'>
-          <div className='ml-2 mt-2 w-12 sm:w-15 md:w-10 xl:w-16'>
-            <img className='rounded-full' src="logo.webp" alt="" />
+        "
+      >
+        <nav className="flex justify-between items-center xl:w-full xl:m-auto">
+          <div className="ml-2 mt-2 w-12 sm:w-15 md:w-10 xl:w-16">
+            <img className="rounded-full" src="logo.webp" alt="" />
           </div>
-          <ul className='flex justify-between gap-5 mr-2 ul-header'>
-            <li>
-              <Link to='/'>Volver</Link>
-            </li>
-          </ul>
+              <Link to="/">
+                <ButtonVolver/>
+              </Link>
         </nav>
-
       </header>
 
-      <div className="
+      <div
+        className="
       lg:flex 
       lg:justify-center 
       lg:gap-4 lg:w-full
       lg:text-xl
-      ">
+      "
+      >
         <div className="lg:w-1/4">
           <h1 className="mt-2 mb-2  text-xl">APIs</h1>
           <div
@@ -104,52 +103,48 @@ export function Apis() {
             mb-1
             "
           >
-            {
-              Object.keys(endPointsProjects).map(key => {
-                let title = endPointsProjects[key]?.title
-                let url = endPointsProjects[key]?.url_ping
+            {Object.keys(endPointsProjects).map((key) => {
+              let title = endPointsProjects[key]?.title;
+              let url = endPointsProjects[key]?.url_ping;
 
-                return (
-                  <div
-                    onClick={() => handleClickKey(key)}
-                  >
-                    <EndpointSelector
-                      url={url}
-                      title={title}
-                    />
-
-
-                  </div>
-                )
-              })
-            }
+              return (
+                <div onClick={() => handleClickKey(key)}>
+                  <EndpointSelector url={url} title={title} />
+                </div>
+              );
+            })}
           </div>
 
-          <div className="
+          <div
+            className="
       "
           >
-            <h1 className="
+            <h1
+              className="
           mb-2
           text-xl
           font-semibold
         "
-            >Endpoints {endPointsProjects[key]?.title}</h1>
-            <div className="
-        ">
-              {
-                endpoints.map(ep => {
-                  let urlApi = endPointsProjects[key].api
-                  return (
-                    <div
-                      onClick={() => handleClickEndP(ep, urlApi)}
-                      className="
+            >
+              Endpoints {endPointsProjects[key]?.title}
+            </h1>
+            <div
+              className="
+        "
+            >
+              {endpoints.map((ep) => {
+                let urlApi = endPointsProjects[key].api;
+                return (
+                  <div
+                    onClick={() => handleClickEndP(ep, urlApi)}
+                    className="
                   drop-shad-tecno
                   p-1
                   cursor-pointer
                   "
-                    >
-                      <button
-                        className="
+                  >
+                    <button
+                      className="
                         border-2
                     btn-endpoint
                     w-full
@@ -164,23 +159,27 @@ export function Apis() {
                     hover:bg-white
                     hover:bg-opacity-70
                     "
-
-                      >{ep.url}</button>
-                    </div>
-                  )
-                })
-              }
+                    >
+                      {ep.url}
+                    </button>
+                  </div>
+                );
+              })}
             </div>
           </div>
 
           <div>
             <div className="flex flex-col">
               {/* endpoint */}
-              <p className="
+              <p
+                className="
           mt-3 text-xl
           font-semibold"
-              >Input:</p>
-              <input className="
+              >
+                Input:
+              </p>
+              <input
+                className="
       bg-black 
       font-semibold
       border-2
@@ -191,14 +190,13 @@ export function Apis() {
                 onChange={handleChangeRequest}
               />
               <div className="flex items-center justify-center w-5 h-3 m-auto mb-1">
-                {loaderData &&
+                {loaderData && (
                   <>
                     <div className="chaotic-orbit"></div>
                   </>
-                }
+                )}
               </div>
-              <div className="flex flex-col justify-center items-center mt-2">
-
+              <div className="flex justify-center items-center mt-2">
                 <button
                   className="
             drop-shad-tecno
@@ -212,49 +210,59 @@ export function Apis() {
             hover:bg-emerald-100
             "
                   onClick={() => handleClickRequest()}
-                >Solicitar
+                >
+                  Solicitar
                 </button>
 
-                <h1 className="
-          text-2xl          
-          ">☆</h1>
+                <h1
+                  className="
+                   w-full
+                    m-auto
+                    text-2xl          
+          "
+                >
+                  ☆
+                </h1>
               </div>
-
             </div>
           </div>
-
-
         </div>
 
         {/* DESCRIPTION API */}
-        <div className="  
+        <div
+          className="  
         p-2
         lg:mt-3
         lg:w-1/4 
-        ">
+        "
+        >
           <p className="lg:mb-3">{descriptionEndPoint}</p>
           <ul className="">
-            {
-              detailsEndpoint && detailsEndpoint.map(det => {
+            {detailsEndpoint &&
+              detailsEndpoint.map((det) => {
                 return (
-                  <li className="
+                  <li
+                    className="
                     whitespace-pre-line
-                   bg-black bg-opacity-65 rounded-lg p-2 mb-1">
+                   bg-black bg-opacity-65 rounded-lg p-2 mb-1"
+                  >
                     {det}
                   </li>
-                )
-              })
-            }
+                );
+              })}
           </ul>
         </div>
 
         {/* TEXTAREA */}
 
         <div className="mt-3 lg:w-1/2">
-          <h1 className="
+          <h1
+            className="
         text-xl
         font-semibold"
-          >RESPUESTA JSON:</h1>
+          >
+            RESPUESTA JSON:
+          </h1>
           <img src={image} alt="" />
           <textarea
             className="
@@ -276,16 +284,10 @@ export function Apis() {
             rows="30"
             cols="50"
           />
-
         </div>
       </div>
-
-
-
-
-
     </div>
-  )
+  );
 }
 
 async function fetchData(url) {
@@ -300,9 +302,8 @@ async function fetchData(url) {
     const data = await response.json();
     return { status, data };
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error("Error fetching data:", error);
     throw error;
-
   }
 }
 
@@ -319,7 +320,7 @@ async function fetchImage(url) {
     const imageUrl = URL.createObjectURL(blob);
     return { status, imageUrl };
   } catch (error) {
-    console.error('Error fetching image:', error);
+    console.error("Error fetching image:", error);
     throw error;
   }
 }

@@ -122,6 +122,8 @@ export function FormContact({ urlPing }) {
                     <LoaderProject
                         url={urlPing}
                         text={'Solicitando servicio'}
+                        id={3}
+                        title={"Servivio de contacto"}
                     ></LoaderProject>
                 </div>
             )}

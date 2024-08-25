@@ -9,9 +9,15 @@ import { Works } from "./pages/Home/Works.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Apis } from "./pages/APIs/Apis.jsx";
 import { Cv } from "./pages/CV/Cv.jsx";
-import ReactToPrint from 'react-to-print'
+import ReactToPrint from "react-to-print";
+import { useContext, useState } from "react";
+import { Context } from "./Context/Context.jsx";
+import { ConsolaInfo } from "./pages/Home/ConsolaInfo.jsx";
 
 function App() {
+  const { requests } = useContext(Context);
+  const [loadSpinner, setLoadSpinner] = useState(true);
+
   return (
     <>
       <Router>
@@ -44,13 +50,15 @@ function App() {
             path="/cv"
             element={
               <>
-                <Cv/>
-                
+                <Cv />
               </>
             }
           />
         </Routes>
       </Router>
+      <footer class="fixed bottom-0 right-1 p-3 flex bg-gray-100 bg-opacity-10  z-50  rounded-full">
+        <ConsolaInfo requests={requests} />
+      </footer>
     </>
   );
 }
