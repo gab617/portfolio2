@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import { Link } from "react-router-dom";
-import ReactToPrint from "react-to-print";
 import { CurricVitae } from "./components/CurricVitae";
 import { FooterCv } from "./components/FooterCv";
 import { ButtonVolver } from "../../components/ButtonVolver";

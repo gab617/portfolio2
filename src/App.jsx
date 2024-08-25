@@ -9,15 +9,12 @@ import { Works } from "./pages/Home/Works.jsx";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Apis } from "./pages/APIs/Apis.jsx";
 import { Cv } from "./pages/CV/Cv.jsx";
-import ReactToPrint from "react-to-print";
 import { useContext, useState } from "react";
 import { Context } from "./Context/Context.jsx";
 import { ConsolaInfo } from "./pages/Home/ConsolaInfo.jsx";
 
 function App() {
   const { requests } = useContext(Context);
-  const [loadSpinner, setLoadSpinner] = useState(true);
-
   return (
     <>
       <Router>
