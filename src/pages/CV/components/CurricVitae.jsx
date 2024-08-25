@@ -104,7 +104,7 @@ export function CurricVitae({cvRef} ) {
                   </li>
                   <li>
                     Capacidad para crear soluciones completas, desde la
-                    planificación hasta la puesta en marcha.
+                    planificación hasta el despliegue.
                   </li>
                   <li>Comunicación acertiva.</li>
                   <li>Algoritmos e implementaciones.</li>
