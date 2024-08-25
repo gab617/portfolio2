@@ -12,7 +12,7 @@ export function FooterCv({cvRef} ) {
       </div>
 
       <div className="flex  items-center gap-2">
-        <p className="text-xs lg:text-base">CV Maquetado con tailwind</p>
+        <p className="text-xs lg:text-base">CV Estilado con tailwind</p>
         <img className="w-11" src="/icons_tecs/tailwind-icon.png" alt="" />
       </div>
     </div>
