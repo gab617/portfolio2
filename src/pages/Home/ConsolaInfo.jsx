@@ -29,7 +29,7 @@ export function ConsolaInfo({ requests }) {
 
 const ProyectInfo = ({ reqData }) => {
   const [loader, setLoader] = useState(reqData.load);
-  const { requests } = useContext(Context);
+  const { requests, allLoaded } = useContext(Context);
   useEffect(() => {
     setLoader(!loader);
   }, [requests]);
@@ -37,7 +37,7 @@ const ProyectInfo = ({ reqData }) => {
   return (
     <div className="flex gap-2 items-center">
       <h1 className="">{reqData.title}</h1>
-      {loader ? (
+      {!allLoaded ? (
         <div class=" w-4 h-4 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
       ) : (
         <p>✅</p>

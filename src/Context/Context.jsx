@@ -23,7 +23,10 @@ export function ContextProvider({ children }) {
   function refreshResquests(data, status) {
     requests[data.id].load = status;
     console.log(requests);
-    if (allLoadedVerif) setAllLoaded(true);
+    if (allLoadedVerif) {
+      console.log('TODOS LOS PING ESTAN RESUELTOS')
+      setAllLoaded(true)
+    };
   }
 
   const setTheme = (theme) => {
