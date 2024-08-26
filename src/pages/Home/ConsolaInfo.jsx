@@ -3,6 +3,8 @@ import { Context } from "../../Context/Context";
 
 export function ConsolaInfo() {
   const { allLoaded, requests } = useContext(Context);
+  const [reqs, setReqs] = useState(requests);
+
   return (
     <div class="relative inline-block group">
       {!allLoaded ? (
@@ -16,9 +18,9 @@ export function ConsolaInfo() {
           Levantando inactividad de los servidores... (Desplegados en
           Render.com). La primer solicitud puede tomar unos segundos.
         </p>
-        {Object.keys(requests).map((key) => (
+        {Object.keys(reqs).map((key) => (
           <div key={key} className="flex gap-2">
-            <ProyectInfo reqData={requests[key]} key={key} />
+            <ProyectInfo reqData={reqs[key]} k={key} />
           </div>
         ))}
       </div>
@@ -27,12 +29,13 @@ export function ConsolaInfo() {
   );
 }
 
-const ProyectInfo = ({ reqData, key }) => {
+const ProyectInfo = ({ reqData, k }) => {
+  const { allLoaded, requests, requestCheck} = useContext(Context);
+
   const [loader, setLoader] = useState(reqData.load);
-  const { requests } = useContext(Context);
-  useEffect(() => {
-      setLoader(requests[reqData.key]?.load);
-  }, [requests]);
+  useEffect(()=>{
+    setLoader(requests[k]?.load)
+  },[requestCheck])
 
   return (
     <div className="flex gap-2 items-center">

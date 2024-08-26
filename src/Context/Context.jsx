@@ -10,6 +10,7 @@ export function ContextProvider({ children }) {
   const [currentTheme, setCurrentTheme] = useState(themes.dark);
   const [indexColor, setIndexColor] = useState(0);
   const [allLoaded, setAllLoaded] = useState(false);
+  const [requestCheck, setRequestCheck] = useState(true);
   const [requests, setRequests] = useState({
     1: { title: "Dota2 App", load: true },
     0: { title: "Basic words", load: true },
@@ -20,11 +21,14 @@ export function ContextProvider({ children }) {
     Object.values(reqs).every((reqProy) => reqProy.load);
 
   function refreshResquests(data, status) {
-    requests[data.id].load = status;
-    console.log(requests, "-----------");
-    if (!allLoadedVerif(requests)) {
-      setAllLoaded(true);
-    } else {
+    if (requests[data.id].load !== status) {
+      setRequestCheck(prev => !prev)
+      requests[data.id].load = status;
+      console.log(requests, "-----------");
+      if (!allLoadedVerif(requests)) {
+        setAllLoaded(true);
+      } else {
+      }
     }
   }
 
@@ -59,6 +63,7 @@ export function ContextProvider({ children }) {
         setTheme,
         requests,
         refreshResquests,
+        requestCheck,
         allLoaded,
       }}
     >
