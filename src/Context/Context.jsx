@@ -16,17 +16,16 @@ export function ContextProvider({ children }) {
     2: { title: "Giphy", load: true },
     3: { title: "Servicio de contacto", load: true },
   });
-  const allLoadedVerif = Object.values(requests).every(
-    (reqProy) => reqProy.load
-  );
+  const allLoadedVerif = (reqs) =>
+    Object.values(reqs).every((reqProy) => reqProy.load);
 
   function refreshResquests(data, status) {
     requests[data.id].load = status;
-    console.log(requests);
-    if (allLoadedVerif) {
-      console.log('TODOS LOS PING ESTAN RESUELTOS')
-      setAllLoaded(true)
-    };
+    console.log(requests, "-----------");
+    if (!allLoadedVerif(requests)) {
+      setAllLoaded(true);
+    } else {
+    }
   }
 
   const setTheme = (theme) => {

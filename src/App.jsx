@@ -54,7 +54,7 @@ function App() {
         </Routes>
       </Router>
       <footer class="fixed bottom-0 right-1 p-3 flex bg-gray-100 bg-opacity-10  z-50  rounded-full">
-        <ConsolaInfo requests={requests} />
+        <ConsolaInfo/>
       </footer>
     </>
   );

@@ -6,12 +6,13 @@ export function LoaderProject({ url, text, title, id }) {
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+
     let dataProyect = { id, title, url };
     setLoader(true);
     fetch(url).then((response) => {
-      console.log(response.status, "Ping-pong", url);
-      setLoader(false);
-      refreshResquests(dataProyect, false);
+      /* console.log(response.status, "Ping-pong", url); */
+        setLoader(false);
+        refreshResquests(dataProyect, false);
     });
   }, []);
 
