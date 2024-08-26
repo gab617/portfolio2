@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../Context/Context";
 
 export function LoaderProject({ url, text, title, id }) {
-  const { refreshResquests } = useContext(Context);
+  const { refreshResquests, allLoaded } = useContext(Context);
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
+    if(allLoaded)return
     const timeout = Math.random() * (700 - 1500) + 1000;
     let dataProyect = { id, title, url };
     setLoader(true);
@@ -19,7 +20,7 @@ export function LoaderProject({ url, text, title, id }) {
   }, []);
 
   return (
-    <></>
+    <>  </>
 /*     <div
       className={` ${
         loader ? " items-center flex  opacity-100" : "opacity-0 hidden"
