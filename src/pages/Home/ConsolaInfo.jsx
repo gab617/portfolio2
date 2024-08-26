@@ -14,10 +14,15 @@ export function ConsolaInfo() {
       )}
 
       <div class="absolute bottom-full right-7 mb-2 bg-gray-800 text-white text-base rounded w-72 h-72 p-2  invisible group-hover:visible">
-        <p className="w-full mb-3">
-          Levantando inactividad de los servidores... (Desplegados en
-          Render.com). La primer solicitud puede tomar unos segundos.
-        </p>
+        {!allLoaded ? (
+          <p className="w-full mb-3">
+            Levantando inactividad de los servidores... (Desplegados en
+            Render.com). La primer solicitud puede tomar unos segundos.
+          </p>
+        ) : (
+          <p className="mb-5">Todos los servicios estan activos. Servidores desplegados en Render.com</p>
+        )}
+
         {Object.keys(reqs).map((key) => (
           <div key={key} className="flex gap-2">
             <ProyectInfo reqData={reqs[key]} k={key} />
@@ -30,12 +35,12 @@ export function ConsolaInfo() {
 }
 
 const ProyectInfo = ({ reqData, k }) => {
-  const { allLoaded, requests, requestCheck} = useContext(Context);
+  const { allLoaded, requests, requestCheck } = useContext(Context);
 
   const [loader, setLoader] = useState(reqData.load);
-  useEffect(()=>{
-    setLoader(requests[k]?.load)
-  },[requestCheck])
+  useEffect(() => {
+    setLoader(requests[k]?.load);
+  }, [requestCheck]);
 
   return (
     <div className="flex gap-2 items-center">
