@@ -17,18 +17,22 @@ export function ContextProvider({ children }) {
     2: { title: "Giphy", load: true },
     3: { title: "Servicio de contacto", load: true },
   });
-  const allLoadedVerif = (reqs) =>
-    Object.values(reqs).every((reqProy) => reqProy.load);
+  const allLoadedVerif = (reqs) => {
+    console.log(reqs, "asdasd");
+    return Object.values(reqs).every((reqProy) => !reqProy.load);
+    
+  };
 
   function refreshResquests(data, status) {
-    if (requests[data.id].load !== status) {
-      setRequestCheck(prev => !prev)
-      requests[data.id].load = status;
-      console.log(requests, "-----------");
-      if (!allLoadedVerif(requests)) {
-        setAllLoaded(true);
-      } else {
-      }
+    console.log(requests, "-----------");
+    requests[data.id].load = status;
+    setRequestCheck((prev) => !prev);
+    console.log(allLoadedVerif(requests), " VERIF")
+    if (allLoadedVerif(requests)) {
+      console.log('ALLLLL')
+      setAllLoaded(true);
+    } else {
+      console.log('NOALLALOADED')
     }
   }
 

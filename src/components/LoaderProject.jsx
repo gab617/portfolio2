@@ -6,22 +6,24 @@ export function LoaderProject({ url, text, title, id }) {
   const [loader, setLoader] = useState(false);
 
   useEffect(() => {
-    if(allLoaded)return
-    const timeout = Math.random() * (700 - 1500) + 1000;
+    const timeout = Math.random() * (5000 - 3000) + 3000;
+    if (allLoaded) return;
+
     let dataProyect = { id, title, url };
     setLoader(true);
-    fetch(url).then((response) => {
-      setTimeout(() => {
+    fetch(url)
+      .then((response) => {
         /* console.log(response.status, "Ping-pong", url); */
         setLoader(false);
-        refreshResquests(dataProyect, false);
-      }, timeout);
-    });
+      })
+      .then(() => {
+        refreshResquests(dataProyect, loader);
+      });
   }, []);
 
   return (
-    <>  </>
-/*     <div
+    <> </>
+    /*     <div
       className={` ${
         loader ? " items-center flex  opacity-100" : "opacity-0 hidden"
       } transition-all duration-500`}
