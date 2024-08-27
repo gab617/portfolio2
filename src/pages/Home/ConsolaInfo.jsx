@@ -2,8 +2,40 @@ import React, { useContext, useEffect, useState } from "react";
 import { Context } from "../../Context/Context";
 
 export function ConsolaInfo() {
-  const { allLoaded, requests } = useContext(Context);
-  const [reqs, setReqs] = useState(requests);
+  const [allLoaded, setAllLoaded] = useState(false);
+  const [requests, setRequests] = useState({
+    1: {
+      title: "Dota2 App",
+      load: true,
+      url_ping: "https://dota2-6174.onrender.com/api/ping",
+    },
+    0: {
+      title: "Basic words",
+      load: true,
+      url_ping: "https://e-b-js-traduciones.onrender.com/ping",
+    },
+    2: {
+      title: "Giphy",
+      load: true,
+      url_ping: "https://giphy617.onrender.com/ping",
+    },
+    3: {
+      title: "Servicio de contacto",
+      load: true,
+      url_ping: "https://portf-617-express.onrender.com/ping",
+    },
+  });
+
+  function allLoadedVerif(reqs) {
+    return Object.values(reqs).every((reqProy) => reqProy.load === false);
+  }
+
+  function refreshResquests() {
+    if (allLoadedVerif(requests)){
+      console.log('Se resolvieron todas las peticiones a servicios')
+      setAllLoaded(true)
+    }
+  }
 
   return (
     <div class="relative inline-block group">
@@ -20,12 +52,15 @@ export function ConsolaInfo() {
             Render.com). La primer solicitud puede tomar unos segundos.
           </p>
         ) : (
-          <p className="mb-5">Todos los servicios estan activos. Servidores desplegados en Render.com</p>
+          <p className="mb-5">
+            Todos los servicios estan activos. Servidores desplegados en
+            Render.com
+          </p>
         )}
 
-        {Object.keys(reqs).map((key) => (
+        {Object.keys(requests).map((key) => (
           <div key={key} className="flex gap-2">
-            <ProyectInfo reqData={reqs[key]} k={key} />
+            <ProyectInfo refreshResquests={refreshResquests} reqData={requests[key]} k={key} />
           </div>
         ))}
       </div>
@@ -34,13 +69,20 @@ export function ConsolaInfo() {
   );
 }
 
-const ProyectInfo = ({ reqData, k }) => {
-  const { allLoaded, requests, requestCheck } = useContext(Context);
-
-  const [loader, setLoader] = useState(reqData.load);
+const ProyectInfo = ({ refreshResquests, reqData, k }) => {
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
-    setLoader(requests[k]?.load);
-  }, [requestCheck]);
+    setLoader(true);
+    fetch(reqData.url_ping)
+      .then((res) => {
+        setLoader(false);
+        console.log(res.status, "ping: ", reqData.title, reqData.load);
+      })
+      .then(() => {
+        reqData.load = false;
+        refreshResquests()
+      });
+  }, []);
 
   return (
     <div className="flex gap-2 items-center">

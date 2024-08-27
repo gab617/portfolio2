@@ -9,33 +9,8 @@ export function ContextProvider({ children }) {
 
   const [currentTheme, setCurrentTheme] = useState(themes.dark);
   const [indexColor, setIndexColor] = useState(0);
-  const [allLoaded, setAllLoaded] = useState(false);
-  const [requestCheck, setRequestCheck] = useState(true);
-  const [requests, setRequests] = useState({
-    1: { title: "Dota2 App", load: true },
-    0: { title: "Basic words", load: true },
-    2: { title: "Giphy", load: true },
-    3: { title: "Servicio de contacto", load: true },
-  });
-  const allLoadedVerif = (reqs) => {
-    console.log(reqs, "asdasd");
-    console.log(Object.values(reqs).every((reqProy) => reqProy.load))
-    return Object.values(reqs).every((reqProy) => reqProy.load);
-    
-  };
 
-  function refreshResquests(data, status) {
-    console.log(requests, "-----------");
-    requests[data.id].load = status;
-    setRequestCheck((prev) => !prev);
-    console.log(allLoadedVerif(requests))
-    if (!allLoadedVerif(requests)) {
-      console.log('ALLLLL')
-      setAllLoaded(true);
-    } else {
-      console.log('NOALLALOADED')
-    }
-  }
+
 
   const setTheme = (theme) => {
     if (theme === "colours") {
@@ -66,10 +41,6 @@ export function ContextProvider({ children }) {
       value={{
         currentTheme,
         setTheme,
-        requests,
-        refreshResquests,
-        requestCheck,
-        allLoaded,
       }}
     >
       {children}

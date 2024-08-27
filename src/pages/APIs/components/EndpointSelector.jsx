@@ -31,16 +31,10 @@ export function EndpointSelector({ url, title }) {
 
             </div>
             <div className="
-            flex
+            flex items-center
             ">
                 {loader && (
-                    <div className="
-                    flex 
-                    items-center 
-                    transition-all duration-300">
-                        <div className="chaotic-orbit"></div>
-                        <p className="text-sm">Loading...</p>
-                    </div>
+                   <div class=" w-4 h-4 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
                 )}
 
             </div>

@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
-import { LoaderProject } from "../../components/LoaderProject";
 import { projectsF } from "../../assets/jsonData.json";
 
 const ListProjects = () => {
@@ -58,12 +57,7 @@ const ListProjects = () => {
                         flex
                         "
             >
-              <LoaderProject
-                url={proyect.url_ping}
-                title={proyect.title}
-                id={proyect.id}
-                text={"Solicitando server"}
-              />
+
             </div>
           </div>
         </div>
