@@ -19,7 +19,8 @@ export function ContextProvider({ children }) {
   });
   const allLoadedVerif = (reqs) => {
     console.log(reqs, "asdasd");
-    return Object.values(reqs).every((reqProy) => !reqProy.load);
+    console.log(Object.values(reqs).every((reqProy) => reqProy.load))
+    return Object.values(reqs).every((reqProy) => reqProy.load);
     
   };
 
@@ -27,8 +28,8 @@ export function ContextProvider({ children }) {
     console.log(requests, "-----------");
     requests[data.id].load = status;
     setRequestCheck((prev) => !prev);
-    console.log(allLoadedVerif(requests), " VERIF")
-    if (allLoadedVerif(requests)) {
+    console.log(allLoadedVerif(requests))
+    if (!allLoadedVerif(requests)) {
       console.log('ALLLLL')
       setAllLoaded(true);
     } else {
