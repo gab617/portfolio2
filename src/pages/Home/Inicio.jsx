@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { tecnologies_list } from "../../assets/jsonData.json";
 import { ButtonbyAdam } from "../../components/ButtonbyAdam";
 import "./Home.css";
+import { useContext } from "react";
+import { Context } from "../../Context/Context";
 
 const Hero = () => {
   return (
@@ -92,23 +94,25 @@ const AboutMe = () => {
 };
 
 const CardTecnologie = ({ tecData }) => {
+  const {currentTheme} = useContext(Context)
+
   return (
     <div
-      className="card-tec m-auto"
+      className="card-tec m-auto w-20 h-20 sm:w-[130px] sm:h-[130px]"
       style={{
         backgroundImage: `url(${tecData.url})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
     >
-      <div className="flex flex-col second-content">
-        <h2>{tecData.name} </h2>
+      <div className={`flex flex-col second-content ${currentTheme.color === "#000" ? "sm:bg-white bg-opacity-50" : "sm:bg-black"} sm:bg-opacity-50`}>
+        <h2 className="text-sm">{tecData.name} </h2>
         <div>
           <ul>
             {tecData.list_skill.map((skill) => {
               return (
                 <li>
-                  <p className="text-sm">{skill}</p>
+                  <p className={`${currentTheme.color === "#000" ? "bg-white" : "bg-black"} bg-opacity-40 sm:bg-opacity-0 px-3 text-xs sm:text-sm`}>{skill}</p>
                 </li>
               );
             })}

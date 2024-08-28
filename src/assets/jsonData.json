@@ -38,6 +38,7 @@
             "list_skill": [
                 "Middleware",
                 "Enrutamiento",
+                "Requests/Responses",
                 "APIs REST",
                 "Manejo de Errores",
                 "Autenticación"
@@ -78,7 +79,7 @@
         },
         {
             "url": "icons_tecs/tailwind-icon.png",
-            "name": "Tailwind CSS",
+            "name": "Tailwind",
             "list_skill": [
                 "Utilidades CSS",
                 "Diseño Responsive",
