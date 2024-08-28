@@ -1,14 +1,103 @@
 {
-    "icons_urls": [
-        "icons_tecs/html-icon.png",
-        "icons_tecs/css-icon.png",
-        "icons_tecs/js-icon.png",
-        "icons_tecs/express-icon.png",
-        "icons_tecs/react-icon.png",
-        "icons_tecs/github-logo.png",
-        "icons_tecs/git-icon.png",
-        "icons_tecs/tailwind-icon.png",
-        "icons_tecs/node-icon.png"
+    "tecnologies_list": [
+        {
+            "url": "icons_tecs/html-icon.png",
+            "name": "HTML",
+            "list_skill": [
+                "Semántica",
+                "Formularios",
+                "Accesibilidad",
+                "SEO",
+                "Canvas"
+            ]
+        },
+        {
+            "url": "icons_tecs/css-icon.png",
+            "name": "CSS",
+            "list_skill": [
+                "Flexbox",
+                "Grid",
+                "Diseño Responsivo",
+                "Animaciones"
+            ]
+        },
+        {
+            "url": "icons_tecs/js-icon.png",
+            "name": "JavaScript",
+            "list_skill": [
+                "ES6+",
+                "Manipulación del DOM",
+                "JS Asíncrono",
+                "Promesas",
+                "Event Loop"
+            ]
+        },
+        {
+            "url": "icons_tecs/express-icon.png",
+            "name": "Express",
+            "list_skill": [
+                "Middleware",
+                "Enrutamiento",
+                "APIs REST",
+                "Manejo de Errores",
+                "Autenticación"
+            ]
+        },
+        {
+            "url": "icons_tecs/react-icon.png",
+            "name": "React",
+            "list_skill": [
+                "Componentes",
+                "React Native",
+                "Hooks/ Contexto",
+                "Manejo de Estado",
+                "React Router"
+            ]
+        },
+        {
+            "url": "icons_tecs/github-logo.png",
+            "name": "GitHub",
+            "list_skill": [
+                "Control de Versiones",
+                "Branching",
+                "Pull Requests",
+                "Colaboración",
+                "GitHub Actions"
+            ]
+        },
+        {
+            "url": "icons_tecs/git-icon.png",
+            "name": "Git",
+            "list_skill": [
+                "Comandos Básicos",
+                "Rebase",
+                "Merge",
+                "Stash",
+                "Cherry-pick"
+            ]
+        },
+        {
+            "url": "icons_tecs/tailwind-icon.png",
+            "name": "Tailwind CSS",
+            "list_skill": [
+                "Utilidades CSS",
+                "Diseño Responsive",
+                "Customización",
+                "Configuración",
+                "Optimización"
+            ]
+        },
+        {
+            "url": "icons_tecs/node-icon.png",
+            "name": "Node.js",
+            "list_skill": [
+                "npm",
+                "Módulos",
+                "Eventos",
+                "Streams",
+                "CLI"
+            ]
+        }
     ],
     "projectsF": [
         {

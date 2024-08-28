@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-key */
 import { Link } from "react-router-dom";
-import { icons_urls } from "../../assets/jsonData.json";
+import { tecnologies_list } from "../../assets/jsonData.json";
 import { ButtonbyAdam } from "../../components/ButtonbyAdam";
+import "./Home.css";
 
 const Hero = () => {
   return (
@@ -28,7 +29,7 @@ const Hero = () => {
         </div>
         <div className="xl:flex xl:justify-end xl:full">
           <div className="w-90 xl:w-1/2">
-            <Link to={'/cv'}>
+            <Link to={"/cv"}>
               <button className="sm:w-70 sm:m-auto sm:mb-1 btn-adam">
                 CV
                 <span></span>
@@ -89,6 +90,35 @@ const AboutMe = () => {
     </div>
   );
 };
+
+const CardTecnologie = ({ tecData }) => {
+  return (
+    <div
+      className="card-tec m-auto"
+      style={{
+        backgroundImage: `url(${tecData.url})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
+      <div className="flex flex-col second-content">
+        <h2>{tecData.name} </h2>
+        <div>
+          <ul>
+            {tecData.list_skill.map((skill) => {
+              return (
+                <li>
+                  <p className="text-sm">{skill}</p>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const Tecnologies = () => {
   return (
     <div>
@@ -105,15 +135,11 @@ const Tecnologies = () => {
           Tecnologías
         </h1>
       </div>
-      <div className="grid grid-cols-3 gap-4 sm:gap-2 md:w-80 md:m-auto md:gap-1 xl:w-2/5">
-        {icons_urls.map((icon) => {
+      <div className="grid grid-cols-3 gap-4 sm:gap-2 md:w-80 md:m-auto xl:w-2/5">
+        {tecnologies_list.map((tecData) => {
           return (
-            <div
-              className="
-                            drop-shad-tecno
-                            w-80 text-center m-auto sm:w-60 md:w-1/2 xl:w-2/5"
-            >
-              <img className="w-full rounded-full img-tecs" src={icon} alt="" />
+            <div className="">
+              <CardTecnologie tecData={tecData} />
             </div>
           );
         })}
