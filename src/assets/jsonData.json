@@ -105,7 +105,7 @@
             "id": 1,
             "title": "Dota2 App",
             "url_link": "https://dota2-app-front-617.vercel.app/",
-            "url_ping": "https://dota2-6174.onrender.com/api/ping",
+            "url_ping": "https://serviciosunificados.onrender.com/d2/ping",
             "url_repo": "https://github.com/gab617/dota2-app-FRONT-617",
             "img_url": "proys_imgs/d2.png",
             "description_app": "Esta aplicación para fanáticos de Dota 2 permite explorar y aprender sobre los héroes del juego. Presenta una lista completa de héroes, y al hacer clic en uno, se muestra una página con sus detalles, incluyendo estadísticas y habilidades.",
@@ -122,7 +122,7 @@
             "id": 0,
             "title": "Basic words",
             "url_link": "https://r-f-traducciones.vercel.app/",
-            "url_ping": "https://e-b-js-traduciones.onrender.com/ping",
+            "url_ping": "https://serviciosunificados.onrender.com/bw/ping",
             "url_repo": "https://github.com/gab617/r-f-traducciones",
             "img_url": "proys_imgs/traducc.png",
             "description_app": "La app muestra imágenes y opciones de palabras al azar dentro de un rango de categorias seleccionables, para que el aprendizaje sea variado y divertido. Cuando aciertas la palabra, recibes una respuesta inmediata, lo que ayuda a memorizar y entender mejor el vocabulario. Además, su diseño modular facilita agregar nuevas palabras e imágenes sin problemas.",
@@ -154,62 +154,62 @@
         }
     ],
     "urls_ping": [
-        "https://e-b-js-traduciones.onrender.com/ping",
-        "https://dota2-6174.onrender.com/api/ping",
+        "https://serviciosunificados.onrender.com/bw/ping",
+        "https://serviciosunificados.onrender.com/d2/ping",
         "https://giphy617.onrender.com/ping",
         "https://portf-617-express.onrender.com/ping"
     ],
     "endPointsProjects": {
         "d2": {
             "title": "Dota2 App",
-            "api": "https://dota2-6174.onrender.com",
-            "url_ping": "https://dota2-6174.onrender.com/api/ping",
+            "api": "https://serviciosunificados.onrender.com/d2",
+            "url_ping": "https://serviciosunificados.onrender.com/d2/ping",
             "image": "",
             "endpoints": [
                 {
                     "url": [
-                        "/api/dota2"
+                        "/heros-list"
                     ],
                     "description": "Este objeto proporciona toda la información básica, esencial para representar un héroe de Dota 2, incluyendo identificadores, nombres localizados, atributos principales, niveles de complejidad y URLs para imágenes asociadas. Esto permite a una aplicación cliente presentar de manera adecuada la información visual y textual de cada héroe.",
                     "details": [
-                        "GET /api/dota2"
+                        "GET /heros-list"
                     ]
                 },
                 {
                     "url": [
-                        "/api/dota2/:id"
+                        "/detail/:id"
                     ],
                     "description": "Esta estructura detallada permite a los desarrolladores obtener toda la información necesaria sobre un héroe específico de Dota 2 mediante una única llamada a este endpoint.",
                     "details": [
-                        "GET /api/dota2/:id",
+                        "GET /detail/:id",
                         "Parámetro id: \nUn número entero que representa el identificador único del objeto",
-                        "Ejemplo: /api/dota2/3"
+                        "Ejemplo: /detail/3"
                     ]
                 }
             ]
         },
         "bw": {
             "title": "Basic words",
-            "api": "https://e-b-js-traduciones.onrender.com",
-            "url_ping": "https://e-b-js-traduciones.onrender.com/ping",
+            "api": "https://serviciosunificados.onrender.com/bw",
+            "url_ping": "https://serviciosunificados.onrender.com/bw/ping",
             "image": "",
             "endpoints": [
                 {
                     "url": [
-                        "/data-elements"
+                        "/databw"
                     ],
                     "description": "Este endpoint devuelve datos organizados en diferentes categorías, donde cada categoría es representada por una clave del objeto JSON. Cada categoría contiene una lista de objetos que representan elementos específicos dentro de esa categoría.",
                     "details": [
-                        "GET /api/data-elements"
+                        "GET /databw"
                     ]
                 },
                 {
                     "url": [
-                        "/categories/keys"
+                        "/keywords"
                     ],
                     "description": "Este endpoint proporciona una lista de categorías disponibles. Estas categorías pueden representar diferentes temáticas sobre las cuales se puede interactuar o jugar en la aplicación. La respuesta es un array de strings, donde cada string es el nombre de una categoría.",
                     "details": [
-                        "GET /categories"
+                        "GET /keywords"
                     ]
                 },
                 {

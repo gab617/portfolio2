@@ -7,12 +7,12 @@ export function ConsolaInfo() {
     1: {
       title: "Dota2 App",
       load: true,
-      url_ping: "https://dota2-6174.onrender.com/api/ping",
+      url_ping: "https://serviciosunificados.onrender.com/d2/ping",
     },
     0: {
       title: "Basic words",
       load: true,
-      url_ping: "https://e-b-js-traduciones.onrender.com/ping",
+      url_ping: "https://serviciosunificados.onrender.com/bw/ping",
     },
     2: {
       title: "Giphy",
