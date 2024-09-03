@@ -65,7 +65,7 @@ export function FormContact({ }) {
     setLoadingEmail(true);
 
     try {
-      fetch("https://portf-617-express.onrender.com/enviar-correo", {
+      fetch("https://serviciosunificados.onrender.com/cnt/enviar-correo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

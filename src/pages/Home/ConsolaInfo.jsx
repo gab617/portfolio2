@@ -22,7 +22,7 @@ export function ConsolaInfo() {
     3: {
       title: "Servicio de contacto",
       load: true,
-      url_ping: "https://portf-617-express.onrender.com/ping",
+      url_ping: "https://serviciosunificados.onrender.com/cnt/ping",
     },
   });
 
