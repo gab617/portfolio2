@@ -107,7 +107,7 @@ const ListProjects = () => {
           </p>
         </article>
 
-        <div className="m-auto w-70 flex justify-center items-center gap-2 sm:w-1/2 lg:w-1/3 xl:w-1/5">
+        <div className="m-auto lg:m-0 w-70 flex justify-center items-center gap-1 sm:w-1/2 lg:w-1/3 xl:w-1/5">
           {proyect.tecs.map((tec) => {
             return (
               <div
@@ -118,7 +118,7 @@ const ListProjects = () => {
               >
                 <div className="mt-2">
                   <img
-                    className="xl:w-80 img-tecs rounded-full"
+                    className="xl:w-[70%] img-tecs rounded-[50%] m-auto"
                     src={tec}
                     alt=""
                   />

@@ -11,7 +11,7 @@
 }
 
 .card-tec:hover {
-  border-radius: 15px;
+  border-radius: 0;
   width: 200px;
   cursor: pointer;
   transform: scale(1.5);
@@ -41,9 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
   transition: all 0.4s;
-  font-size: 0px;
   transform: rotate(90deg) scale(-1);
   background: rgba(0, 0, 0, 0.68);
   
