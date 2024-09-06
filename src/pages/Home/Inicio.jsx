@@ -84,9 +84,12 @@ const AboutMe = () => {
       <p className="xl:p-5">
         Soy un desarrollador web enfocado en el diseño lógico y algorítmico de
         aplicaciones, mejorando estructuras de datos para asegurar la
-        escalabilidad y eficiencia de los proyectos. Acompañado de un diseño
-        atractivo, acorde a las necesidades y para cualquier dispositivo
-        (resposive). <br /> <br />
+        escalabilidad y eficiencia de los proyectos. Implemento integraciones
+        dinámicas que permiten un uso fluido y sostenible de los datos en el
+        backend, garantizando una arquitectura robusta y flexible. Además,
+        diseño interfaces atractivas y adaptables a cualquier dispositivo
+        (responsive), ajustándome a las necesidades específicas de cada
+        proyecto. <br /> <br />
       </p>
       <p className="lg:text-center">Mejora continua.</p>
     </div>
@@ -94,7 +97,7 @@ const AboutMe = () => {
 };
 
 const CardTecnologie = ({ tecData }) => {
-  const {currentTheme} = useContext(Context)
+  const { currentTheme } = useContext(Context);
 
   return (
     <div
@@ -105,14 +108,26 @@ const CardTecnologie = ({ tecData }) => {
         backgroundPosition: "center",
       }}
     >
-      <div className={`flex flex-col second-content ${currentTheme.color === "#000" ? "sm:bg-white bg-opacity-50" : "sm:bg-black"} sm:bg-opacity-50`}>
+      <div
+        className={`flex flex-col second-content ${
+          currentTheme.color === "#000"
+            ? "sm:bg-white bg-opacity-50"
+            : "sm:bg-black"
+        } sm:bg-opacity-50`}
+      >
         <h2 className="text-sm">{tecData.name} </h2>
         <div>
           <ul>
             {tecData.list_skill.map((skill) => {
               return (
                 <li>
-                  <p className={`${currentTheme.color === "#000" ? "bg-white" : "bg-black"} bg-opacity-40 sm:bg-opacity-0 px-3 text-xs sm:text-sm`}>{skill}</p>
+                  <p
+                    className={`${
+                      currentTheme.color === "#000" ? "bg-white" : "bg-black"
+                    } bg-opacity-40 sm:bg-opacity-0 px-3 text-xs sm:text-sm`}
+                  >
+                    {skill}
+                  </p>
                 </li>
               );
             })}
