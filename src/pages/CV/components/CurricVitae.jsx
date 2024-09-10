@@ -1,6 +1,6 @@
 import React from "react";
 
-export function CurricVitae({cvRef} ) {
+export function CurricVitae({ cvRef }) {
   return (
     <div className="xl:w-80 m-auto mt-2 mb-1 print-container" ref={cvRef}>
       <div className="bg-white text-black rounded-3xl ">
@@ -38,6 +38,7 @@ export function CurricVitae({cvRef} ) {
                       <li>Context API y Hooks</li>
                       <li>Integración de APIs </li>
                       <li>Optimización de Renderizado</li>
+                      <li>Integraciones Servidor/Base de Datos</li>
                       <li>Gestión de Estado Local y Global </li>
                       <li>Enrutamiento</li>
                       <li>Desarrollo Mobile con React Native</li>
@@ -70,6 +71,7 @@ export function CurricVitae({cvRef} ) {
                       Capacitación de nuevos empleados en el uso de programas y
                       herramientas.
                     </li>
+                    <li>Optimización de procesos.</li>
                   </ul>
                 </div>
               </div>
@@ -98,10 +100,6 @@ export function CurricVitae({cvRef} ) {
               <div>
                 <h2 className="font-semibold">Aptitudes</h2>
                 <ul class="list-disc pl-5 text-gray-700">
-                  <li>
-                    Desarrollo de proyectos desde la idea inicial hasta la
-                    ejecución, resolviendo problemas reales.
-                  </li>
                   <li>
                     Capacidad para crear soluciones completas, desde la
                     planificación hasta el despliegue.

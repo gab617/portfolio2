@@ -2,6 +2,8 @@
 /* eslint-disable react/jsx-key */
 import { projectsF } from "../../assets/jsonData.json";
 
+const ListProjects2 = () => {}
+
 const ListProjects = () => {
   const Proyect = ({ proyect }) => {
     return (
@@ -29,7 +31,6 @@ const ListProjects = () => {
         
                         W-full
                         flex
-
                     "
           >
             <a
@@ -56,9 +57,7 @@ const ListProjects = () => {
               className="
                         flex
                         "
-            >
-
-            </div>
+            ></div>
           </div>
         </div>
 
@@ -161,7 +160,11 @@ const Tiltle = () => {
         </p>
         <div className="flex gap-3 items-center">
           <p> Incluyendo el propio portfolio.</p>
-          <a target="_blank" href="https://github.com/gab617/portfolio2" title="Repository Portfolio">
+          <a
+            target="_blank"
+            href="https://github.com/gab617/portfolio2"
+            title="Repository Portfolio"
+          >
             <svg
               className="bg-emerald-400 bg-opacity-25 cursor-pointer img-repo"
               width="25px"
