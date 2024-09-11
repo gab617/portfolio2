@@ -47,10 +47,10 @@ export function Header() {
             <a href="#contacto">Contacto</a>
           </li>
           <li className="bg-lime-400 bg-opacity-30 rounded-sm p-1 py-2 lg:py-2">
-            <Link to="apis">APIs</Link>
+            <Link to="cv">CV</Link>
           </li>
           <li className="bg-lime-400 bg-opacity-30 rounded-sm p-1 py-2 lg:py-2">
-            <Link to="cv">CV</Link>
+            <Link to="apis">APIs</Link>
           </li>
           <li >
             <ThemeSelector></ThemeSelector>

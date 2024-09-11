@@ -102,6 +102,23 @@
     ],
     "projectsF": [
         {
+            "id": 0,
+            "title": "Basic words",
+            "url_link": "https://r-f-traducciones.vercel.app/",
+            "url_ping": "https://serviciosunificados.onrender.com/bw/ping",
+            "url_repo": "https://github.com/gab617/r-f-traducciones",
+            "img_url": "proys_imgs/traducc.png",
+            "description_app": "App enfocada en aprendizaje de inglés. muestra imágenes y opciones de palabras al azar dentro de un rango de categorias seleccionables, para que el aprendizaje sea variado y divertido. Cuando aciertas la palabra, recibes una respuesta inmediata, lo que ayuda a memorizar y entender mejor el vocabulario. Además, su diseño modular facilita agregar nuevas palabras e imágenes sin problemas.",
+            "description_dev": "El front-end de la aplicación está desarrollado en React, lo que permite una creación dinámica de componentes y una actualización eficiente del DOM. Utilizando React Router y Context, se garantiza una navegación fluida y una gestión eficiente del estado de la aplicación. El back-end, construido con Express y Node.js (API propia), forma una API RESTful que maneja las solicitudes HTTP del front-end. Esta API sirve imágenes y palabras, gestionando la lógica de aprendizaje y enviando datos en formato JSON para una comunicación rápida y eficiente. Node.js permite alta concurrencia y escalabilidad, manejando múltiples conexiones simultáneas de manera eficaz.",
+            "tecs": [
+                "icons_tecs/react-icon.png",
+                "icons_tecs/tailwind-icon.png",
+                "icons_tecs/node-icon.png",
+                "icons_tecs/git-icon.png"
+            ],
+            "responsive": true
+        },
+        {
             "id": 1,
             "title": "Dota2 App",
             "url_link": "https://dota2-app-front-617.vercel.app/",
@@ -118,23 +135,7 @@
             ],
             "responsive": true
         },
-        {
-            "id": 0,
-            "title": "Basic words",
-            "url_link": "https://r-f-traducciones.vercel.app/",
-            "url_ping": "https://serviciosunificados.onrender.com/bw/ping",
-            "url_repo": "https://github.com/gab617/r-f-traducciones",
-            "img_url": "proys_imgs/traducc.png",
-            "description_app": "La app muestra imágenes y opciones de palabras al azar dentro de un rango de categorias seleccionables, para que el aprendizaje sea variado y divertido. Cuando aciertas la palabra, recibes una respuesta inmediata, lo que ayuda a memorizar y entender mejor el vocabulario. Además, su diseño modular facilita agregar nuevas palabras e imágenes sin problemas.",
-            "description_dev": "El front-end de la aplicación está desarrollado en React, lo que permite una creación dinámica de componentes y una actualización eficiente del DOM. Utilizando React Router y Context, se garantiza una navegación fluida y una gestión eficiente del estado de la aplicación. El back-end, construido con Express y Node.js (API propia), forma una API RESTful que maneja las solicitudes HTTP del front-end. Esta API sirve imágenes y palabras, gestionando la lógica de aprendizaje y enviando datos en formato JSON para una comunicación rápida y eficiente. Node.js permite alta concurrencia y escalabilidad, manejando múltiples conexiones simultáneas de manera eficaz.",
-            "tecs": [
-                "icons_tecs/react-icon.png",
-                "icons_tecs/tailwind-icon.png",
-                "icons_tecs/node-icon.png",
-                "icons_tecs/git-icon.png"
-            ],
-            "responsive": true
-        },
+
         {
             "id": 2,
             "title": "Giphy",
