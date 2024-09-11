@@ -31,9 +31,9 @@ export function ConsolaInfo() {
   }
 
   function refreshResquests() {
-    if (allLoadedVerif(requests)){
-      console.log('Se resolvieron todas las peticiones a servicios')
-      setAllLoaded(true)
+    if (allLoadedVerif(requests)) {
+      console.log("Se resolvieron todas las peticiones a servicios");
+      setAllLoaded(true);
     }
   }
 
@@ -60,7 +60,11 @@ export function ConsolaInfo() {
 
         {Object.keys(requests).map((key) => (
           <div key={key} className="flex gap-2">
-            <ProyectInfo refreshResquests={refreshResquests} reqData={requests[key]} k={key} />
+            <ProyectInfo
+              refreshResquests={refreshResquests}
+              reqData={requests[key]}
+              k={key}
+            />
           </div>
         ))}
       </div>
@@ -73,15 +77,22 @@ const ProyectInfo = ({ refreshResquests, reqData, k }) => {
   const [loader, setLoader] = useState(false);
   useEffect(() => {
     setLoader(true);
-    fetch(reqData.url_ping)
-      .then((res) => {
-        setLoader(false);
-        console.log(res.status, "ping: ", reqData.title, reqData.load);
-      })
-      .then(() => {
-        reqData.load = false;
-        refreshResquests()
-      });
+    if (k == 2) {
+      reqData.load = false;
+      refreshResquests();
+      setLoader(false);
+      return;
+    } else {
+      fetch(reqData.url_ping)
+        .then((res) => {
+          setLoader(false);
+          console.log(res.status, "ping: ", reqData.title, reqData.load);
+        })
+        .then(() => {
+          reqData.load = false;
+          refreshResquests();
+        });
+    }
   }, []);
 
   return (
