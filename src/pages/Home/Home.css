@@ -1,5 +1,4 @@
-.card-tec {
-  
+.card-tec {  
   width: 130px;
   height: 130px;
   background: rgba(200, 203, 203, 0.986);
@@ -52,6 +51,25 @@
   height: 100%;
   font-size: 1.8rem;
   transform: rotate(0deg);
+}
+
+.work-view:hover .desc-work {
+  opacity: 1;
+}
+
+.desc-work{
+  width: 100%;
+  opacity: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.5s;
+}
+
+.tool-tecnologie-effect:hover{
+  box-shadow: 0px 0px 1em .5em rgba(23, 176, 6, 0.665);
+  background-color: rgba(255, 255, 255, 0.704);
+
 }
 
 @media (max-width: 640px) {

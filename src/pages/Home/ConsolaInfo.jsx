@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Context } from "../../Context/Context";
 
 export function ConsolaInfo() {
   const [allLoaded, setAllLoaded] = useState(false);
@@ -38,14 +37,14 @@ export function ConsolaInfo() {
   }
 
   return (
-    <div class="relative inline-block group">
+    <div className="relative inline-block group">
       {!allLoaded ? (
-        <div class="w-7 h-7 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+        <div className="w-7 h-7 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
       ) : (
-        <div class="w-7 h-7 border-4 border-green-500 border-t-green-500 rounded-full"></div>
+        <div className="w-7 h-7 border-4 border-green-500 border-t-green-500 rounded-full"></div>
       )}
 
-      <div class="absolute bottom-full right-7 mb-2 bg-gray-800 text-white text-base rounded w-72 h-72 p-2  invisible group-hover:visible">
+      <div className="absolute bottom-full right-7 mb-2 bg-gray-800 text-white text-base rounded w-72 h-72 p-2  invisible group-hover:visible">
         {!allLoaded ? (
           <p className="w-full mb-3">
             Levantando inactividad de los servidores... (Desplegados en

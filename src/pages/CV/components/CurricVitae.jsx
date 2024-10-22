@@ -18,32 +18,45 @@ export function CurricVitae({ cvRef }) {
                   <div className="mb-2 flex xl:items-end">
                     <h1 className="font-bold">EXPERIENCIA</h1>
                     <p className="text-sm pr-2 pl-2 ml-2 font-semibold bg-slate-300 mb-1">
-                      Universidad Informática UNLP (2015-2018) / Autodidacta
+                      Universidad Informática UNLP (2015-2018) / Autodidacta Hasta La Actualidad
                     </p>
                   </div>
                   <div className="ml-3">
                     <p className="mb-3">
-                      Desarrollador frontend en React y React Native,
-                      especializado en la creación de interfaces interactivas y
-                      optimizadas. He integrado APIs RESTful y realizado
-                      solicitudes a bases de datos mediante endpoints, manejando
-                      datos y asegurando la comunicación efectiva entre frontend
-                      y backend. Mi enfoque es desarrollar aplicaciones
-                      eficientes y funcionales, aplicando las mejores prácticas
-                      en desarrollo web y móvil.
+                      Desarrollador frontend especializado en React y React
+                      Native, con experiencia en la creación de interfaces
+                      interactivas y optimizadas. Además, he trabajado en la
+                      integración de APIs RESTful y solicitudes a bases de
+                      datos, asegurando una comunicación fluida entre el
+                      frontend y backend. Con un enfoque en el desarrollo de
+                      aplicaciones eficientes y funcionales, también tengo
+                      experiencia manejando servidores y trabajando con bases de
+                      datos, lo que me permite ofrecer soluciones completas de
+                      desarrollo. Aplico las mejores prácticas en desarrollo web
+                      y móvil, asegurando calidad y rendimiento.
                     </p>
-                    <ul className="ml-3 list-disc">
-                      <li>Proyectos propios desplegados</li>
-                      <li>Desarrollo de Interfaces </li>
-                      <li>Context API y Hooks</li>
-                      <li>Integración de APIs </li>
-                      <li>Optimización de Renderizado</li>
-                      <li>Integraciones Servidor/Base de Datos</li>
-                      <li>Gestión de Estado Local y Global </li>
-                      <li>Enrutamiento</li>
-                      <li>Desarrollo Mobile con React Native</li>
-                      <li>Estilos y Diseño Manejo de Formularios</li>
-                      <li>Diseño Responsive</li>
+                    <ul className="ml-3 list-disc grid grid-cols-2">
+                      <div>
+                        <li>Proyectos propios desplegados</li>
+                        <li>Desarrollo de Interfaces </li>
+                        <li>Context API y Hooks</li>
+                        <li>Optimización de Renderizado</li>
+                        <li>Desarrollo Mobile con React Native</li>
+                        <li>Estilos y Diseño Manejo de Formularios</li>
+                        <li>Diseño Responsive</li>
+                        <li>Componetización</li>
+                      </div>
+                      <div>
+                        <li>Creación e integración de APIs </li>
+                        <li>Node.js /Express /MySQL</li>
+                        <li>Enrutamiento</li>
+                        <li>Web Sockets</li>
+                        <li>Gestión de Estado Local y Global </li>
+                        <li>Integraciones Servidor/Base de Datos</li>
+                        <li>Gestión de base de datos.</li>
+                        <li>Gestión de usuarios</li>
+                        
+                      </div>
                     </ul>
                   </div>
                 </div>

@@ -26,7 +26,7 @@ const Hero = () => {
                     xl:text-4xl"
           >
             <h1>Gabriel Cabrera Sirlopu</h1>
-            <h2>Web developer</h2>
+            <h2><span className="font-bold">Web / App developer</span></h2>
           </div>
         </div>
         <div className="xl:flex xl:justify-end xl:full">
