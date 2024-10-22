@@ -14,20 +14,20 @@ const ListProjects = () => {
 
     function handleImageNext() {
       setCurrentImg((prevState) => {
-        console.log(cant, prevState)
+        console.log(cant, prevState);
         if (cant == prevState) {
           return 1;
         }
-        return prevState + 1
+        return prevState + 1;
       });
     }
     function handleImagePrevious() {
       setCurrentImg((prevState) => {
-        console.log(cant, prevState)
+        console.log(cant, prevState);
         if (prevState == 1) {
           return cant;
         }
-        return prevState - 1
+        return prevState - 1;
       });
     }
 
@@ -122,14 +122,31 @@ const ListProjects = () => {
                 w-full 
                 "
           >
-            <a className="" href={proyect.url_link} target="_blank">
-              <img
-                className="
-                            rounded-xl"
-                src={proyect.img_url}
-                alt=""
-              />
-            </a>
+            <a
+              style={{
+                backgroundImage: `url(proys_imgs/${proyect.media_folder.path}/${currentImg}.png)`,
+                backgroundSize: "110%",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+              className="h-[15em] w-full"
+              href={proyect.url_link}
+              target="_blank"
+            ></a>
+            <div className="flex justify-center gap-3 mt-1 w-[25%] mx-auto ">
+              <button
+                onClick={handleImagePrevious}
+                className="tool-tecnologie-effect transition-all duration-300"
+              >
+                <img src="/arrow-left.png" alt="" />
+              </button>
+              <button
+                onClick={handleImageNext}
+                className="tool-tecnologie-effect transition-all duration-300"
+              >
+                <img src="/arrow-right.png" alt="" />
+              </button>
+            </div>
             <p
               className={`
                         text-base
