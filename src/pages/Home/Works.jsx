@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-key */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { projectsF } from "../../assets/jsonData.json";
 import { Context } from "../../Context/Context";
 
@@ -9,6 +9,28 @@ const ListProjects2 = () => {};
 const ListProjects = () => {
   const Proyect = ({ proyect }) => {
     const { currentTheme } = useContext(Context);
+    const [currentImg, setCurrentImg] = useState(1);
+    const { cant } = proyect.media_folder;
+
+    function handleImageNext() {
+      setCurrentImg((prevState) => {
+        console.log(cant, prevState)
+        if (cant == prevState) {
+          return 1;
+        }
+        return prevState + 1
+      });
+    }
+    function handleImagePrevious() {
+      setCurrentImg((prevState) => {
+        console.log(cant, prevState)
+        if (prevState == 1) {
+          return cant;
+        }
+        return prevState - 1
+      });
+    }
+
     return (
       <div
         className="
@@ -24,7 +46,7 @@ const ListProjects = () => {
                 flex mb-2 mt-3 justify-between"
         >
           {/* Titulo */}
-          <div className="flex">
+          <div className="flex mb-2">
             <div
               className=" 
                         W-full
@@ -130,15 +152,19 @@ const ListProjects = () => {
         </article>
 
         {/* SUPERIOR A MOBILE */}
+        <hr className="border " />
         <article
-        title="Click para ir a web"
           className="
+                group
                 hidden
                 sm:block
                 xl:flex-col xl:p-3 mt-3 mb-2"
         >
           <div
             className="
+             group-hover:scale-110
+             group-hover:-translate-y-5
+             transition-all duration-300
                 drop-shad-tecno
                 flex items-center justify-center
                 w-full 
@@ -147,11 +173,13 @@ const ListProjects = () => {
           >
             <a
               style={{
-                backgroundImage: `url(${proyect.img_url})`,
+                backgroundImage: `url(proys_imgs/${proyect.media_folder.path}/${currentImg}.png)`,
                 backgroundSize: "cover",
-                backgroundPosition: "center",
+                backgroundPosition: "top",
+                backgroundRepeat: "no-repeat",
               }}
-              className={` work-view h-[20em] lg:min-h-[25em] lg:max-h-[30em] flex`}
+              title="Click para ir a web"
+              className={` work-view h-[20em] lg:min-h-[27em] lg:max-h-[30em] flex transition-all duration-300`}
               href={proyect.url_link}
               target="_blank"
             >
@@ -183,6 +211,20 @@ const ListProjects = () => {
                 </ul>
               </div>
             </a>
+          </div>
+          <div className="flex justify-center gap-3 mt-1 w-[15%] mx-auto ">
+            <button
+              onClick={handleImagePrevious}
+              className="tool-tecnologie-effect transition-all duration-300"
+            >
+              <img src="/arrow-left.png" alt="" />
+            </button>
+            <button
+              onClick={handleImageNext}
+              className="tool-tecnologie-effect transition-all duration-300"
+            >
+              <img src="/arrow-right.png" alt="" />
+            </button>
           </div>
         </article>
 

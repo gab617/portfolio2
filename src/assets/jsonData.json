@@ -122,19 +122,22 @@
                 "Context para gestión de estado",
                 "Express y Node.js como API",
                 "API sevidora de multimedia",
-                "Lógica de aprendizaje gestionada",                
+                "Lógica de aprendizaje gestionada",
                 "Escalabilidad",
                 "Diseño Responsive"
-              ],
+            ],
             "tecs": [
                 "icons_tecs/react-icon.png",
                 "icons_tecs/tailwind-icon.png",
                 "icons_tecs/node-icon.png",
                 "icons_tecs/git-icon.png",
                 "icons_tecs/mysql-icon.png"
-
             ],
-            "responsive": true
+            "responsive": true,
+            "media_folder": {
+                "path": "basicWordsmedia",
+                "cant": 12
+            }
         },
         {
             "id": 1,
@@ -145,7 +148,7 @@
             "img_url": "proys_imgs/d2.png",
             "description_app": "Esta aplicación para fanáticos de Dota 2 permite explorar y aprender sobre los héroes del juego. Presenta una lista completa de héroes, y al hacer clic en uno, se muestra una página con sus detalles, incluyendo estadísticas y habilidades.",
             "description_dev": "La aplicación está desarrollada utilizando React para el front-end y Express con Node.js para el back-end (API propia). En el front-end, React se encarga de renderizar dos componentes principales: una lista de héroes y un componente de detalles para cada héroe seleccionado. La lista de héroes presenta una vista general de todos los héroes disponibles en Dota 2, mientras que el componente de detalles proporciona información detallada sobre un héroe específico cuando se hace clic en él.",
-            "description_list":  [
+            "description_list": [
                 "Planeamiento y esquemas.",
                 "React para el front-end",
                 "Express y Node.js para el back-end",
@@ -157,16 +160,18 @@
                 "Context para gestión de estado",
                 "API propia.",
                 "Diseño Responsive"
-
-              ],
+            ],
             "tecs": [
                 "icons_tecs/react-icon.png",
                 "icons_tecs/tailwind-icon.png",
                 "icons_tecs/node-icon.png",
                 "icons_tecs/git-icon.png"
-                
             ],
-            "responsive": true
+            "responsive": true,
+            "media_folder": {
+                "path": "d2media",
+                "cant": 8
+            }
         },
         {
             "id": 2,
@@ -188,15 +193,18 @@
                 "Obtiene categorías y búsquedas de Giphy",
                 "Funcionalidades gestionadas por Express",
                 "Diseño Responsive"
-
-              ],
+            ],
             "tecs": [
                 "icons_tecs/react-icon.png",
                 "icons_tecs/tailwind-icon.png",
                 "icons_tecs/node-icon.png",
                 "icons_tecs/git-icon.png"
             ],
-            "responsive": true
+            "responsive": true,
+            "media_folder": {
+                "path": "giphmedia",
+                "cant": 6
+            }
         }
     ],
     "urls_ping": [
