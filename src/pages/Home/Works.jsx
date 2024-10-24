@@ -169,7 +169,13 @@ const ListProjects = () => {
         </article>
 
         {/* SUPERIOR A MOBILE */}
-        <hr className="border " />
+        <hr
+          className={`border ${
+            currentTheme.color === "#000"
+              ? "border-white "
+              : "border-black "
+          }`}
+        />
         <article
           className="
                 group
@@ -181,7 +187,7 @@ const ListProjects = () => {
             className="
              group-hover:scale-110
              group-hover:-translate-y-5
-             transition-all duration-300
+             transition-all duration-500
                 drop-shad-tecno
                 flex items-center justify-center
                 w-full 
@@ -196,7 +202,7 @@ const ListProjects = () => {
                 backgroundRepeat: "no-repeat",
               }}
               title="Click para ir a web"
-              className={` work-view h-[20em] lg:min-h-[27em] lg:max-h-[30em] flex transition-all duration-300`}
+              className={` work-view h-[20em] lg:min-h-[27em] lg:max-h-[30em] 2xl:min-h-[30em] flex transition-all duration-700`}
               href={proyect.url_link}
               target="_blank"
             >
