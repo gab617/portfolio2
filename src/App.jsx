@@ -12,6 +12,7 @@ import { Cv } from "./pages/CV/Cv.jsx";
 import { useContext, useState } from "react";
 import { Context } from "./Context/Context.jsx";
 import { ConsolaInfo } from "./pages/Home/ConsolaInfo.jsx";
+import { Credit } from "./pages/Credit/Credit.jsx";
 
 function App() {
   const { requests } = useContext(Context);
@@ -51,10 +52,14 @@ function App() {
               </>
             }
           />
+
+          <Route path="/credit" element={<>
+            <Credit/>
+          </>} />
         </Routes>
       </Router>
       <footer class="fixed bottom-0 right-1 p-3 flex bg-gray-100 bg-opacity-10  z-50  rounded-full">
-        <ConsolaInfo/>
+        <ConsolaInfo />
       </footer>
     </>
   );
