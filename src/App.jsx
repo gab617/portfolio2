@@ -6,7 +6,7 @@ import { FormContact } from "./pages/Home/FormContact.jsx";
 import { Header } from "./pages/Home/Header.jsx";
 import { Inicio } from "./pages/Home/Inicio.jsx";
 import { Works } from "./pages/Home/Works.jsx";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { Apis } from "./pages/APIs/Apis.jsx";
 import { Cv } from "./pages/CV/Cv.jsx";
 import { useContext, useState } from "react";
@@ -31,6 +31,11 @@ function App() {
                 <Works />
                 {/* CONTACTO */}
                 <FormContact urlPing={urls_ping[3]} />
+                <div className="flex justify-center">
+                  <Link to="/credit" className="text-xl mb-5">
+                    Creditos
+                  </Link>
+                </div>
               </>
             }
           />

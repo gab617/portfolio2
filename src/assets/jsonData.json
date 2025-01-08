@@ -104,6 +104,41 @@
     ],
     "projectsF": [
         {
+            "id": 3,
+            "title": "Prize OnLine",
+            "url_link": "https://prizeonline.vercel.app/",
+            "url_ping": "https://prizebackend.onrender.com/pingBDDPrize",
+            "url_repo": "https://github.com/gab617/prizefrontend",
+            "img_url": "proys_imgs/sorteos.png",
+            "description_app": "Una plataforma interactiva diseñada para organizar sorteos en línea de manera eficiente y emocionante. Los usuarios pueden participar en sorteos en tiempo real con tableros dinámicos y reglas personalizables. La interfaz amigable y visualmente atractiva asegura una experiencia de usuario fluida, mientras que las funciones en vivo garantizan la transparencia y emoción de los sorteos. Además, los administradores tienen herramientas avanzadas para gestionar participantes, premios y reglas del sorteo.",
+            "description_dev": "El front-end está desarrollado con React, lo que proporciona una experiencia dinámica y reactiva para los usuarios. Tailwind CSS se utiliza para estilizar la interfaz, garantizando un diseño atractivo y completamente adaptable a cualquier dispositivo. En el back-end, Node.js y Express manejan la lógica del sorteo y la gestión de usuarios, asegurando alta concurrencia y tiempos de respuesta rápidos. La base de datos en MySQL almacena la información clave, incluyendo usuarios, premios y resultados de los sorteos, lo que garantiza integridad y seguridad en los datos. Gracias a Socket.IO, los eventos en tiempo real como actualizaciones de tableros, asignación de participantes y notificaciones de ganadores son instantáneos, creando una experiencia inmersiva. La arquitectura modular permite agregar fácilmente nuevas funcionalidades según sea necesario.",
+            "description_list": [
+              "Sorteos dinámicos en tiempo real",
+              "Administración de tableros y participantes",
+              "Notificaciones instantáneas de ganadores",
+              "Gestión eficiente de usuarios en MySQL",
+              "React para componentes interactivos",
+              "Planeación y esquemas flexibles para añadir nuevos sorteos",
+              "Socket.IO para eventos en vivo",
+              "Tailwind CSS para diseño responsivo",
+              "Transparencia en los procesos",
+              "Soporte para múltiples dispositivos y usuarios concurrentes"
+            ],
+            "tecs": [
+              "icons_tecs/react-icon.png",
+              "icons_tecs/tailwind-icon.png",
+              "icons_tecs/socketio-icon.png",
+              "icons_tecs/node-icon.png",
+                "icons_tecs/git-icon.png",
+              "icons_tecs/mysql-icon.png"
+            ],
+            "responsive": true,
+            "media_folder": {
+              "path": "prizemedia",
+              "cant": 10
+            }
+          },
+        {
             "id": 0,
             "title": "Basic words",
             "url_link": "https://r-f-traducciones.vercel.app/",

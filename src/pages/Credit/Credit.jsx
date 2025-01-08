@@ -70,7 +70,7 @@ export function Credit() {
 
   return (
     <div>
-{/*       <div className="w-[89%] mx-auto bg-yellow-400">
+      {/*       <div className="w-[89%] mx-auto bg-yellow-400">
         <Link to="/">
           <ButtonVolver></ButtonVolver>
         </Link>
@@ -227,16 +227,20 @@ export function Credit() {
             </h2>
             <ol className="list-decimal pl-6 text-lg">
               <li>
-                <strong>Solicita tu préstamo:</strong> Contáctanos por WhatsApp
-                y dinos cuánto necesitas.
+                <strong>Inicia el proceso:</strong> Contáctanos por WhatsApp y
+                dinos cuánto necesitas. Coordinaremos una visita personalizada a
+                tu negocio para conocer tus necesidades y situación financiera.
               </li>
               <li>
-                <strong>Elige tu plazo:</strong> Escoge el plan de días que
-                mejor se ajuste a tu situación.
+                <strong>Análisis en sitio:</strong> Nuestro equipo realizará una
+                evaluación profesional en tu lugar de trabajo para garantizar
+                que el crédito se ajuste perfectamente a tus objetivos
+                comerciales y flujo de ingresos.
               </li>
               <li>
-                <strong>Recibe tu dinero:</strong> Sin demoras y con total
-                comodidad.
+                <strong>Aprobación y entrega:</strong> Una vez completado el
+                análisis, recibirás tu dinero de manera ágil y segura, con un
+                enfoque transparente y personalizado.
               </li>
             </ol>
           </section>

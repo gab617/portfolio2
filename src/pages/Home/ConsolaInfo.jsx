@@ -3,6 +3,11 @@ import React, { useContext, useEffect, useState } from "react";
 export function ConsolaInfo() {
   const [allLoaded, setAllLoaded] = useState(false);
   const [requests, setRequests] = useState({
+    4: {
+      title: "Prize Online",
+      load: true,
+      url_ping: "https://prizebackend.onrender.com/pingBDDPrize",
+    },
     1: {
       title: "Dota2 App",
       load: true,
