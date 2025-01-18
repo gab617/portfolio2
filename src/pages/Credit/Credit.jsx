@@ -286,15 +286,25 @@ export function Credit() {
             <div className="flex justify-center mt-2">
               <div className="flex gap-3 text-xl">
                 <button
-                className="p-2 border-2 border-black"
-                  style={{ background: `${modePay ? "white" : ""}` }}
+                  className="p-2 border-2 border-black"
+                  style={{
+                    background: `${modePay ? "white" : ""}`,
+                    border: `${
+                      modePay ? "3px solid black" : "1px solid black"
+                    }`,
+                  }}
                   onClick={changeModePay}
                 >
                   Diario
                 </button>
                 <button
-                className="p-2 border-2 border-black "
-                  style={{ background: `${modePay ? "" : "white"}` }}
+                  className="p-2 border-2 border-black "
+                  style={{
+                    background: `${modePay ? "" : "white"}`,
+                    border: `${
+                      !modePay ? "3px solid black" : "1px solid black"
+                    }`,
+                  }}
                   onClick={changeModePay}
                 >
                   Semanal
@@ -364,7 +374,7 @@ export function Credit() {
               className="flex flex-col sm:text-xl mt-5 font-semibold"
             >
               <div className="flex w-full justify-between items-center mb-2">
-                <h1 className="text-green-900 ml-1  sm:text-2xl font-bold">
+                <h1 className="text-green-900 ml-1  text-xs sm:text-2xl font-bold">
                   CRÉDITO
                 </h1>
 
@@ -372,7 +382,7 @@ export function Credit() {
                   {TABLASEMANAL[0].semanas.map((semana) => {
                     return (
                       <div className="flex w-full justify-center">
-                        <h1 className="text-start border-4 border-black border-dotted p-2">
+                        <h1 className="text-xs sm:text-xl  sm:border-4 border-black border-2 border-dotted p-[0.2em] sm:p-2">
                           {semana.semanasTot} SEMANAS
                         </h1>
                       </div>
@@ -436,7 +446,7 @@ export function Credit() {
             <ul className="list-disc pl-6 text-lg">
               <li>
                 Préstamos flexibles desde <strong>$100,000</strong> hasta{" "}
-                <strong>$1,000,000</strong>.
+                <strong>$1,500,000</strong>.
               </li>
               <li>
                 Plazos convenientes: <strong>20, 25, 33 o 50 días</strong>.
