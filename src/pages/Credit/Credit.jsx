@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { ButtonVolver } from "../../components/ButtonVolver";
 import { Link } from "react-router-dom";
 
@@ -64,9 +64,182 @@ const TABLA = [
       { dias: 50, valorPorDia: 30000 },
     ],
   },
+  {
+    credito: 1500000,
+    creditoStr: "1.500.000",
+    dias: [
+      { dias: 20, valorPorDia: 90000 },
+      { dias: 25, valorPorDia: 75000 },
+      { dias: 33, valorPorDia: 60000 },
+      { dias: 50, valorPorDia: 45000 },
+    ],
+  },
 ];
+
+const TABLASEMANAL = [
+  {
+    credito: 100000,
+    creditoStr: "100.000",
+    semanas: [
+      {
+        semanasTot: 3,
+        montosSemanales: 40000,
+      },
+      {
+        semanasTot: 4,
+        montosSemanales: 31250,
+      },
+      {
+        semanasTot: 5,
+        montosSemanales: 26400,
+      },
+      {
+        semanasTot: 8,
+        montosSemanales: 18750,
+      },
+    ],
+  },
+  {
+    credito: 200000,
+    creditoStr: "200.000",
+    semanas: [
+      {
+        semanasTot: 3,
+        montosSemanales: 80000,
+      },
+      {
+        semanasTot: 4,
+        montosSemanales: 62500,
+      },
+      {
+        semanasTot: 5,
+        montosSemanales: 52800,
+      },
+      {
+        semanasTot: 8,
+        montosSemanales: 37500,
+      },
+    ],
+  },
+  {
+    credito: 250000,
+    creditoStr: "250.000",
+    semanas: [
+      {
+        semanasTot: 3,
+        montosSemanales: 100000,
+      },
+      {
+        semanasTot: 4,
+        montosSemanales: 78125,
+      },
+      {
+        semanasTot: 5,
+        montosSemanales: 66000,
+      },
+      {
+        semanasTot: 8,
+        montosSemanales: 46875,
+      },
+    ],
+  },
+  {
+    credito: 400000,
+    creditoStr: "400.000",
+    semanas: [
+      {
+        semanasTot: 3,
+        montosSemanales: 160000,
+      },
+      {
+        semanasTot: 4,
+        montosSemanales: 125000,
+      },
+      {
+        semanasTot: 5,
+        montosSemanales: 105600,
+      },
+      {
+        semanasTot: 8,
+        montosSemanales: 62500,
+      },
+    ],
+  },
+  {
+    credito: 500000,
+    creditoStr: "500.000",
+    semanas: [
+      {
+        semanasTot: 3,
+        montosSemanales: 200000,
+      },
+      {
+        semanasTot: 4,
+        montosSemanales: 156250,
+      },
+      {
+        semanasTot: 5,
+        montosSemanales: 132000,
+      },
+      {
+        semanasTot: 8,
+        montosSemanales: 93750,
+      },
+    ],
+  },
+  {
+    credito: 1000000,
+    creditoStr: "1.000.000",
+    semanas: [
+      {
+        semanasTot: 3,
+        montosSemanales: 400000,
+      },
+      {
+        semanasTot: 4,
+        montosSemanales: 312500,
+      },
+      {
+        semanasTot: 5,
+        montosSemanales: 264000,
+      },
+      {
+        semanasTot: 8,
+        montosSemanales: 187500,
+      },
+    ],
+  },
+  {
+    credito: 1500000,
+    creditoStr: "1.500.000",
+    semanas: [
+      {
+        semanasTot: 3,
+        montosSemanales: 600000,
+      },
+      {
+        semanasTot: 4,
+        montosSemanales: 468750,
+      },
+      {
+        semanasTot: 5,
+        montosSemanales: 396000,
+      },
+      {
+        semanasTot: 8,
+        montosSemanales: 281250,
+      },
+    ],
+  },
+];
+
 export function Credit() {
   const creditsPDFRef = useRef();
+  const [modePay, setModePay] = useState(true); //true -diary- false -week-
+
+  function changeModePay() {
+    setModePay((prev) => !prev);
+  }
 
   return (
     <div>
@@ -110,7 +283,32 @@ export function Credit() {
               </div>
             </div>
 
-            <div className="flex flex-col sm:text-xl mt-9 font-semibold">
+            <div className="flex justify-center mt-2">
+              <div className="flex gap-3 text-xl">
+                <button
+                className="p-2 border-2 border-black"
+                  style={{ background: `${modePay ? "white" : ""}` }}
+                  onClick={changeModePay}
+                >
+                  Diario
+                </button>
+                <button
+                className="p-2 border-2 border-black "
+                  style={{ background: `${modePay ? "" : "white"}` }}
+                  onClick={changeModePay}
+                >
+                  Semanal
+                </button>
+              </div>
+            </div>
+
+            {/* DIARIO */}
+            <div
+              style={{
+                display: `${modePay ? "block" : "none"}`,
+              }}
+              className="flex flex-col sm:text-xl mt-5 font-semibold"
+            >
               <div className="flex w-full justify-between items-center mb-2">
                 <h1 className="text-green-900 ml-1  sm:text-2xl font-bold">
                   CRÉDITO
@@ -146,6 +344,60 @@ export function Credit() {
                               </h1>
                               <p className="scale-75 sm:scale-100 sm:text-xs font-semibold text-green-950">
                                 PAGO <br /> DIARIO
+                              </p>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <hr className="border-green-600 w-[95%] mx-auto mb-[2em]" />
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* SEMANAL */}
+            <div
+              style={{
+                display: `${!modePay ? "block" : "none"}`,
+              }}
+              className="flex flex-col sm:text-xl mt-5 font-semibold"
+            >
+              <div className="flex w-full justify-between items-center mb-2">
+                <h1 className="text-green-900 ml-1  sm:text-2xl font-bold">
+                  CRÉDITO
+                </h1>
+
+                <div className="flex justify-between w-[81%]">
+                  {TABLASEMANAL[0].semanas.map((semana) => {
+                    return (
+                      <div className="flex w-full justify-center">
+                        <h1 className="text-start border-4 border-black border-dotted p-2">
+                          {semana.semanasTot} SEMANAS
+                        </h1>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <hr className="border-green-600 w-[95%] mx-auto mb-5" />
+
+              {TABLASEMANAL.map((creditData) => {
+                return (
+                  <div>
+                    <div className="h-auto flex w-full justify-between text-black">
+                      <h1 className="sm:text-2xl text-blue-950 mr-3  ">
+                        ${creditData.creditoStr}
+                      </h1>
+                      <div className="flex w-[81%] justify-between">
+                        {creditData.semanas.map((semana) => {
+                          return (
+                            <div className=" flex flex-col sm:flex-row w-full items-center justify-center">
+                              <h1 className="text-start mr-1 sm:text-2xl text-green-950">
+                                ${semana.montosSemanales}
+                              </h1>
+                              <p className="scale-75 sm:scale-100 sm:text-xs font-semibold text-green-950">
+                                PAGO SEM
                               </p>
                             </div>
                           );
