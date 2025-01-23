@@ -154,7 +154,7 @@ const Tecnologies = () => {
           Tecnologías
         </h1>
       </div>
-      <div className="grid grid-cols-3 gap-4 sm:gap-2 md:w-80 md:m-auto xl:w-2/5">
+      <div className="grid grid-cols-3  xl:flex gap-4 mx-auto justify-center">
         {tecnologies_list.map((tecData) => {
           return (
             <div className="">

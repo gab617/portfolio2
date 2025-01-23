@@ -267,12 +267,33 @@ export function Credit() {
 
   return (
     <div>
-      {/*       <div className="w-[89%] mx-auto bg-yellow-400">
-        <Link to="/">
-          <ButtonVolver></ButtonVolver>
-        </Link>
-      </div> */}
+      <div className="w-[89%] mx-auto bg-yellow-400"></div>
+      <hr className="mt-6 mb-6" />
+      <div className="ml-2 flex flex-col">
 
+        <div className="flex">
+          <div className=" mb-2 bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
+            <ReactToPrint
+              trigger={() => <button>Guardar como PDF</button>}
+              content={() => creditsPDFRef.current}
+            />
+          </div>
+          <p>Volante PDF</p>
+        </div>
+
+        <div className="flex">
+          <div className=" bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
+            <ReactToPrint
+              trigger={() => <button>Guardar como PDF</button>}
+              content={() => cartonsitoPDFRef.current}
+            />
+          </div>
+          <p>Financiación PDF</p>
+        </div>
+
+        
+      </div>
+      <hr className="mt-6 mb-6" />
       <div className="flex flex-col lg:flex-row justify-center gap-7 ">
         <div
           ref={creditsPDFRef}
@@ -288,109 +309,80 @@ export function Credit() {
           />
         </div>
 
-        <DescriptionCredit />
-      </div>
-
-      <hr className="mt-6 mb-6" />
-      <div className="flex flex-col gap-3 lg:flex-row">
-        <div
-          ref={cartonsitoPDFRef}
-          className=" w-full items-center bg-white text-black text-center"
-          style={{
-            fontFamily: "'Lato',serif",
-          }}
-        >
+        {/* <DescriptionCredit /> */}
+        <div className="flex flex-col gap-3 lg:flex-row">
           <div
-            className=""
+            ref={cartonsitoPDFRef}
+            className=" w-full items-center bg-white text-black text-center"
             style={{
+              fontFamily: "'Lato',serif",
             }}
           >
-            <h1
+            <div className="" style={{}}>
+              <h1
+                style={{
+                  background: `linear-gradient(90deg, rgba(238,237,235,1) 54%, rgba(45,45,45,0.8127626050420168) 98%)`,
+                }}
+                className=" text-xl p-5 font-semibold mb-2"
+              >
+                FINANCIACIÓN
+              </h1>
+              <div className="flex w-[99%]  p-1 font-bold text-start">
+                <div className="grid grid-cols-2 w-[80%]">
+                  <div className="flex">
+                    <img
+                      className="h-[1.3em] w-[1.3em] mr-1"
+                      src="/user.png"
+                    ></img>
+                    <h1>CLIENTE: </h1>
+                  </div>
+                  <h1>CUOTAS: </h1>
+                  <div className="flex">
+                    <img
+                      className="h-[1.3em] w-[1.3em] mr-1"
+                      src="/calendar.png"
+                    ></img>
+                    <h1>FECHA INICIO: </h1>
+                  </div>
+                  <h1>IMPORTE CUOTA: </h1>
+                  <div className="flex">
+                    <img
+                      className="h-[1.3em] w-[1.3em] mr-1"
+                      src="/calendar.png"
+                    ></img>
+                    <h1>FECHA VENC.: </h1>
+                  </div>
+                </div>
+
+                <div className="mx-auto w-[20%]">
+                  <img
+                    className="w-[100%] mx-auto rounded-full"
+                    src="/creditsmedia/logo4.png"
+                  ></img>
+                </div>
+              </div>
+            </div>
+
+            {/*------------ CASILLEROS-------------------- */}
+            <div className="w-[99%] mx-auto mt-2  grid grid-cols-3 gap-3 bg-white text-black">
+              {casilleros.map((casillero) => {
+                return <>{casillero}</>;
+              })}
+            </div>
+
+            <div className="mt-5 w-[10%] mx-auto">
+              <img className="" src="/creditsmedia/plants.png"></img>
+            </div>
+
+            <hr
               style={{
                 background: `linear-gradient(90deg, rgba(238,237,235,1) 54%, rgba(45,45,45,0.8127626050420168) 98%)`,
               }}
-              className=" text-xl p-5 font-semibold mb-2"
-            >
-              FINANCIACIÓN
-            </h1>
-            <div className="flex w-[99%]  p-1 font-bold text-start">
-              <div className="grid grid-cols-2 w-[80%]">
-                <div className="flex">
-                  <img
-                    className="h-[1.3em] w-[1.3em] mr-1"
-                    src="/user.png"
-                  ></img>
-                  <h1>CLIENTE: </h1>
-                </div>
-                <h1>CUOTAS: </h1>
-                <div className="flex">
-                  <img
-                    className="h-[1.3em] w-[1.3em] mr-1"
-                    src="/calendar.png"
-                  ></img>
-                  <h1>FECHA INICIO: </h1>
-                </div>
-                <h1>IMPORTE CUOTA: </h1>
-                <div className="flex">
-                  <img
-                    className="h-[1.3em] w-[1.3em] mr-1"
-                    src="/calendar.png"
-                  ></img>
-                  <h1>FECHA VENC.: </h1>
-                </div>
-              </div>
-
-              <div className="mx-auto w-[20%]">
-                <img
-                  className="w-[100%] mx-auto rounded-full"
-                  src="/creditsmedia/logo4.png"
-                ></img>
-              </div>
-            </div>
-          </div>
-
-          {/*------------ CASILLEROS-------------------- */}
-          <div className="w-[99%] mx-auto mt-2  grid grid-cols-3 gap-3 bg-white text-black">
-            {casilleros.map((casillero) => {
-              return <>{casillero}</>;
-            })}
-          </div>
-
-          <div className="mt-5 w-[10%] mx-auto">
-            <img className="" src="/creditsmedia/plants.png"></img>
-          </div>
-
-          <hr
-            style={{
-              background: `linear-gradient(90deg, rgba(238,237,235,1) 54%, rgba(45,45,45,0.8127626050420168) 98%)`,
-            }}
-            className="mt-5 p-4 "
-          />
-        </div>
-        <div className="w-[60%] ml-2 flex flex-col">
-          <div className="flex">
-            <div className="w-1/2 mb-2 bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
-              <ReactToPrint
-                trigger={() => <button>Guardar como PDF</button>}
-                content={() => creditsPDFRef.current}
-              />
-            </div>
-            <p>Volante PDF</p>
-          </div>
-
-          <div className="flex">
-            <div className="w-1/2 bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
-              <ReactToPrint
-                trigger={() => <button>Guardar como PDF</button>}
-                content={() => cartonsitoPDFRef.current}
-              />
-            </div>
-            <p>Financiación PDF</p>
+              className="mt-5 p-4 "
+            />
           </div>
         </div>
       </div>
-
-      <hr className="mt-6 mb-6" />
     </div>
   );
 }

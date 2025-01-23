@@ -100,6 +100,11 @@ export function FormContact({ }) {
   return (
     <section
       id="contacto"
+      style={
+        {
+          background:"linear-gradient(90deg, rgba(238,237,235,0.36738445378151263) 0%, rgba(45,45,45,0.8127626050420168) 98%)"
+        }
+      }
       className="
         mb-4
         bg-white 
