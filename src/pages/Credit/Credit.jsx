@@ -238,7 +238,7 @@ const TABLASEMANAL = [
 ];
 
 const casilleros = [];
-for (let i = 1; i <= 33; i++) {
+for (let i = 1; i <= 30; i++) {
   casilleros.push(
     <div
       key={i}
@@ -247,11 +247,11 @@ for (let i = 1; i <= 33; i++) {
       gap-1
       "
     >
-      <div className="border-2 border-gray-600 w-[38%] h-[3.5em]"></div>
-      <div className="flex items-center justify-center w-[10%] border-2 border-gray-600 h-[3.5em] text-center">
+      <div className="border-2 border-gray-600 w-[38%] h-[3.8em]"></div>
+      <div className="flex items-center justify-center w-[10%] border-2 border-gray-600 h-[3.8em] text-center">
         {i}
       </div>
-      <div className="border-2 border-gray-600 w-[57%] h-[3.5em]"></div>
+      <div className="border-2 border-gray-600 w-[57%] h-[3.8em]"></div>
     </div>
   );
 }
@@ -296,43 +296,55 @@ export function Credit() {
         <div
           ref={cartonsitoPDFRef}
           className=" w-full items-center bg-white text-black text-center"
+          style={{
+            fontFamily: "'Lato',serif",
+          }}
         >
-          <div className="">
+          <div
+            className=""
+            style={{
+            }}
+          >
             <h1
               style={{
                 background: `linear-gradient(90deg, rgba(238,237,235,1) 54%, rgba(45,45,45,0.8127626050420168) 98%)`,
               }}
-              className=" text-xl p-3 font-semibold"
+              className=" text-xl p-5 font-semibold mb-2"
             >
-              Financiación
+              FINANCIACIÓN
             </h1>
-            <div className="grid grid-cols-2 w-[99%] mx-auto  p-2 font-bold text-start">
-              <div className="flex">
-                <img
-                className="h-[1.3em] w-[1.3em] mr-1"
-                  src="/user.png"
-                >
-                </img>
-                <h1>CLIENTE: </h1>
+            <div className="flex w-[99%]  p-1 font-bold text-start">
+              <div className="grid grid-cols-2 w-[80%]">
+                <div className="flex">
+                  <img
+                    className="h-[1.3em] w-[1.3em] mr-1"
+                    src="/user.png"
+                  ></img>
+                  <h1>CLIENTE: </h1>
+                </div>
+                <h1>CUOTAS: </h1>
+                <div className="flex">
+                  <img
+                    className="h-[1.3em] w-[1.3em] mr-1"
+                    src="/calendar.png"
+                  ></img>
+                  <h1>FECHA INICIO: </h1>
+                </div>
+                <h1>IMPORTE CUOTA: </h1>
+                <div className="flex">
+                  <img
+                    className="h-[1.3em] w-[1.3em] mr-1"
+                    src="/calendar.png"
+                  ></img>
+                  <h1>FECHA VENC.: </h1>
+                </div>
+              </div>
 
-              </div>
-              <h1>CUOTAS: </h1>
-              <div className="flex">
+              <div className="mx-auto w-[20%]">
                 <img
-                className="h-[1.3em] w-[1.3em] mr-1"
-                  src="/calendar.png"
-                >
-                </img>
-                <h1>FECHA INICIO: </h1>
-              </div>
-              <h1>IMPORTE CUOTA: </h1>
-              <div className="flex">
-                <img
-                className="h-[1.3em] w-[1.3em] mr-1"
-                  src="/calendar.png"
-                >
-                </img>
-                <h1>FECHA VENC.: </h1>
+                  className="w-[100%] mx-auto rounded-full"
+                  src="/creditsmedia/logo4.png"
+                ></img>
               </div>
             </div>
           </div>
@@ -344,11 +356,15 @@ export function Credit() {
             })}
           </div>
 
+          <div className="mt-5 w-[10%] mx-auto">
+            <img className="" src="/creditsmedia/plants.png"></img>
+          </div>
+
           <hr
             style={{
               background: `linear-gradient(90deg, rgba(238,237,235,1) 54%, rgba(45,45,45,0.8127626050420168) 98%)`,
             }}
-            className="mt-5 p-3 "
+            className="mt-5 p-4 "
           />
         </div>
         <div className="w-[60%] ml-2 flex flex-col">
