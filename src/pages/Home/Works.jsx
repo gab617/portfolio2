@@ -34,12 +34,15 @@ const ListProjects = () => {
     return (
       <div
         className="
-            border border-stone-600
-            mb-10 
+            border border-stone-300
+            mx-auto
+            w-[99%]
+            
+            mb-5
             sm:rounded-xl
             xl:bg-black 
             xl:bg-opacity-10 
-            xl:p-1"
+            "
       >
         <div
           className="
@@ -179,11 +182,11 @@ const ListProjects = () => {
                 group
                 hidden
                 sm:block
-                xl:flex-col xl:p-3 mt-3 mb-2"
+                xl:flex-col xl:p-1 mt-3 mb-2"
         >
           <div
             className="
-             group-hover:scale-110
+             group-hover:scale-105
              group-hover:-translate-y-5
              transition-all duration-500
                 drop-shad-tecno
@@ -213,19 +216,21 @@ const ListProjects = () => {
               >
                 <p
                   className="
-                        p-4 
+                        p-1 
+                        mb-5
                         rounded-xl 
+                        text-base
                         lg:ml-0
                         xl:w-full"
                 >
                   {proyect.description_app}
                   <br />
                 </p>
-                <ul className="grid grid-cols-2 2xl:text-lg list-disc list-inside">
+                <ul className="w-[95%] grid grid-cols-2 2xl:text-lg list-disc">
                   {proyect.description_list?.map((item) => {
                     return (
                       <>
-                        <li className="ml-1 mb-1 xl:ml-4">{item}</li>
+                        <li className="text-base ml-1 mb-1 xl:ml-4">{item}</li>
                       </>
                     );
                   })}
@@ -255,7 +260,7 @@ const ListProjects = () => {
   };
 
   return (
-    <div className="lg:grid lg:grid-cols-4 gap-3">
+    <div className="lg:w-[92%] mx-auto lg:grid lg:grid-cols-2 gap-1">
       {projectsF.map((proyect) => {
         return <Proyect proyect={proyect} />;
       })}
