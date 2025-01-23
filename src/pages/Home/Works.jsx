@@ -39,7 +39,7 @@ const ListProjects = () => {
             sm:rounded-xl
             xl:bg-black 
             xl:bg-opacity-10 
-            xl:p-2"
+            xl:p-1"
       >
         <div
           className="
@@ -171,9 +171,7 @@ const ListProjects = () => {
         {/* SUPERIOR A MOBILE */}
         <hr
           className={`border ${
-            currentTheme.color === "#000"
-              ? "border-white "
-              : "border-black "
+            currentTheme.color === "#000" ? "border-white " : "border-black "
           }`}
         />
         <article
@@ -257,7 +255,7 @@ const ListProjects = () => {
   };
 
   return (
-    <div className="lg:grid lg:grid-cols-2 gap-3">
+    <div className="lg:grid lg:grid-cols-4 gap-3">
       {projectsF.map((proyect) => {
         return <Proyect proyect={proyect} />;
       })}

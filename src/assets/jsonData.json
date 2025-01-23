@@ -112,6 +112,7 @@
             "img_url": "proys_imgs/sorteos.png",
             "description_app": "Una plataforma interactiva diseñada para organizar sorteos en línea de manera eficiente y emocionante. Los usuarios pueden participar en sorteos en tiempo real con tableros dinámicos y reglas personalizables. La interfaz amigable y visualmente atractiva asegura una experiencia de usuario fluida, mientras que las funciones en vivo garantizan la transparencia y emoción de los sorteos. Además, los administradores tienen herramientas avanzadas para gestionar participantes, premios y reglas del sorteo.",
             "description_dev": "El front-end está desarrollado con React, lo que proporciona una experiencia dinámica y reactiva para los usuarios. Tailwind CSS se utiliza para estilizar la interfaz, garantizando un diseño atractivo y completamente adaptable a cualquier dispositivo. En el back-end, Node.js y Express manejan la lógica del sorteo y la gestión de usuarios, asegurando alta concurrencia y tiempos de respuesta rápidos. La base de datos en MySQL almacena la información clave, incluyendo usuarios, premios y resultados de los sorteos, lo que garantiza integridad y seguridad en los datos. Gracias a Socket.IO, los eventos en tiempo real como actualizaciones de tableros, asignación de participantes y notificaciones de ganadores son instantáneos, creando una experiencia inmersiva. La arquitectura modular permite agregar fácilmente nuevas funcionalidades según sea necesario.",
+            "description_resume":"",
             "description_list": [
               "Sorteos dinámicos en tiempo real",
               "Administración de tableros y participantes",
@@ -147,6 +148,7 @@
             "img_url": "proys_imgs/traducc.png",
             "description_app": "Una app de aprendizaje de inglés que muestra imágenes y opciones de palabras al azar dentro de categorías seleccionables, ofreciendo una experiencia variada y divertida. Al acertar la palabra, se recibe una respuesta inmediata para mejorar la memorización del vocabulario. Su diseño modular permite agregar fácilmente nuevas palabras e imágenes.",
             "description_dev": "El front-end está desarrollado en React, lo que permite crear componentes dinámicos y actualizar eficientemente el DOM. Con React Router y Context, se asegura una navegación fluida y una gestión eficiente del estado. El back-end, hecho con Express y Node.js, ofrece una API RESTful que maneja las solicitudes del front-end, sirviendo imágenes y palabras para la lógica de aprendizaje, y enviando datos en formato JSON para una comunicación rápida. Node.js permite alta concurrencia y escalabilidad, manejando múltiples conexiones simultáneas de manera eficaz.",
+            "description_resume":"",
             "description_list": [
                 "Usuarios activos",
                 "Múltiples conexiones simultáneas",
