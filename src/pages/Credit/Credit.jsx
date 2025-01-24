@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { DescriptionCredit } from "./DescriptionCredit";
 import { Folleto } from "./Folleto";
 import ReactToPrint from "react-to-print";
+import { Calculadora } from "./Calculadora";
 
 const TABLA = [
   {
@@ -277,25 +278,31 @@ export function Credit() {
         </Link>
       </div>
       <hr className="mt-6 mb-6" />
-      <div className="ml-2 flex flex-col">
-        <div className="flex">
-          <div className=" mb-2 bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
-            <ReactToPrint
-              trigger={() => <button>Guardar como PDF</button>}
-              content={() => creditsPDFRef.current}
-            />
+      <div className="ml-2 flex flex-row gap-4">
+        <div className="flex flex-col">
+          <div className="flex">
+            <div className=" mb-2 bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
+              <ReactToPrint
+                trigger={() => <button>Guardar como PDF</button>}
+                content={() => creditsPDFRef.current}
+              />
+            </div>
+            <p>Volante PDF</p>
           </div>
-          <p>Volante PDF</p>
-        </div>
 
-        <div className="flex">
-          <div className=" bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
-            <ReactToPrint
-              trigger={() => <button>Guardar como PDF</button>}
-              content={() => cartonsitoPDFRef.current}
-            />
+          <div className="flex">
+            <div className=" bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
+              <ReactToPrint
+                trigger={() => <button>Guardar como PDF</button>}
+                content={() => cartonsitoPDFRef.current}
+              />
+            </div>
+            <p>Financiación PDF</p>
           </div>
-          <p>Financiación PDF</p>
+        </div>
+        <div className="">
+          <Calculadora></Calculadora>
+
         </div>
       </div>
       <hr className="mt-6 mb-6" />
