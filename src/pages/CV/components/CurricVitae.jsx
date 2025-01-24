@@ -282,6 +282,7 @@ export function CurricVitae({ cvRef }) {
           </div>
         </div>
       </div>
+
     </div>
   );
 }

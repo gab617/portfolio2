@@ -268,9 +268,16 @@ export function Credit() {
   return (
     <div>
       <div className="w-[89%] mx-auto bg-yellow-400"></div>
+      <div className="flex justify-between">
+        <h1 className="text-center text-xl font-bold">
+          Recursos para empresa de créditos.
+        </h1>
+        <Link to={"/cv"}>
+          <ButtonVolver></ButtonVolver>
+        </Link>
+      </div>
       <hr className="mt-6 mb-6" />
       <div className="ml-2 flex flex-col">
-
         <div className="flex">
           <div className=" mb-2 bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
             <ReactToPrint
@@ -290,8 +297,6 @@ export function Credit() {
           </div>
           <p>Financiación PDF</p>
         </div>
-
-        
       </div>
       <hr className="mt-6 mb-6" />
       <div className="flex flex-col lg:flex-row justify-center gap-7 ">

@@ -4,7 +4,6 @@ import { CurricVitae } from "./components/CurricVitae";
 import { FooterCv } from "./components/FooterCv";
 import { ButtonVolver } from "../../components/ButtonVolver";
 
-
 export function Cv() {
   const cvRef = useRef();
   return (
@@ -15,11 +14,18 @@ export function Cv() {
         </Link>
       </div>
 
-
-
       <div>
         <CurricVitae cvRef={cvRef} />
         <FooterCv cvRef={cvRef} />
+        <hr />
+        <div className="">
+          <Link to={"/credit"}>
+            <h1 className="hover:bg-white hover:text-black text-center cursor-pointer">
+              DISEÑOS/RECURSOS PARA EMPRESAS
+            </h1>
+          </Link>
+        </div>
+        <hr />
       </div>
     </div>
   );

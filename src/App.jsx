@@ -31,11 +31,7 @@ function App() {
                 <Works />
                 {/* CONTACTO */}
                 <FormContact urlPing={urls_ping[3]} />
-                <div className="flex justify-center">
-                  <Link to="/credit" className="text-xl mb-5">
-                    Creditos
-                  </Link>
-                </div>
+
               </>
             }
           />
