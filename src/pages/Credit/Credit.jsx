@@ -269,19 +269,26 @@ export function Credit() {
   return (
     <div>
       <div className="w-[89%] mx-auto bg-yellow-400"></div>
-      <div className="flex justify-between">
-        <h1 className="text-center text-xl font-bold">
+      <div className="flex justify-between mt-3">
+        <h1 className="text-center sm:text-xl font-bold">
           Recursos para empresa de créditos.
         </h1>
-        <Link to={"/cv"}>
+        <Link className="" to={"/cv"}>
           <ButtonVolver></ButtonVolver>
         </Link>
       </div>
       <hr className="mt-6 mb-6" />
-      <div className="ml-2 flex flex-row gap-4">
-        <div className="flex flex-col">
-          <div className="flex">
-            <div className=" mb-2 bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
+
+      <div className="ml-2 flex justify-between flex-col sm:flex-row gap-4">
+        <div className="">
+          <Calculadora></Calculadora>
+        </div>
+
+        <hr className="sm:hidden" />
+
+        <div className="flex items-start sm:flex-col gap-2 text-center">
+          <div className="flex flex-col sm:flex-row ">
+            <div className=" bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
               <ReactToPrint
                 trigger={() => <button>Guardar como PDF</button>}
                 content={() => creditsPDFRef.current}
@@ -290,7 +297,7 @@ export function Credit() {
             <p>Volante PDF</p>
           </div>
 
-          <div className="flex">
+          <div className="flex flex-col sm:flex-row ">
             <div className=" bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
               <ReactToPrint
                 trigger={() => <button>Guardar como PDF</button>}
@@ -299,10 +306,6 @@ export function Credit() {
             </div>
             <p>Financiación PDF</p>
           </div>
-        </div>
-        <div className="">
-          <Calculadora></Calculadora>
-
         </div>
       </div>
       <hr className="mt-6 mb-6" />
