@@ -3,6 +3,7 @@
 import { useContext, useState } from "react";
 import { projectsF } from "../../assets/jsonData.json";
 import { Context } from "../../Context/Context";
+import "./Works.css"
 
 const ListProjects2 = () => {};
 

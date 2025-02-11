@@ -10,7 +10,7 @@ export const Calculadora = () => {
     e.preventDefault();
 
     const montoNumerico = parseFloat(monto);
-    const diasNumerico = parseInt(dias, 10);
+    let diasNumerico = parseInt(dias, 10);
 
     if (
       isNaN(montoNumerico) ||
@@ -23,7 +23,13 @@ export const Calculadora = () => {
     }
 
     const interesDiario = 0.01;
+    if(diasNumerico == 33){
+      diasNumerico = 32
+    }
     const total = montoNumerico * (1 + interesDiario * diasNumerico);
+    if(diasNumerico == 32){
+      diasNumerico = 33
+    }
     const cuota = total / diasNumerico;
 
     setTotalPagar(total.toFixed(2));
