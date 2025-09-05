@@ -6,237 +6,14 @@ import { DescriptionCredit } from "./DescriptionCredit";
 import { Folleto } from "./Folleto";
 import ReactToPrint from "react-to-print";
 import { Calculadora } from "./Calculadora";
-
-const TABLA = [
-  {
-    credito: 100000,
-    creditoStr: "100.000",
-    dias: [
-      { dias: 20, valorPorDia: 6000 },
-      { dias: 25, valorPorDia: 5000 },
-      { dias: 33, valorPorDia: 4000 },
-      { dias: 50, valorPorDia: 3000 },
-    ],
-  },
-  {
-    credito: 200000,
-    creditoStr: "200.000",
-    dias: [
-      { dias: 20, valorPorDia: 12000 },
-      { dias: 25, valorPorDia: 10000 },
-      { dias: 33, valorPorDia: 8000 },
-      { dias: 50, valorPorDia: 6000 },
-    ],
-  },
-  {
-    credito: 250000,
-    creditoStr: "250.000",
-    dias: [
-      { dias: 20, valorPorDia: 15000 },
-      { dias: 25, valorPorDia: 12500 },
-      { dias: 33, valorPorDia: 10000 },
-      { dias: 50, valorPorDia: 7500 },
-    ],
-  },
-  {
-    credito: 400000,
-    creditoStr: "400.000",
-
-    dias: [
-      { dias: 20, valorPorDia: 24000 },
-      { dias: 25, valorPorDia: 20000 },
-      { dias: 33, valorPorDia: 16000 },
-      { dias: 50, valorPorDia: 12000 },
-    ],
-  },
-  {
-    credito: 500000,
-    creditoStr: "500.000",
-    dias: [
-      { dias: 20, valorPorDia: 30000 },
-      { dias: 25, valorPorDia: 25000 },
-      { dias: 33, valorPorDia: 20000 },
-      { dias: 50, valorPorDia: 15000 },
-    ],
-  },
-  {
-    credito: 1000000,
-    creditoStr: "1.000.000",
-    dias: [
-      { dias: 20, valorPorDia: 60000 },
-      { dias: 25, valorPorDia: 50000 },
-      { dias: 33, valorPorDia: 40000 },
-      { dias: 50, valorPorDia: 30000 },
-    ],
-  },
-  {
-    credito: 1500000,
-    creditoStr: "1.500.000",
-    dias: [
-      { dias: 20, valorPorDia: 90000 },
-      { dias: 25, valorPorDia: 75000 },
-      { dias: 33, valorPorDia: 60000 },
-      { dias: 50, valorPorDia: 45000 },
-    ],
-  },
-];
-
-const TABLASEMANAL = [
-  {
-    credito: 100000,
-    creditoStr: "100.000",
-    semanas: [
-      {
-        semanasTot: 3,
-        montosSemanales: 40000,
-      },
-      {
-        semanasTot: 4,
-        montosSemanales: 31250,
-      },
-      {
-        semanasTot: 5,
-        montosSemanales: 26400,
-      },
-      {
-        semanasTot: 8,
-        montosSemanales: 18750,
-      },
-    ],
-  },
-  {
-    credito: 200000,
-    creditoStr: "200.000",
-    semanas: [
-      {
-        semanasTot: 3,
-        montosSemanales: 80000,
-      },
-      {
-        semanasTot: 4,
-        montosSemanales: 62500,
-      },
-      {
-        semanasTot: 5,
-        montosSemanales: 52800,
-      },
-      {
-        semanasTot: 8,
-        montosSemanales: 37500,
-      },
-    ],
-  },
-  {
-    credito: 250000,
-    creditoStr: "250.000",
-    semanas: [
-      {
-        semanasTot: 3,
-        montosSemanales: 100000,
-      },
-      {
-        semanasTot: 4,
-        montosSemanales: 78125,
-      },
-      {
-        semanasTot: 5,
-        montosSemanales: 66000,
-      },
-      {
-        semanasTot: 8,
-        montosSemanales: 46875,
-      },
-    ],
-  },
-  {
-    credito: 400000,
-    creditoStr: "400.000",
-    semanas: [
-      {
-        semanasTot: 3,
-        montosSemanales: 160000,
-      },
-      {
-        semanasTot: 4,
-        montosSemanales: 125000,
-      },
-      {
-        semanasTot: 5,
-        montosSemanales: 105600,
-      },
-      {
-        semanasTot: 8,
-        montosSemanales: 62500,
-      },
-    ],
-  },
-  {
-    credito: 500000,
-    creditoStr: "500.000",
-    semanas: [
-      {
-        semanasTot: 3,
-        montosSemanales: 200000,
-      },
-      {
-        semanasTot: 4,
-        montosSemanales: 156250,
-      },
-      {
-        semanasTot: 5,
-        montosSemanales: 132000,
-      },
-      {
-        semanasTot: 8,
-        montosSemanales: 93750,
-      },
-    ],
-  },
-  {
-    credito: 1000000,
-    creditoStr: "1.000.000",
-    semanas: [
-      {
-        semanasTot: 3,
-        montosSemanales: 400000,
-      },
-      {
-        semanasTot: 4,
-        montosSemanales: 312500,
-      },
-      {
-        semanasTot: 5,
-        montosSemanales: 264000,
-      },
-      {
-        semanasTot: 8,
-        montosSemanales: 187500,
-      },
-    ],
-  },
-  {
-    credito: 1500000,
-    creditoStr: "1.500.000",
-    semanas: [
-      {
-        semanasTot: 3,
-        montosSemanales: 600000,
-      },
-      {
-        semanasTot: 4,
-        montosSemanales: 468750,
-      },
-      {
-        semanasTot: 5,
-        montosSemanales: 396000,
-      },
-      {
-        semanasTot: 8,
-        montosSemanales: 281250,
-      },
-    ],
-  },
-];
+import {
+  TABLA,
+  TABLASEMANAL,
+  TABLA_REDONDEADA_116_NO_REDONDEADA,
+  TABLA_REDONDEADA_116_REDONDEADA,
+} from "./tablas";
+import { ListadoValores116 } from "./components/ListadoValores116";
+import { CalculadoraInteligente } from "./components/CalculadoraInteligente";
 
 const casilleros = [];
 for (let i = 1; i <= 30; i++) {
@@ -261,6 +38,7 @@ export function Credit() {
   const creditsPDFRef = useRef();
   const cartonsitoPDFRef = useRef();
   const [modePay, setModePay] = useState(true); //true -diary- false -week-
+  const [usarRedondeada, setUsarRedondeada] = useState(true); // true = redondeada, false = no redondeada
 
   function changeModePay() {
     setModePay((prev) => !prev);
@@ -279,52 +57,56 @@ export function Credit() {
       </div>
       <hr className="mt-6 mb-6" />
 
-      <div className="ml-2 flex justify-between flex-col sm:flex-row gap-4">
+      <hr className="mt-6 mb-6" />
+
+      <div className="">
         <div className="">
           <Calculadora></Calculadora>
         </div>
-
-        <hr className="sm:hidden" />
-
-        <div className="flex items-start sm:flex-col gap-2 text-center">
-          <div className="flex flex-col sm:flex-row ">
-            <div className=" bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
-              <ReactToPrint
-                trigger={() => <button>Guardar como PDF</button>}
-                content={() => creditsPDFRef.current}
-              />
-            </div>
-            <p>Volante PDF</p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row ">
-            <div className=" bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
-              <ReactToPrint
-                trigger={() => <button>Guardar como PDF</button>}
-                content={() => cartonsitoPDFRef.current}
-              />
-            </div>
-            <p>Financiación PDF</p>
-          </div>
-        </div>
       </div>
       <hr className="mt-6 mb-6" />
-      <div className="flex flex-col lg:flex-row justify-center gap-7 ">
-        <div
-          ref={creditsPDFRef}
-          className="
-            flex 
-          bg-green-300"
+
+      <ListadoValores116 usarRedondeada={usarRedondeada} />
+
+      <hr className="mt-6 mb-6" />
+      {/*  <CalculadoraInteligente /> */}
+      <hr className="mt-6 mb-6" />
+      {/* Selector de estructura */}
+      <div className="flex gap-2 justify-center mb-4">
+        <button
+          onClick={() => setUsarRedondeada(true)}
+          className={`px-4 py-2 rounded font-semibold border ${
+            usarRedondeada ? "bg-blue-500 text-white" : "bg-gray-200"
+          }`}
         >
+          Redondeada
+        </button>
+        <button
+          onClick={() => setUsarRedondeada(false)}
+          className={`px-4 py-2 rounded font-semibold border ${
+            !usarRedondeada ? "bg-blue-500 text-white" : "bg-gray-200"
+          }`}
+        >
+          No Redondeada
+        </button>
+      </div>
+      <div className="flex flex-col lg:flex-row justify-center gap-7 ">
+        <div ref={creditsPDFRef} className="flex bg-white">
           <Folleto
-            TABLA={TABLA}
+            TABLA={
+              usarRedondeada
+                ? TABLA_REDONDEADA_116_REDONDEADA
+                : TABLA_REDONDEADA_116_NO_REDONDEADA
+            }
             TABLASEMANAL={TABLASEMANAL}
             changeModePay={changeModePay}
             modePay={modePay}
+            usarRedondeada={usarRedondeada} // pasamos también la info al Folleto
           />
         </div>
 
         {/* <DescriptionCredit /> */}
+
         <div className="flex flex-col gap-3 lg:flex-row">
           <div
             ref={cartonsitoPDFRef}
@@ -395,6 +177,29 @@ export function Credit() {
               }}
               className="mt-5 p-4 "
             />
+          </div>
+        </div>
+      </div>
+      <div>
+        <div className="flex justify-evenly w-full sm:flex-row py-2 mx-auto gap-2 text-center">
+          <div className="flex flex-col sm:flex-row ">
+            <div className=" bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
+              <ReactToPrint
+                trigger={() => <button>Guardar como PDF</button>}
+                content={() => creditsPDFRef.current}
+              />
+            </div>
+            <p>Volante PDF</p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row ">
+            <div className=" bg-teal-500 bg-opacity-30 lg:rounded-sm rounded-xl p-2 transform transition-transform duration-300 ease-in-out hover:scale-110">
+              <ReactToPrint
+                trigger={() => <button>Guardar como PDF</button>}
+                content={() => cartonsitoPDFRef.current}
+              />
+            </div>
+            <p>Financiación PDF</p>
           </div>
         </div>
       </div>

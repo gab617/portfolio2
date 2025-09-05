@@ -1,113 +1,58 @@
 import React, { useState } from "react";
+import { CalculadoraInteres } from "./components/CalculadoraInteres";
 
 export const Calculadora = () => {
-  const [monto, setMonto] = useState("");
-  const [dias, setDias] = useState("");
-  const [totalPagar, setTotalPagar] = useState(null);
-  const [cuotaDiaria, setCuotaDiaria] = useState(null);
+  const PORCENTAJE_INICIAL = 1.1667; // valor inicial
+  const [porcentajeDinamico, setPorcentajeDinamico] = useState(PORCENTAJE_INICIAL);
 
-  const calcularPrestamo = (e) => {
-    e.preventDefault();
-
-    const montoNumerico = parseFloat(monto);
-    let diasNumerico = parseInt(dias, 10);
-
-    if (
-      isNaN(montoNumerico) ||
-      isNaN(diasNumerico) ||
-      montoNumerico <= 0 ||
-      diasNumerico <= 0
-    ) {
-      alert("Por favor, ingresa valores válidos para el monto y los días.");
-      return;
-    }
-
-    const interesDiario = 0.01;
-    if(diasNumerico == 33){
-      diasNumerico = 32
-    }
-    const total = montoNumerico * (1 + interesDiario * diasNumerico);
-    if(diasNumerico == 32){
-      diasNumerico = 33
-    }
-    const cuota = total / diasNumerico;
-
-    setTotalPagar(total.toFixed(2));
-    setCuotaDiaria(cuota.toFixed(2));
+  const handleChangePorcentaje = (e) => {
+    setPorcentajeDinamico(parseFloat(e.target.value));
   };
 
-  const handleClear = (e) => {
-    e.preventDefault()
-    setMonto("")
-    setDias("")
-    setTotalPagar("")
-    setCuotaDiaria("")
+  const handleResetPorcentaje = () => {
+    setPorcentajeDinamico(PORCENTAJE_INICIAL);
   };
 
-  const handleChangeMonto=(valor)=>{
-    
-    setMonto(valor)
-
-  }
+  // Calcular porcentaje total a 30 días
+  const porcentaje30Dias = Math.round(porcentajeDinamico * 30 * 100) / 100; // opcional: redondeo a 2 decimales
 
   return (
-    <div className="flex flex-col sm:flex-row font-bold text-xl">
-      <form onSubmit={calcularPrestamo}>
-        <h2>Calculadora de Préstamo 1% diario</h2>
-        <div className="text-black">
-          <p className="text-yellow-500">Monto $$</p>
+    <div className="p-1 flex flex-col sm:flex-row justify-evenly gap-4">
+      {/* Calculadoras Fijas */}
+      <div className="grid">
+        <CalculadoraInteres titulo="Préstamo 1% diario" porcentaje={1} />
+      </div>
 
+      {/* Calculadora Dinámica */}
+      <div className="border p-4">
+        <h2 className="font-bold text-xl mb-2">Calculadora Dinámica</h2>
+
+        <div className="flex items-center gap-2 mb-2">
           <input
-            className="w-full block rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-400 focus:text-gray-800"
             type="number"
-            value={monto}
-            onChange={(e) => handleChangeMonto(e.target.value)}
-            placeholder="Ingresa el monto total"
+            step="0.01"
+            value={porcentajeDinamico}
+            onChange={handleChangePorcentaje}
+            className="w-[120px] px-2 py-1 border rounded text-black"
           />
-        </div>
-        <div className="text-black">
-          <p className="text-yellow-500">Días</p>
-          <input
-            className="w-full block  rounded-md py-1.5 px-2 ring-1 ring-inset ring-gray-800 focus:text-gray-800"
-            type="number"
-            value={dias}
-            onChange={(e) => setDias(e.target.value)}
-            placeholder="Cantidad de días"
-          />
-        </div>
-        <div className="flex gap-2">
           <button
-            className="py-2 border mt-2 w-[65%] cursor-pointer hover:bg-white hover:text-black  font-semibold"
-            type="submit"
+            onClick={handleResetPorcentaje}
+            className="px-2 py-1 border rounded cursor-pointer"
           >
-            Calcular
-          </button>
-          <button onClick={handleClear} className="w-[35%] border-red-600 border-2 mt-2 hover:bg-red-400">
-            Borrar
+            Reset
           </button>
         </div>
-        <p>{monto.toString().toString().replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p>
-      </form>
-      {monto && totalPagar && cuotaDiaria && (
-        <div className="sm:ml-6 mt-2">
-          <p>
-            Para{" "}
-            <span className="text-yellow-500">
-              ${monto.toString().toString().replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-            </span>{" "}
-            a <span className="text-yellow-500">{dias}</span> días
-          </p>
-          <p>
-            Total a Pagar:{" "}
-            <span className="text-green-500">
-              ${totalPagar.toString().toString().replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-            </span>
-          </p>
-          <p>
-            Cuota Diaria: <span className="text-green-500">${cuotaDiaria.toString().replace(".", ",").replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</span>
-          </p>
-        </div>
-      )}
+
+        {/* Mostrar porcentaje total a 30 días */}
+        <p className="mb-2 text-white">
+          Porcentaje estimado a 30 días: <span className="font-semibold">{porcentaje30Dias}%</span>
+        </p>
+
+        <CalculadoraInteres
+          titulo={`Préstamo ${porcentajeDinamico}% diario`}
+          porcentaje={porcentajeDinamico}
+        />
+      </div>
     </div>
   );
 };

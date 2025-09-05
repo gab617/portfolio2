@@ -8,7 +8,7 @@ import { Inicio } from "./pages/Home/Inicio.jsx";
 import { Works } from "./pages/Home/Works.jsx";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import { Apis } from "./pages/APIs/Apis.jsx";
-import { Cv } from "./pages/CV/Cv.jsx";
+import { Cv } from "./pages/CV2/Cv.jsx";
 import { useContext, useState } from "react";
 import { Context } from "./Context/Context.jsx";
 import { ConsolaInfo } from "./pages/Home/ConsolaInfo.jsx";
@@ -31,7 +31,6 @@ function App() {
                 <Works />
                 {/* CONTACTO */}
                 <FormContact urlPing={urls_ping[3]} />
-
               </>
             }
           />
@@ -54,9 +53,23 @@ function App() {
             }
           />
 
-          <Route path="/credit" element={<>
-            <Credit/>
-          </>} />
+{/*           <Route
+            path="/cv2"
+            element={
+              <>
+                <Cv />
+              </>
+            }
+          /> */}
+
+          <Route
+            path="/credit"
+            element={
+              <>
+                <Credit />
+              </>
+            }
+          />
         </Routes>
       </Router>
       <footer class="fixed bottom-0 right-1 p-3 flex bg-gray-100 bg-opacity-10  z-50  rounded-full">
