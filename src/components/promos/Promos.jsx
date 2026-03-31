@@ -4,7 +4,7 @@ import html2canvas from "html2canvas";
 const images = [
   { src: "./promos/1.jpeg", position: "center" },
   { src: "./promos/2.jpeg", position: "center" },
-  { src: "./promos/3.jpg", position: "center" },
+  { src: "./promos/3.jpeg", position: "center" },
 ];
 
 const Img = ({ index, className = "" }) => (
