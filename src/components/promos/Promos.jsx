@@ -1,3 +1,4 @@
+
 import { useState, useRef } from "react";
 import html2canvas from "html2canvas";
 
@@ -184,38 +185,75 @@ function Variant3({ eventInfo, textPosition }) {
   );
 }
 
-function Variant4({ eventInfo, textPosition }) {
+function Variant4({ eventInfo }) {
   return (
     <div className="relative w-[360px] h-[640px] overflow-hidden rounded-2xl bg-black">
-      <div className="absolute inset-0">
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-violet-900/30 via-transparent to-purple-900/30" />
-      </div>
       
+      {/* Fondo */}
+      <div className="absolute inset-0 bg-gradient-to-br from-violet-900/30 via-transparent to-purple-900/30" />
+
+      {/* Imagen central con marco artístico */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-56 h-72">
-        <div className="absolute inset-0 rounded-lg border border-white/10" style={{ transform: 'rotate(15deg)' }} />
-        <div className="absolute inset-2 rounded-lg border border-white/10" style={{ transform: 'rotate(10deg)' }} />
-        <div className="absolute inset-4 rounded-lg border border-white/10" style={{ transform: 'rotate(5deg)' }} />
+        <div className="absolute inset-0 rounded-lg border border-white/10 rotate-[15deg]" />
+        <div className="absolute inset-2 rounded-lg border border-white/10 rotate-[10deg]" />
+        <div className="absolute inset-4 rounded-lg border border-white/10 rotate-[5deg]" />
+
         <div className="absolute inset-6 rounded-lg overflow-hidden shadow-[0_0_40px_rgba(168,85,247,0.5)]">
           <Img index={1} className="w-full h-full" />
         </div>
       </div>
-      
-      <div className="absolute top-16 left-8 w-28 h-40 rounded-lg overflow-hidden shadow-lg rotate-[-20deg] border border-white/20">
+
+      {/* Laterales */}
+      <div className="absolute top-16 left-8 w-28 h-40 rounded-lg overflow-hidden rotate-[-20deg] border border-white/20">
         <Img index={0} className="w-full h-full" />
       </div>
-      
-      <div className="absolute bottom-32 right-8 w-28 h-40 rounded-lg overflow-hidden shadow-lg rotate-[20deg] border border-white/20">
+
+      <div className="absolute bottom-32 right-8 w-28 h-40 rounded-lg overflow-hidden rotate-[20deg] border border-white/20">
         <Img index={2} className="w-full h-full" />
       </div>
-      
-      <div className="absolute left-1/2 -translate-x-1/2 text-center w-full">
-        <h1 className="text-3xl font-bold text-white tracking-[0.2em]">{eventInfo.title}</h1>
-        <p className="text-white/50 text-xs mt-1">{eventInfo.date} · {eventInfo.place}</p>
+
+      {/* TEXTO PRINCIPAL */}
+      <div className="absolute top-10 left-1/2 -translate-x-1/2 text-center w-full px-6">
+        
+        <h1 className="
+          text-3xl 
+          text-white 
+          font-['Playfair_Display'] 
+          tracking-[0.08em]
+          leading-tight
+        ">
+          {eventInfo.title}
+        </h1>
+
+        <p className="
+          text-white/60 
+          text-xs 
+          mt-2 
+          font-['Inter'] 
+          tracking-wide
+        ">
+          {eventInfo.date} · {eventInfo.place}
+        </p>
       </div>
-      
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 border border-white/50 px-8 text-center py-2 rounded-full">
-        <span className="text-white font-bold">{eventInfo.price}</span>
+
+      {/* PRECIO / CTA */}
+      <div className="
+        absolute bottom-6 left-1/2 -translate-x-1/2 
+        border border-white/40 
+        px-6 py-2 
+        rounded-full 
+        backdrop-blur-sm
+      ">
+        <span className="
+          text-white 
+          font-['Inter'] 
+          font-semibold 
+          tracking-wide
+        ">
+          {eventInfo.price}
+        </span>
       </div>
+
     </div>
   );
 }

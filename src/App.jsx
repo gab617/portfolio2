@@ -38,9 +38,9 @@ function App() {
           </Routes>
         </main>
 
-        <footer className="fixed bottom-3 right-3 z-50">
+      {/*   <footer className="fixed bottom-3 right-3 z-50">
           <ConsolaInfo />
-        </footer>
+        </footer> */}
       </div>
     </Router>
   );
