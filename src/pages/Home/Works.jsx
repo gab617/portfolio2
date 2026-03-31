@@ -33,55 +33,25 @@ const ListProjects = () => {
     }
 
     return (
-      <div
-        className="
-            border border-stone-300
-            mx-auto
-            w-[99%]
-            
-            mb-5
-            sm:rounded-xl
-            xl:bg-black 
-            xl:bg-opacity-10 
-            "
-      >
-        <div
-          className="
-                flex mb-2 mt-3 justify-between"
-        >
+      <div className="border border-stone-300 mx-auto w-full max-w-6xl mb-6 rounded-xl p-4">
+        <div className="flex flex-col sm:flex-row mb-4 justify-between items-start sm:items-center gap-2">
           {/* Titulo */}
-          <div className="flex mb-2">
-            <div
-              className=" 
-                        W-full
-                        flex
-                    "
+          <div className="flex items-center gap-2">
+            <a
+              className="w-11"
+              href={proyect.url_repo}
+              target="_blank"
             >
-              <a
-                className="
-                        w-11 mr-5 
-                        "
-                href={proyect.url_repo}
-                target="_blank"
-              >
-                <img
-                  className="
-                  img-repo
-                  rounded-full
-                  opacity-80
-                  ml-3
-                  cursor-pointer"
-                  src="icons_tecs/github-logo.png"
-                  alt=""
-                  title="Repositoy project"
-                />
-              </a>
-            </div>
-            <div className="flex items-center ">
-              <h1 className="text-xl md:text-3xl font-bold ">
-                {proyect.title}
-              </h1>
-            </div>
+              <img
+                className="img-repo rounded-full opacity-80 cursor-pointer w-8 h-8"
+                src="icons_tecs/github-logo.png"
+                alt=""
+                title="Repositoy project"
+              />
+            </a>
+            <h1 className="text-lg md:text-2xl font-bold">
+              {proyect.title}
+            </h1>
           </div>
           <div className="relative inline-block group w-11 mr-3 cursor-pointer hover:scale-110 transition-all rounded-full duration-200 tool-tecnologie-effect">
             <img src="/toolsimg.png" alt="" />

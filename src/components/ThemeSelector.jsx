@@ -9,45 +9,35 @@ export function ThemeSelector() {
         setTheme(theme)
     }
 
-
     return (
-        <div className="w-full gap-2.5 flex flex-col lg:flex-row lg:gap-6">
+        <div className="flex items-center gap-1">
             <button
-                style={{ width: '1.6em' }}
                 onClick={() => handleChangeTheme('dark')}
+                className="w-6 h-6"
             >
-                <div>
-                    <img
-                        src={"/full-moon.png"} alt="" />
-                </div>
-
+                <img src="/full-moon.png" alt="dark" className="w-full h-full object-contain" />
             </button>
 
             <button
                 onClick={() => handleChangeTheme('light')}
+                className="w-6 h-6 relative"
             >
-                <div className='w-full'>
-                    <div className="container-sun">
-                        <div className="cloud front">
-                            <span className="left-front"></span>
-                            <span className="right-front"></span>
-                        </div>
-                        <span className="sun sunshine"></span>
-                        <span className="sun"></span>
-
+                <div className="container-sun">
+                    <div className="cloud front">
+                        <span className="left-front"></span>
+                        <span className="right-front"></span>
                     </div>
+                    <span className="sun sunshine"></span>
+                    <span className="sun"></span>
                 </div>
             </button>
 
             <button
-                style={{ width: '1.6em' }}
-                onClick={() => handleChangeTheme('colours')}>
-                <div>
-                    <img
-                        src={"/colour.png"} alt="" />
-                </div>
+                onClick={() => handleChangeTheme('colours')}
+                className="w-6 h-6"
+            >
+                <img src="/colour.png" alt="colours" className="w-full h-full object-contain" />
             </button>
-
         </div>
     )
 }

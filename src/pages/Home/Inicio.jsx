@@ -8,55 +8,35 @@ import { Context } from "../../Context/Context";
 
 const Hero = () => {
   return (
-    <div
-      className="
-        text-center 
-        flex justify-evenly items-center 
-        w-full m-auto
-        xl:gap-3"
-    >
-      <div className="w-1/2 flex flex-col gap-2 ">
-        <div className="mr-5 lg:mb-5 xl:w-full xl:flex justify-end">
-          <div
-            className="
-                    text-xl
-                    md:text-3xl
-                    xl:w-1/2 
-                    xl:text-center 
-                    xl:text-4xl"
-          >
-            <h1>Gabriel Cabrera Sirlopu</h1>
-            <h2><span className="font-bold">Web / App developer</span></h2>
-          </div>
+    <div className="flex flex-col-reverse md:flex-row justify-evenly items-center w-full m-auto gap-4 p-4">
+      <div className="flex flex-col gap-3 w-full md:w-1/2">
+        <div className="text-center md:text-left">
+          <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">Gabriel Cabrera Sirlopu</h1>
+          <h2 className="text-lg md:text-xl lg:text-2xl"><span className="font-bold">Web / App developer</span></h2>
         </div>
-        <div className="xl:flex xl:justify-end xl:full">
-          <div className="w-90 xl:w-1/2">
-            <Link to={"/cv"}>
-              <button className="sm:w-70 sm:m-auto sm:mb-1 btn-adam">
-                CV
-                <span></span>
-              </button>
-            </Link>
+        <div className="flex flex-wrap gap-2 justify-center md:justify-start mt-2">
+          <Link to={"/cv"}>
+            <button className="btn-adam">
+              CV
+              <span></span>
+            </button>
+          </Link>
 
-            <ButtonbyAdam
-              content={"Linkedin"}
-              link={
-                "https://www.linkedin.com/in/gabriel-cabrera-sirlopu-0a5700267/"
-              }
-            />
-            <ButtonbyAdam
-              content={"Github"}
-              link={"https://github.com/gab617?tab=repositories"}
-            />
-          </div>
+          <ButtonbyAdam
+            content={"Linkedin"}
+            link={
+              "https://www.linkedin.com/in/gabriel-cabrera-sirlopu-0a5700267/"
+            }
+          />
+          <ButtonbyAdam
+            content={"Github"}
+            link={"https://github.com/gab617?tab=repositories"}
+          />
         </div>
       </div>
-      <div className="w-1/2 xl:ml-5">
+      <div className="w-full md:w-1/2 flex justify-center">
         <img
-          className="
-                rounded-xl
-                lg:w-60 lg:m-auto 
-                xl:m-0 xl:w-2/5"
+          className="rounded-xl w-48 sm:w-56 md:w-60 lg:w-72"
           src="relajo.png"
           alt=""
         />
@@ -66,22 +46,9 @@ const Hero = () => {
 };
 const AboutMe = () => {
   return (
-    <div
-      className="
-        mb-10 mt-4 
-        sm:bg-black 
-        sm:bg-opacity-10 
-        sm:p-3
-        sm:pb-5
-        xl:max-w-7xl
-        xl:m-auto
-        xl:mt-2
-        xl:mb-2
-        xl:rounded-xl
-        "
-    >
-      <h1 className="sm:text-center mb-1">Sobre mí:</h1>
-      <p className="xl:p-5">
+    <div className="mb-8 mt-4 p-4 max-w-4xl mx-auto">
+      <h1 className="text-center mb-4 text-xl md:text-2xl font-bold">Sobre mí:</h1>
+      <p className="text-sm md:text-base leading-relaxed">
         Soy un desarrollador web enfocado en el diseño lógico y algorítmico de
         aplicaciones, mejorando estructuras de datos para asegurar la
         escalabilidad y eficiencia de los proyectos. Implemento integraciones
@@ -89,9 +56,9 @@ const AboutMe = () => {
         backend, garantizando una arquitectura robusta y flexible. Además,
         diseño interfaces atractivas y adaptables a cualquier dispositivo
         (responsive), ajustándome a las necesidades específicas de cada
-        proyecto. <br /> <br />
+        proyecto.
       </p>
-      <p className="lg:text-center">Mejora continua.</p>
+      <p className="text-center mt-4">Mejora continua.</p>
     </div>
   );
 };
@@ -140,24 +107,14 @@ const CardTecnologie = ({ tecData }) => {
 
 const Tecnologies = () => {
   return (
-    <div>
-      <div>
-        <h1
-          className="
-                m-auto
-                text-center 
-                mb-4 text-3xl 
-                sm:bg-black sm:bg-opacity-10 sm:rounded-xl
-                xl:max-w-7xl
-                "
-        >
-          Tecnologías
-        </h1>
-      </div>
-      <div className="grid grid-cols-3  xl:flex gap-4 mx-auto justify-center">
-        {tecnologies_list.map((tecData) => {
+    <div className="p-4">
+      <h1 className="text-center mb-6 text-2xl md:text-3xl font-bold">
+        Tecnologías
+      </h1>
+      <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+        {tecnologies_list.map((tecData, index) => {
           return (
-            <div className="">
+            <div key={index}>
               <CardTecnologie tecData={tecData} />
             </div>
           );
