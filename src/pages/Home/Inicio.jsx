@@ -9,12 +9,12 @@ import { Context } from "../../Context/Context";
 const Hero = () => {
   return (
     <div className="flex flex-col-reverse md:flex-row justify-evenly items-center w-full m-auto gap-4 p-4">
-      <div className="flex flex-col gap-3 w-full md:w-1/2">
+      <div className="flex flex-col items-end gap-3 w-full md:w-1/2">
         <div className="text-center md:text-left">
           <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold">Gabriel Cabrera Sirlopu</h1>
           <h2 className="text-lg md:text-xl lg:text-2xl"><span className="font-bold">Web / App developer</span></h2>
         </div>
-        <div className="flex flex-wrap gap-2 justify-center md:justify-start mt-2">
+        <div className="flex flex-col w-1/2 gap-2 justify-center md:justify-start mt-2">
           <Link to={"/cv"}>
             <button className="btn-adam">
               CV
@@ -34,7 +34,7 @@ const Hero = () => {
           />
         </div>
       </div>
-      <div className="w-full md:w-1/2 flex justify-center">
+      <div className="w-full md:w-1/2 flex justify-start">
         <img
           className="rounded-xl w-48 sm:w-56 md:w-60 lg:w-72"
           src="relajo.png"

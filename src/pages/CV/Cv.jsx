@@ -6,11 +6,15 @@ import { CurricVitae as CurricVitaeAgustina } from "../CVANTO/components/CurricV
 import { FooterCv as FooterCvGabriel } from "../CV2/components/FooterCv";
 import { FooterCv as FooterCvAugusto } from "../CV/components/FooterCv";
 import { FooterCv as FooterCvAgustina } from "../CVANTO/components/FooterCv";
+import { FolletoA4, FooterFolletoA4 } from "../CV/components/FolletoA4";
+import { ListaClientesA4, FooterListaClientes } from "../CV/components/ListaClientesA4";
 
 const cvOptions = [
   { id: "gabriel", label: "Gabriel (Desarrollador)", Component: CurricVitaeGabriel, Footer: FooterCvGabriel },
   { id: "augusto", label: "Augusto (Enfermero)", Component: CurricVitaeAugusto, Footer: FooterCvAugusto },
   { id: "agustina", label: "Agustina (Atención)", Component: CurricVitaeAgustina, Footer: FooterCvAgustina },
+  { id: "folleto", label: "Folleto A4 (Imprimir)", Component: FolletoA4, Footer: FooterFolletoA4 },
+  { id: "lista", label: "Lista Clientes (Imprimir)", Component: ListaClientesA4, Footer: FooterListaClientes },
 ];
 
 export function Cv() {
