@@ -1,15 +1,54 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Context } from "../../../Context/Context";
+
+// Generar key única basada en el porcentaje
+const getStorageKey = (porcentaje) => `nwPortf_calc_${Number(porcentaje).toFixed(4)}`;
 
 export const CalculadoraInteres = ({ titulo, porcentaje }) => {
   const { currentTheme } = useContext(Context);
   const isDark = currentTheme.color === "#fff";
   
-  const [monto, setMonto] = useState("");
-  const [dias, setDias] = useState("");
-  const [resultado, setResultado] = useState(null);
-  const [redondeoSeleccionado, setRedondeoSeleccionado] = useState("500");
+  const storageKey = getStorageKey(porcentaje);
+  
+  // Cargar estado desde localStorage
+  const [monto, setMonto] = useState(() => {
+    const saved = localStorage.getItem(`${storageKey}_monto`);
+    return saved || "";
+  });
+  const [dias, setDias] = useState(() => {
+    const saved = localStorage.getItem(`${storageKey}_dias`);
+    return saved || "";
+  });
+  const [resultado, setResultado] = useState(() => {
+    const saved = localStorage.getItem(`${storageKey}_resultado`);
+    return saved ? JSON.parse(saved) : null;
+  });
+  const [redondeoSeleccionado, setRedondeoSeleccionado] = useState(() => {
+    const saved = localStorage.getItem(`${storageKey}_redondeo`);
+    return saved || "500";
+  });
   const [copiado, setCopiado] = useState(false);
+
+  // Guardar en localStorage cuando cambia algo
+  useEffect(() => {
+    localStorage.setItem(`${storageKey}_monto`, monto);
+  }, [monto, storageKey]);
+  
+  useEffect(() => {
+    localStorage.setItem(`${storageKey}_dias`, dias);
+  }, [dias, storageKey]);
+  
+  useEffect(() => {
+    if (resultado) {
+      localStorage.setItem(`${storageKey}_resultado`, JSON.stringify(resultado));
+    } else {
+      localStorage.removeItem(`${storageKey}_resultado`);
+    }
+  }, [resultado, storageKey]);
+  
+  useEffect(() => {
+    localStorage.setItem(`${storageKey}_redondeo`, redondeoSeleccionado);
+  }, [redondeoSeleccionado, storageKey]);
 
   const calcularPrestamo = (e) => {
     e.preventDefault();
@@ -82,89 +121,76 @@ export const CalculadoraInteres = ({ titulo, porcentaje }) => {
 
   return (
     <div 
-      className={`flex flex-col rounded-xl p-1 sm:p-5 md:p-6 ${isDark ? 'bg-gray-800' : 'bg-white'}`}
-      style={{ maxWidth: "480px" }}
+      className={`flex flex-col rounded-xl p-1 ${isDark ? 'bg-gray-800' : 'bg-white'}`}
     >
       <form onSubmit={calcularPrestamo} className="w-full">
-        <div className="flex items-center gap-2 mb-2">
-          <h2 className="text-lg sm:text-xl font-bold">🧮 {titulo}</h2>
-          <span className="text-xs px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-400">
-            {porcentaje}% diario
+        <div className="flex items-center gap-1 mb-1">
+          <h2 className="text-base font-bold">🧮 {titulo}</h2>
+          <span className="text-xs px-1 py-0.5 rounded-full bg-teal-500/20 text-teal-400">
+            {Number(porcentaje).toFixed(4)}%
           </span>
         </div>
-        <p className="text-xs sm:text-sm mb-4" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
-          Ingresá el monto y los días para calculate
-        </p>
 
-        <div className="grid grid-cols-2 gap-3 mb-4">
+        <div className="grid grid-cols-2 gap-1 mb-2">
           <div>
-            <label className="text-xs sm:text-sm font-semibold mb-1.5 block" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
-              💰 Monto
-            </label>
             <input
-              className={`w-full rounded-lg py-2.5 px-3 border text-sm sm:text-base ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}`}
+              className={`w-full rounded-lg py-2 px-2 border text-base md:text-sm ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}`}
               type="number"
               value={monto}
               onChange={(e) => setMonto(e.target.value)}
-              placeholder="50000"
+              placeholder="Monto"
             />
           </div>
           <div>
-            <label className="text-xs sm:text-sm font-semibold mb-1.5 block" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
-              📅 Días
-            </label>
             <input
-              className={`w-full rounded-lg py-2.5 px-3 border text-sm sm:text-base ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}`}
+              className={`w-full rounded-lg py-2 px-2 border text-base md:text-sm ${isDark ? 'bg-gray-700 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}`}
               type="number"
               value={dias}
               onChange={(e) => setDias(e.target.value)}
-              placeholder="30"
+              placeholder="Días"
             />
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-1">
           <button
-            className="flex-1 py-2.5 rounded-lg bg-teal-500 text-white font-semibold hover:bg-teal-600 transition-all hover:shadow-lg text-sm sm:text-base"
+            className="flex-1 py-2 rounded-lg bg-teal-500 text-white font-semibold hover:bg-teal-600 transition-all text-base md:text-sm"
             type="submit"
           >
-            ✅ Calcular Cuota
+            ✅ Calcular
           </button>
         </div>
         {resultado && (
           <button
             onClick={handleClear}
-            className="w-full mt-2 py-1.5 text-xs text-red-500 hover:text-red-600 transition-colors"
+            className="w-full mt-1 py-1 text-sm text-red-500 hover:text-red-600 transition-colors"
             type="button"
           >
-            🔄 Nueva cotización
+            🔄 Nuevo
           </button>
         )}
       </form>
 
       {resultado && (
         <div 
-          className="mt-5 rounded-lg p-4"
+          className="mt-2 rounded-lg p-2"
           style={{ backgroundColor: isDark ? 'rgba(30,30,30,0.9)' : '#f9fafb' }}
         >
-          {/* Header del resultado */}
-          <div className="mb-4 pb-3 border-b" style={{ borderColor: isDark ? '#374151' : '#e5e7eb' }}>
-            <div className="flex items-center gap-2 mb-3">
+          <div className="mb-2 pb-1 border-b" style={{ borderColor: isDark ? '#374151' : '#e5e7eb' }}>
+            <div className="flex items-center gap-1 mb-1">
               <span className="text-sm font-semibold" style={{ color: isDark ? '#fff' : '#1f2937' }}>
                 📊 Resultado
               </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-400">
+              <span className="text-xs px-1 py-0.5 rounded-full bg-teal-500/20 text-teal-400">
                 {resultado.dias} días
               </span>
             </div>
             
-            {/* Total exacto */}
-            <div className="rounded-lg p-3 mb-3" style={{ backgroundColor: isDark ? 'rgba(20,184,166,0.15)' : 'rgba(20,184,166,0.1)' }}>
-              <p className="text-xs mb-1" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>💵 Total a Pagar (exacto)</p>
-              <p className="text-xl sm:text-2xl font-bold text-teal-500">${formatear(resultado.totalRaw)}</p>
+            <div className="rounded-lg p-2 mb-1" style={{ backgroundColor: isDark ? 'rgba(20,184,166,0.15)' : 'rgba(20,184,166,0.1)' }}>
+              <p className="text-sm mb-0.5" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>💵 Total</p>
+              <p className="text-xl font-bold text-teal-500">${formatear(resultado.totalRaw)}</p>
             </div>
             
-            {/* Detalle */}
             <div className="flex justify-between items-center text-sm">
               <span style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Monto:</span>
               <span className="font-semibold">${formatear(resultado.monto)}</span>
@@ -173,105 +199,63 @@ export const CalculadoraInteres = ({ titulo, porcentaje }) => {
               <span style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Interés:</span>
               <span className="font-semibold">${formatear(resultado.totalRaw - resultado.monto)}</span>
             </div>
-            <div className="flex justify-between items-center text-sm mt-1">
-              <span style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Cuota diaria:</span>
+            <div className="flex justify-between items-center text-sm">
+              <span style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Cuota:</span>
               <span className="font-semibold">${formatear(resultado.cuotaRaw)}</span>
             </div>
           </div>
 
-          {/* Opciones de copiar */}
-          <p className="text-xs font-semibold mb-2" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
-            📋 Seleccioná una opción para copiar:
+          <p className="text-sm font-semibold mb-1" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
+            📋 Copiar:
           </p>
 
-          {/* Opción Exacto */}
-          <div 
-            className={`mb-2 rounded-lg p-3 transition-all cursor-pointer ${
-              redondeoSeleccionado === "exacto" ? "ring-2 ring-teal-500" : ""
-            }`}
-            style={{ backgroundColor: isDark ? 'rgba(40,40,40,0.8)' : '#f3f4f6' }}
-            onClick={() => setRedondeoSeleccionado("exacto")}
-          >
-            <div className="flex justify-between items-center mb-2">
-              <span className="font-semibold text-sm">🎯 Valor Exacto (sin redondeo)</span>
-              {redondeoSeleccionado === "exacto" && (
-                <span className="text-xs px-2 py-0.5 rounded bg-teal-500 text-white">✓</span>
-              )}
+          <div className="flex flex-col gap-1 mb-2">
+            <div 
+              className={`flex-1 rounded-lg p-2 transition-all cursor-pointer ${
+                redondeoSeleccionado === "exacto" ? "ring-2 ring-teal-500" : ""
+              }`}
+              style={{ backgroundColor: isDark ? 'rgba(40,40,40,0.8)' : '#f3f4f6' }}
+              onClick={() => setRedondeoSeleccionado("exacto")}
+            >
+              <p className="text-sm font-semibold">🎯 Exacto</p>
+              <p className="text-sm font-bold text-teal-400">${formatear(resultado.cuotaRaw)}</p>
+              <p className="text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Total: ${formatear(resultado.totalRaw)}</p>
             </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div className="rounded p-2" style={{ backgroundColor: isDark ? 'rgba(20,184,166,0.15)' : 'rgba(20,184,166,0.1)' }}>
-                <p className="text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Cuota</p>
-                <p className="font-bold text-teal-400">${formatear(resultado.cuotaRaw)}</p>
-              </div>
-              <div className="rounded p-2" style={{ backgroundColor: isDark ? 'rgba(20,184,166,0.15)' : 'rgba(20,184,166,0.1)' }}>
-                <p className="text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Total</p>
-                <p className="font-bold">${formatear(resultado.totalRaw)}</p>
-              </div>
+
+            <div 
+              className={`flex-1 rounded-lg p-2 transition-all cursor-pointer ${
+                redondeoSeleccionado === "100" ? "ring-2 ring-teal-500" : ""
+              }`}
+              style={{ backgroundColor: isDark ? 'rgba(40,40,40,0.8)' : '#f3f4f6' }}
+              onClick={() => setRedondeoSeleccionado("100")}
+            >
+              <p className="text-sm font-semibold">📋 $100</p>
+              <p className="text-sm font-bold text-teal-400">${formatear(resultado.cuota100)}</p>
+              <p className="text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Total: ${formatear(resultado.total100)}</p>
+            </div>
+
+            <div 
+              className={`flex-1 rounded-lg p-2 transition-all cursor-pointer ${
+                redondeoSeleccionado === "500" ? "ring-2 ring-teal-500" : ""
+              }`}
+              style={{ backgroundColor: isDark ? 'rgba(40,40,40,0.8)' : '#f3f4f6' }}
+              onClick={() => setRedondeoSeleccionado("500")}
+            >
+              <p className="text-sm font-semibold">📋 $500</p>
+              <p className="text-sm font-bold text-teal-400">${formatear(resultado.cuota500)}</p>
+              <p className="text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Total: ${formatear(resultado.total500)}</p>
             </div>
           </div>
 
-          {/* Opción 1 */}
-          <div 
-            className={`mb-3 rounded-lg p-3 transition-all cursor-pointer ${
-              redondeoSeleccionado === "100" ? "ring-2 ring-teal-500" : ""
-            }`}
-            style={{ backgroundColor: isDark ? 'rgba(40,40,40,0.8)' : '#f3f4f6' }}
-            onClick={() => setRedondeoSeleccionado("100")}
-          >
-            <div className="flex justify-between items-center mb-2">
-              <span className="font-semibold text-sm">📋 Opción 1 (redondeo $100)</span>
-              {redondeoSeleccionado === "100" && (
-                <span className="text-xs px-2 py-0.5 rounded bg-teal-500 text-white">✓ Seleccionado</span>
-              )}
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div className="rounded p-2" style={{ backgroundColor: isDark ? 'rgba(20,184,166,0.15)' : 'rgba(20,184,166,0.1)' }}>
-                <p className="text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Cuota</p>
-                <p className="font-bold text-teal-400">${formatear(resultado.cuota100)}</p>
-              </div>
-              <div className="rounded p-2" style={{ backgroundColor: isDark ? 'rgba(20,184,166,0.15)' : 'rgba(20,184,166,0.1)' }}>
-                <p className="text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Total</p>
-                <p className="font-bold">${formatear(resultado.total100)}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Opción 2 */}
-          <div 
-            className={`rounded-lg p-3 transition-all cursor-pointer ${
-              redondeoSeleccionado === "500" ? "ring-2 ring-teal-500" : ""
-            }`}
-            style={{ backgroundColor: isDark ? 'rgba(40,40,40,0.8)' : '#f3f4f6' }}
-            onClick={() => setRedondeoSeleccionado("500")}
-          >
-            <div className="flex justify-between items-center mb-2">
-              <span className="font-semibold text-sm">📋 Opción 2 (redondeo $500)</span>
-              {redondeoSeleccionado === "500" && (
-                <span className="text-xs px-2 py-0.5 rounded bg-teal-500 text-white">✓ Seleccionado</span>
-              )}
-            </div>
-            <div className="grid grid-cols-2 gap-2">
-              <div className="rounded p-2" style={{ backgroundColor: isDark ? 'rgba(20,184,166,0.15)' : 'rgba(20,184,166,0.1)' }}>
-                <p className="text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Cuota</p>
-                <p className="font-bold text-teal-400">${formatear(resultado.cuota500)}</p>
-              </div>
-              <div className="rounded p-2" style={{ backgroundColor: isDark ? 'rgba(20,184,166,0.15)' : 'rgba(20,184,166,0.1)' }}>
-                <p className="text-xs" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>Total</p>
-                <p className="font-bold">${formatear(resultado.total500)}</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Botón copiar */}
           <button
             onClick={() => copiarMensaje(redondeoSeleccionado)}
-            className={`w-full mt-3 py-2.5 rounded-lg font-medium transition-all text-sm sm:text-base ${
+            className={`w-full py-2.5 rounded-lg font-semibold transition-all text-sm ${
               copiado 
                 ? "bg-green-500 text-white" 
                 : "bg-teal-500 hover:bg-teal-600 text-white"
             }`}
           >
-            {copiado ? "✅ Copiado al portapapeles!" : `📋 Copiar mensaje (${redondeoSeleccionado === "exacto" ? "Exacto" : redondeoSeleccionado === "100" ? "Opción 1" : "Opción 2"})`}
+            {copiado ? "✅ Copiado!" : `📋 Copiar (${redondeoSeleccionado === "exacto" ? "Exacto" : redondeoSeleccionado === "100" ? "$100" : "$500"})`}
           </button>
         </div>
       )}

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useContext } from "react";
+import React, { useState, useMemo, useContext, useEffect } from "react";
 import {
   TABLA_REDONDEADA_116_REDONDEADA,
   TABLA_REDONDEADA_116_NO_REDONDEADA,
@@ -11,11 +11,52 @@ export function ListadoValores116() {
   const { currentTheme } = useContext(Context);
   const isDark = currentTheme.color === "#fff";
   
-  const [selectedCredito, setSelectedCredito] = useState(null);
-  const [usarRedondeada, setUsarRedondeada] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [filtro, setFiltro] = useState("");
-  const [busquedaActiva, setBusquedaActiva] = useState(false);
+  // Estados con persistencia
+  const [selectedCredito, setSelectedCredito] = useState(() => {
+    const saved = localStorage.getItem('nwPortf_valores_selected');
+    return saved ? JSON.parse(saved) : null;
+  });
+  const [usarRedondeada, setUsarRedondeada] = useState(() => {
+    const saved = localStorage.getItem('nwPortf_valores_redondeada');
+    return saved !== null ? saved === 'true' : true;
+  });
+  const [currentPage, setCurrentPage] = useState(() => {
+    const saved = localStorage.getItem('nwPortf_valores_page');
+    return saved ? parseInt(saved) : 1;
+  });
+  const [filtro, setFiltro] = useState(() => {
+    const saved = localStorage.getItem('nwPortf_valores_filtro');
+    return saved || "";
+  });
+  const [busquedaActiva, setBusquedaActiva] = useState(() => {
+    const saved = localStorage.getItem('nwPortf_valores_busq');
+    return saved === 'true';
+  });
+
+  // Persistir cambios
+  useEffect(() => {
+    if (selectedCredito) {
+      localStorage.setItem('nwPortf_valores_selected', JSON.stringify(selectedCredito));
+    } else {
+      localStorage.removeItem('nwPortf_valores_selected');
+    }
+  }, [selectedCredito]);
+  
+  useEffect(() => {
+    localStorage.setItem('nwPortf_valores_redondeada', usarRedondeada.toString());
+  }, [usarRedondeada]);
+  
+  useEffect(() => {
+    localStorage.setItem('nwPortf_valores_page', currentPage.toString());
+  }, [currentPage]);
+  
+  useEffect(() => {
+    localStorage.setItem('nwPortf_valores_filtro', filtro);
+  }, [filtro]);
+  
+  useEffect(() => {
+    localStorage.setItem('nwPortf_valores_busq', busquedaActiva.toString());
+  }, [busquedaActiva]);
 
   // Elegimos la tabla según el estado
   const tablaActual = usarRedondeada
@@ -121,7 +162,7 @@ export function ListadoValores116() {
               placeholder="Buscar monto..."
               value={filtro}
               onChange={(e) => { setFiltro(e.target.value); setCurrentPage(1); }}
-              className="w-full pl-10 pr-4 py-2 rounded-lg border text-sm"
+              className="w-full pl-10 pr-4 py-2.5 rounded-lg border text-base"
               style={{ 
                 backgroundColor: isDark ? 'rgba(20,20,20,0.8)' : 'white',
                 borderColor: isDark ? '#374151' : '#d1d5db',
@@ -173,10 +214,10 @@ export function ListadoValores116() {
               borderBottom: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
             }}
           >
-            <h2 className="font-bold">
+            <h2 className="font-bold text-base">
               {busquedaActiva ? "Resultados" : `Montos (${rangoInicio} - ${rangoFin})`}
             </h2>
-            <p className="text-xs" style={{ color: isDark ? '#6b7280' : '#9ca3af' }}>
+            <p className="text-sm" style={{ color: isDark ? '#6b7280' : '#9ca3af' }}>
               {busquedaActiva ? `${tablaFiltrada.length} encontrados` : 'Click para ver opciones'}
             </p>
           </div>
@@ -186,13 +227,11 @@ export function ListadoValores116() {
                 <div
                   key={item.credito}
                   onClick={() => setSelectedCredito(item)}
-                  className={`cursor-pointer p-3 text-sm transition ${
-                    selectedCredito?.credito === item.credito
-                      ? "bg-teal-500 text-white font-semibold"
-                      : isDark 
-                        ? "hover:bg-gray-700" 
-                        : "hover:bg-gray-100"
-                  }`}
+className={`cursor-pointer p-3 text-base md:text-sm transition ${
+                selectedCredito?.credito === item.credito 
+                  ? "bg-teal-500/20" 
+                  : "hover:bg-gray-100 dark:hover:bg-gray-700"
+              }`}
                 >
                   ${item.creditoStr}
                 </div>
@@ -223,7 +262,7 @@ export function ListadoValores116() {
                 <table className="min-w-full border-collapse">
                   <thead>
                     <tr 
-                      className="text-sm"
+                      className="text-base"
                       style={{ backgroundColor: isDark ? 'rgba(50,50,50,0.9)' : '#f3f4f6' }}
                     >
                       <th className="text-left p-3 border">Días</th>
@@ -241,7 +280,7 @@ export function ListadoValores116() {
                             : isDark ? 'hover:bg-gray-800' : 'hover:bg-gray-50'
                         }`}
                       >
-                        <td className="p-3 border">
+                        <td className="p-3 border text-base">
                           {d.dias} días
                           {d.dias === 30 && (
                             <span className="ml-2 text-xs px-2 py-0.5 rounded bg-teal-500 text-white font-medium">
@@ -249,10 +288,10 @@ export function ListadoValores116() {
                             </span>
                           )}
                         </td>
-                        <td className="p-3 border font-medium text-teal-500">
+                        <td className="p-3 border font-medium text-teal-500 text-base">
                           ${d.valorPorDia.toLocaleString("es-AR")}
                         </td>
-                        <td className="p-3 border">
+                        <td className="p-3 border text-base">
                           ${(d.dias * d.valorPorDia).toLocaleString("es-AR")}
                         </td>
                       </tr>
@@ -266,7 +305,7 @@ export function ListadoValores116() {
                 className="mt-4 p-3 rounded-lg"
                 style={{ backgroundColor: isDark ? 'rgba(20,100,80,0.3)' : 'rgba(20,184,166,0.1)' }}
               >
-                <p className="text-sm">
+                <p className="text-base md:text-sm">
                   <span className="font-medium">Nota: </span>
                   <span style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
                     Tasa del 1.1667% diario. Valores redondeados a múltiplos de {usarRedondeada ? 500 : 100}.

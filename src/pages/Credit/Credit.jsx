@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useContext, useEffect } from "react";
 import "./Credit.css";
 import { ButtonVolver } from "../../components/ButtonVolver";
 import { Link } from "react-router-dom";
@@ -73,8 +73,24 @@ export function Credit() {
   const creditsPDFRef = useRef();
   const cartonsitoPDFRef = useRef();
   const [modePay, setModePay] = useState(true);
-  const [usarRedondeada, setUsarRedondeada] = useState(true);
-  const [activeSection, setActiveSection] = useState('calculadora');
+  const [usarRedondeada, setUsarRedondeada] = useState(() => {
+    const saved = localStorage.getItem('nwPortf_usarRedondeada');
+    return saved !== null ? saved === 'true' : true;
+  });
+  const [activeSection, setActiveSection] = useState(() => {
+    const saved = localStorage.getItem('nwPortf_activeSection');
+    return saved || 'calculadora';
+  });
+
+  // Persistir tab activo
+  useEffect(() => {
+    localStorage.setItem('nwPortf_activeSection', activeSection);
+  }, [activeSection]);
+
+  // Persistir usarRedondeada
+  useEffect(() => {
+    localStorage.setItem('nwPortf_usarRedondeada', usarRedondeada.toString());
+  }, [usarRedondeada]);
 
   function changeModePay() {
     setModePay((prev) => !prev);
@@ -111,7 +127,7 @@ export function Credit() {
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 py-8">
+      <main className="max-w-5xl mx-auto py-8">
         {/* Introducción */}
         <div 
           className="rounded-xl p-6 mb-8 backdrop-blur-sm"
@@ -182,24 +198,7 @@ export function Credit() {
             description="Valores exactos por cantidad de cuotas"
             icon="📊"
           >
-            <div className="flex gap-2 justify-center mb-4">
-              <button
-                onClick={() => setUsarRedondeada(true)}
-                className={`px-4 py-2 rounded font-semibold border ${
-                  usarRedondeada ? "bg-teal-500 text-white" : "bg-gray-200"
-                }`}
-              >
-                Redondeada
-              </button>
-              <button
-                onClick={() => setUsarRedondeada(false)}
-                className={`px-4 py-2 rounded font-semibold border ${
-                  !usarRedondeada ? "bg-teal-500 text-white" : "bg-gray-200"
-                }`}
-              >
-                No Redondeada
-              </button>
-            </div>
+
             <ListadoValores116 usarRedondeada={usarRedondeada} />
           </ToolCard>
         )}
