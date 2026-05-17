@@ -2,145 +2,163 @@ import { Phone, MapPin, Mail } from "lucide-react";
 
 export function CurricVitae({ cvRef }) {
   return (
-    <div className="xl:w-80 m-auto mt-2 mb-1 print-container" ref={cvRef}>
-      <div className="bg-white text-black rounded-3xl">
-        {/* ENCABEZADO */}
-        <div className="text-center py-1">
-          <div className="bg-pink-300/20 rounded-3xl w-full h-5"></div>
-
-          <div className="flex flex-row items-center justify-center gap-3 bg-purple-200/10 py-2">
+    <div className="print-container mx-auto" ref={cvRef}>
+      <div className="bg-white text-black px-8 py-5">
+        {/* HEADER */}
+        <div className="mb-3">
+          <div className="mb-3 flex items-center gap-4">
             <img
-              src="./bellomo.jpeg"
-              alt="Foto de Diego Marcelo Mazzella"
-              className="rounded-full w-24 h-24 object-cover"
+              src="./carlos.jpeg"
+              alt="Foto de Carlos Quiroga"
+              className="w-[8rem] h-[8rem] object-cover rounded-full border"
             />
-            <h1 className="text-center font-bold text-2xl">
-              Agustina Magalí Bellomo
-            </h1>
+
+            <div>
+              <h1 className="text-2xl font-bold uppercase">
+                Carlos Alberto Quiroga
+              </h1>
+              <p className="text-sm tracking-wide">
+                Electricista · Refrigeración · Mantenimiento
+              </p>
+            </div>
           </div>
 
-          <p className="text-sm font-normal tracking-wide">
-            Atención al Público · Auxiliar de Farmacia (en formación)
+          <div className="flex gap-4 text-sm mt-1 flex-wrap">
+            <span className="flex items-center gap-1">
+              <Mail size={14} /> katu.1998.11@gmail.com
+            </span>
+            <span className="flex items-center gap-1">
+              <Phone size={14} /> 221 2214754 / 221 6564084
+            </span>
+            <span className="flex items-center gap-1">
+              <MapPin size={14} /> La Plata, Buenos Aires
+            </span>
+          </div>
+
+          <hr className="mt-2 border-black/30" />
+        </div>
+
+        {/* PERFIL */}
+        <div className="mb-3">
+          <h2 className="font-bold uppercase text-sm mb-1">Perfil</h2>
+          <p className="text-sm leading-snug">
+            Electricista con experiencia desde 2018 en trabajos autónomos y en
+            empresas, con sólidos conocimientos en instalaciones eléctricas
+            domiciliarias, comerciales e industriales, así como mantenimiento de
+            alumbrado público. Experiencia en diagnóstico y resolución de
+            fallas, cableado, montaje y cumplimiento de normas de seguridad. Con
+            formación y práctica en sistemas de refrigeración y aire
+            acondicionado. Perfil versátil con experiencia en atención al
+            cliente, logística y manejo de depósitos, destacando por la
+            capacidad de adaptación y aprendizaje.
           </p>
         </div>
 
-        <div className="flex lg:flex-row flex-col font-semibold px-6 pb-4">
-          {/* LADO IZQUIERDO */}
-          <div className="lg:w-70 pr-4">
-            {/* PERFIL */}
-            <div className="mb-4">
-              <h2 className="font-bold mb-1 uppercase">Perfil</h2>
-              <p className="text-sm leading-snug font-normal">
-                Experiencia en atención al cliente en ámbito municipal,
-                estaciones de servicio y gastronomía. Destaco por trato cordial,
-                comunicación clara y resolución de consultas. Acostumbrada a
-                trabajar bajo normas y protocolos, con compromiso y
-                responsabilidad. Actualmente cursando Auxiliar de Farmacia.
+        {/* EXPERIENCIA */}
+        <div className="mb-3">
+          <h2 className="font-bold uppercase text-sm mb-1">
+            Experiencia laboral
+          </h2>
+
+          <div className="space-y-2 text-sm">
+            <div>
+              <p className="font-semibold">
+                Ayudante de Refrigeración (2025 – Actualidad)
+              </p>
+              <p>
+                Diagnóstico y reparación de sistemas de refrigeración comercial
+                y familiar. Mantenimiento preventivo y correctivo de equipos de
+                aire acondicionado. Instalación de nuevas unidades de
+                climatización y asistencia en servicio técnico.
               </p>
             </div>
 
-            {/* EXPERIENCIA */}
             <div>
-              <h2 className="font-bold mb-1 uppercase">Experiencia laboral</h2>
-              <ul className="list-disc ml-4 text-sm font-normal space-y-2">
-                <li>
-                  <strong>
-                    Municipalidad de La Plata – Área de Prevención
-                  </strong>
-                  <br />
-                  Atención directa y orientación al público, asesoramiento
-                  general, resolución de consultas y derivación a áreas
-                  correspondientes. Colaboración en tareas administrativas,
-                  registro de información y cumplimiento de protocolos. Trabajo
-                  constante con ciudadanos, manteniendo trato respetuoso y
-                  profesional.
-                </li>
+              <p className="font-semibold">
+                Electricista – Lesko (2023 – 2025)
+              </p>
+              <p>
+                Mantenimiento y reparación de sistemas de alumbrado público,
+                asegurando la operatividad de la red y el cumplimiento de
+                condiciones de seguridad. Intervenciones en vía pública y
+                control de funcionamiento general.
+              </p>
+            </div>
 
-                <li>
-                  <strong>Playera – Estación de servicio GNC</strong>
-                  <br />
-                  Atención personalizada al cliente, manejo de cobros y medios
-                  de pago, cumplimiento de normas de seguridad y organización
-                  del sector de trabajo.
-                </li>
+            <div>
+              <p className="font-semibold">
+                Electricista – Elecsur (2021 – 2023)
+              </p>
+              <p>
+                Ejecución de instalaciones eléctricas completas en entornos
+                domiciliarios, comerciales e industriales. Detección precisa y
+                resolución eficiente de fallas. Trabajo en equipo en tareas de
+                cableado, montaje y puesta en marcha de sistemas.
+              </p>
+            </div>
 
-                <li>
-                  <strong>Moza – Pizzería y eventos</strong>
-                  <br />
-                  Atención al público en salón y eventos, coordinación con
-                  equipo de trabajo y manejo de situaciones de alta demanda,
-                  priorizando buena experiencia del cliente.
-                </li>
-              </ul>
+            <div>
+              <p className="font-semibold">
+                Electricista Autónomo (2018 – 2021)
+              </p>
+              <p>
+                Desarrollo de trabajos eléctricos para clientes particulares y
+                pequeños comercios, incluyendo instalación, mantenimiento y
+                reparación. Gestión integral de tareas, desde presupuestos hasta
+                finalización del servicio.
+              </p>
+            </div>
+
+            <div>
+              <p className="font-semibold">Atención al cliente (2017 – 2021)</p>
+              <p>
+                Experiencia en comercios (kiosco, rotisería, supermercado),
+                realizando manejo de caja, reposición y organización de
+                mercadería, además de atención directa al cliente.
+              </p>
             </div>
           </div>
+        </div>
 
-          {/* LADO DERECHO */}
-          <div className="w-30 pl-4">
-            <hr className="mb-2 border mt-2" />
+        {/* FORMACIÓN */}
+        <div className="mb-3">
+          <h2 className="font-bold uppercase text-sm mb-1">Formación</h2>
+          <ul className="list-disc pl-5 text-sm">
+            <li>
+              Electricista Montador e Instalador — Centro de Formación
+              Profesional 401
+            </li>
+            <li>Secundario completo</li>
+          </ul>
+        </div>
 
-            {/* FORMACIÓN */}
-            <div className="mb-4">
-              <h2 className="font-bold uppercase">Formación</h2>
-              <ul className="list-disc pl-5 text-sm font-normal">
-                <li>Secundario completo</li>
-              </ul>
-            </div>
+        {/* HABILIDADES */}
+        <div className="mb-3">
+          <h2 className="font-bold uppercase text-sm mb-1">Habilidades</h2>
+          <ul className="list-disc pl-5 text-sm">
+            <li>
+              Instalaciones eléctricas (domiciliarias, comerciales e
+              industriales)
+            </li>
+            <li>Mantenimiento de alumbrado público</li>
+            <li>Diagnóstico y reparación de averías eléctricas</li>
+            <li>Sistemas de refrigeración y aire acondicionado</li>
+            <li>Cableado y montaje eléctrico</li>
+            <li>Manejo de herramientas eléctricas y de medición</li>
+            <li>Carga, descarga y organización de depósitos</li>
+            <li>Atención al cliente y trabajo en equipo</li>
+          </ul>
+        </div>
 
-            {/* ESTUDIOS COMPLEMENTARIOS */}
-            <div className="mb-4">
-              <h2 className="font-bold uppercase">Estudios complementarios</h2>
-              <ul className="list-disc pl-5 text-sm font-normal">
-                <li>Curso de Azafata</li>
-                <li>Auxiliar de Farmacia (en curso)</li>
-              </ul>
-            </div>
-
-            {/* COMPETENCIAS */}
-            <div className="mb-4">
-              <h2 className="font-bold uppercase">Competencias</h2>
-              <ul className="list-disc pl-5 text-sm font-normal">
-                <li>Atención y orientación al cliente</li>
-                <li>Resolución de consultas</li>
-                <li>Manejo de caja</li>
-                <li>Cumplimiento de normas y protocolos</li>
-                <li>Trabajo en equipo</li>
-              </ul>
-            </div>
-            {/* IDIOMAS */}
-            <div className="mb-4">
-              <h2 className="font-bold uppercase">Idiomas</h2>
-              <ul className="list-disc pl-5 text-sm font-normal">
-                <li>Inglés – Nivel básico</li>
-              </ul>
-            </div>
-
-            {/* INFORMACIÓN ADICIONAL */}
-            <div className="mb-4">
-              <h2 className="font-bold uppercase">Información adicional</h2>
-              <ul className="list-disc pl-5 text-sm font-normal">
-                <li>Disponibilidad full time</li>
-                <li>Movilidad propia</li>
-                <li>Incorporación inmediata</li>
-              </ul>
-            </div>
-
-            {/* CONTACTO */}
-            <div>
-              <h2 className="font-bold uppercase">Contacto</h2>
-              <ul className="text-sm font-normal">
-                <li className="flex items-center gap-2">
-                  <Mail size={16} /> agus-lp@outlook.es
-                </li>
-                <li className="flex items-center gap-2">
-                  <Phone size={16} /> 221 566 3571
-                </li>
-                <li className="flex items-center gap-2">
-                  <MapPin size={16} /> Berisso, Buenos Aires
-                </li>
-              </ul>
-            </div>
-          </div>
+        {/* INFO */}
+        <div>
+          <h2 className="font-bold uppercase text-sm mb-1">
+            Información adicional
+          </h2>
+          <ul className="list-disc pl-5 text-sm">
+            <li>Licencias de conducir: B1 y A3</li>
+            <li>Disponibilidad inmediata</li>
+          </ul>
         </div>
       </div>
     </div>

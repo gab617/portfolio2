@@ -29,19 +29,20 @@ const ListProjects = () => {
 
     return (
       <div 
-        className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 mb-10 backdrop-blur-sm"
+        className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-500 mb-10 backdrop-blur-sm group"
         style={{ 
-          backgroundColor: isDark ? 'rgba(30, 30, 30, 0.8)' : 'rgba(255, 255, 255, 0.8)',
-          border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
+          backgroundColor: isDark ? 'rgba(30, 30, 30, 0.8)' : 'rgba(255, 255, 255, 0.85)',
+          border: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'}`
         }}
       >
-        {/* Header */}
+        {/* Header con gradiente */}
         <div 
-          className="p-4 md:p-5"
+          className="p-4 md:p-5 relative overflow-hidden"
           style={{ 
-            backgroundColor: isDark ? 'rgba(40, 40, 40, 0.9)' : 'rgba(245, 245, 245, 0.9)' 
+            backgroundColor: isDark ? 'rgba(40, 40, 40, 0.9)' : 'rgba(248, 248, 248, 0.9)' 
           }}
         >
+          <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-teal-500 to-transparent" />
           <div className="flex items-center justify-between gap-3">
             <div className="flex items-center gap-3">
               <a
@@ -51,12 +52,12 @@ const ListProjects = () => {
                 title="Ver repositorio"
               >
                 <img
-                  className="w-8 h-8 md:w-10 md:h-10 rounded-full opacity-70 hover:opacity-100 transition-opacity"
+                  className="w-8 h-8 md:w-10 md:h-10 rounded-full opacity-60 hover:opacity-100 transition-all hover:scale-110"
                   src="icons_tecs/github-logo.png"
                   alt="GitHub"
                 />
               </a>
-              <h1 className="text-xl md:text-2xl font-bold">{proyect.title}</h1>
+              <h1 className="text-lg md:text-2xl font-bold">{proyect.title}</h1>
             </div>
             
             {/* Tecnologías */}
@@ -64,7 +65,7 @@ const ListProjects = () => {
               {proyect.tecs.map((tec, idx) => (
                 <img
                   key={idx}
-                  className="w-6 h-6 md:w-8 md:h-8 rounded-full"
+                  className="w-5 h-5 md:w-8 md:h-8 rounded-full opacity-80 hover:opacity-100 transition-opacity"
                   src={tec}
                   alt=""
                 />
@@ -73,15 +74,14 @@ const ListProjects = () => {
           </div>
         </div>
 
-        {/* Imagen principal con slider - más amplia */}
-        <div className="relative group">
+        {/* Imagen principal con slider */}
+        <div className="relative group/img">
           <div 
-            className="relative h-56 sm:h-64 md:h-80 lg:h-96"
+            className="relative h-56 sm:h-64 md:h-80 lg:h-96 overflow-hidden"
             style={{ 
               backgroundColor: isDark ? 'rgba(15, 15, 15, 0.95)' : 'rgba(240, 240, 240, 0.95)' 
             }}
           >
-            {/* Link overlay - puesto primero para que no tape los botones */}
             <a
               href={proyect.url_link}
               target="_blank"
@@ -89,7 +89,6 @@ const ListProjects = () => {
               title="Ver proyecto"
             />
             
-            {/* Imagen actual - object-cover para ver más área del proyecto */}
             <img
               key={currentImg}
               src={`proys_imgs/${proyect.media_folder.path}/${currentImg}.png`}
@@ -104,19 +103,19 @@ const ListProjects = () => {
           
           {/* Navegación de imágenes */}
           {cant > 1 && (
-            <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-3 py-2 bg-gradient-to-t from-black/60 to-transparent">
+            <div className="absolute bottom-0 left-0 right-0 flex justify-center gap-3 py-3 bg-gradient-to-t from-black/60 to-transparent">
               <button 
                 onClick={handleImagePrevious} 
                 className="p-1.5 md:p-2 bg-white/90 hover:bg-white rounded-full transition-all hover:scale-110 shadow-md z-10"
               >
                 <img src="/arrow-left.png" alt="Anterior" className="w-4 h-4 md:w-5 md:h-5" />
               </button>
-              <div className="flex items-center gap-2 px-3 py-1 bg-black/40 rounded-full">
+              <div className="flex items-center gap-2 px-3 py-1 bg-black/40 backdrop-blur-sm rounded-full">
                 {Array.from({ length: cant }, (_, i) => (
                   <span 
                     key={i}
                     className={`w-1.5 h-1.5 rounded-full transition-all ${
-                      currentImg === i + 1 ? "bg-white scale-125" : "bg-white/50"
+                      currentImg === i + 1 ? "bg-white scale-125" : "bg-white/40"
                     }`}
                   />
                 ))}
@@ -133,11 +132,10 @@ const ListProjects = () => {
 
         {/* Descripción del proyecto */}
         <div className="p-4 md:p-6">
-          {/* Descripción de la app */}
           <div className="mb-4">
             <h2 
-              className="text-sm font-bold uppercase tracking-wide mb-2"
-              style={{ color: isDark ? '#9ca3af' : '#6b7280' }}
+              className="text-xs font-bold uppercase tracking-widest mb-2"
+              style={{ color: isDark ? '#6b7280' : '#9ca3af' }}
             >
               La App
             </h2>
@@ -149,11 +147,10 @@ const ListProjects = () => {
             </p>
           </div>
 
-          {/* Cómo está desarrollado */}
           <div className="mb-5">
             <h2 
-              className="text-sm font-bold uppercase tracking-wide mb-2"
-              style={{ color: isDark ? '#9ca3af' : '#6b7280' }}
+              className="text-xs font-bold uppercase tracking-widest mb-2"
+              style={{ color: isDark ? '#6b7280' : '#9ca3af' }}
             >
               Desarrollo
             </h2>
@@ -167,25 +164,26 @@ const ListProjects = () => {
 
           {/* Características */}
           <div 
-            className="rounded-xl p-4"
+            className="rounded-xl p-4 relative overflow-hidden"
             style={{ 
-              backgroundColor: isDark ? 'rgba(40, 40, 40, 0.6)' : 'rgba(245, 245, 245, 0.6)' 
+              backgroundColor: isDark ? 'rgba(40, 40, 40, 0.6)' : 'rgba(248, 248, 248, 0.6)' 
             }}
           >
+            <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-teal-500 to-blue-500 rounded-full" />
             <h2 
-              className="text-sm font-bold uppercase tracking-wide mb-3"
-              style={{ color: isDark ? '#9ca3af' : '#6b7280' }}
+              className="text-xs font-bold uppercase tracking-widest mb-3 ml-2"
+              style={{ color: isDark ? '#6b7280' : '#9ca3af' }}
             >
               Características
             </h2>
-            <ul className="grid sm:grid-cols-2 gap-2">
+            <ul className="grid sm:grid-cols-2 gap-2 ml-2">
               {proyect.description_list?.map((item, idx) => (
                 <li 
                   key={idx} 
                   className="flex items-start gap-2 text-sm"
                   style={{ color: isDark ? '#e5e7eb' : '#374151' }}
                 >
-                  <span className="text-green-500 mt-0.5">✓</span>
+                  <span className="text-teal-500 mt-0.5">✓</span>
                   <span>{item}</span>
                 </li>
               ))}
@@ -194,13 +192,13 @@ const ListProjects = () => {
 
           {/* Links */}
           <div 
-            className="flex flex-wrap gap-3 mt-4 pt-4"
-            style={{ borderTopColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)' }}
+            className="flex flex-wrap gap-3 mt-5 pt-4"
+            style={{ borderTop: `1px solid ${isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'}` }}
           >
             <a
               href={proyect.url_link}
               target="_blank"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-lg text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2 bg-teal-500 hover:bg-teal-600 text-white rounded-lg text-sm font-medium transition-all hover:shadow-lg hover:-translate-y-0.5"
             >
               Ver Proyecto
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -210,9 +208,9 @@ const ListProjects = () => {
             <a
               href={proyect.url_repo}
               target="_blank"
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2 rounded-lg text-sm font-medium transition-all hover:-translate-y-0.5"
               style={{ 
-                backgroundColor: isDark ? 'rgba(60, 60, 60, 0.8)' : 'rgba(220, 220, 220, 0.8)',
+                backgroundColor: isDark ? 'rgba(60, 60, 60, 0.8)' : 'rgba(235, 235, 235, 0.8)',
                 color: isDark ? '#e5e7eb' : '#374151'
               }}
             >
@@ -239,17 +237,23 @@ const Title = () => {
   const isDark = currentTheme.color === "#fff";
   
   return (
-    <div className="mb-10 max-w-3xl mx-auto px-4">
-      <h1 className="text-3xl md:text-4xl font-bold text-center mb-4">
-        Proyectos
-      </h1>
+    <div className="mb-12 max-w-3xl mx-auto px-4">
+      <div className="text-center mb-6">
+        <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium bg-teal-500/10 text-teal-400 border border-teal-500/20 mb-3">
+          Portfolio
+        </span>
+        <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+          Proyectos
+        </h1>
+      </div>
       <div 
-        className="rounded-xl p-5 backdrop-blur-sm"
+        className="rounded-xl p-6 backdrop-blur-sm relative overflow-hidden"
         style={{ 
-          backgroundColor: isDark ? 'rgba(30, 30, 30, 0.8)' : 'rgba(245, 245, 245, 0.8)',
-          border: `1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.1)'}`
+          backgroundColor: isDark ? 'rgba(30, 30, 30, 0.8)' : 'rgba(248, 248, 248, 0.8)',
+          border: `1px solid ${isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.06)'}`
         }}
       >
+        <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
         <p 
           className="text-base md:text-lg text-center mb-4"
           style={{ color: isDark ? '#d1d5db' : '#4b5563' }}
@@ -261,7 +265,7 @@ const Title = () => {
         <div className="flex items-center justify-center gap-3">
           <span 
             className="text-sm"
-            style={{ color: isDark ? '#9ca3af' : '#6b7280' }}
+            style={{ color: isDark ? '#6b7280' : '#9ca3af' }}
           >
             Incluyendo este portfolio
           </span>
@@ -272,7 +276,7 @@ const Title = () => {
             className="inline-block"
           >
             <svg
-              className="w-5 h-5 opacity-70 hover:opacity-100 transition-opacity"
+              className="w-5 h-5 opacity-60 hover:opacity-100 transition-all hover:scale-110"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -290,7 +294,7 @@ const Title = () => {
 
 export function Works() {
   return (
-    <section id="proyectos" className="py-10">
+    <section id="proyectos" className="py-12">
       <Title />
       <ListProjects />
     </section>
