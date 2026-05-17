@@ -5,6 +5,7 @@ import { Inicio } from "./pages/Home/Inicio";
 import { Works } from "./pages/Home/Works";
 import { FormContact } from "./pages/Home/FormContact";
 import { Cv } from "./pages/CV/Cv";
+import { CvList } from "./pages/CV/CvList";
 import { Apis } from "./pages/APIs/Apis";
 import { Credit } from "./pages/Credit/Credit";
 import { Promos } from "./components/promos/Promos";
@@ -33,6 +34,7 @@ function App() {
             <Route path="/tools" element={<Credit />} />
             <Route path="/api-tester" element={<Apis />} />
             <Route path="/cv" element={<Cv />} />
+            <Route path="/cvs" element={<CvList />} />
             <Route path="/publ" element={<Promos />} />
             <Route path="/contact" element={<FormContact urlPing={urls_ping[3]} />} />
           </Routes>

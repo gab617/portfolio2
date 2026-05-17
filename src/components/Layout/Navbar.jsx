@@ -8,7 +8,7 @@ const navItems = [
   { path: "/projects", label: "Proyectos", hash: "#proyectos" },
   { path: "/api-tester", label: "APIs", hash: "" },
   { path: "/cv", label: "CV", hash: "" },
-  { path: "/contact", label: "Contacto", hash: "#contacto" },
+  { path: "/contact", label: "Contacto", hash: "" },
 ];
 
 export function Navbar() {

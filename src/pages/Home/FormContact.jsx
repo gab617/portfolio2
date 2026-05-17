@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Context } from "../../Context/Context";
 
 const STORAGE_KEY = "nwPortf_mails_enviados";
@@ -8,10 +8,11 @@ const getMailsEnviados = () => {
   try {
     const saved = localStorage.getItem(STORAGE_KEY);
     if (!saved) return [];
-    const data = JSON.parse(0);
-    // Limpiar entradas viejas (> 24h)
+    const data = JSON.parse(saved);
+    // Limpiar entradas viejas (> 10min)
     const ahora = Date.now();
-    const vigentes = data.filter((d) => ahora - d.ts < 24 * 60 * 60 * 1000);
+    const VENTANA_MS = 10 * 60 * 1000;
+    const vigentes = data.filter((d) => ahora - d.ts < VENTANA_MS);
     if (vigentes.length !== data.length) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(vigentes));
     }
@@ -46,6 +47,36 @@ export function FormContact() {
   // Mails enviados desde localStorage (persiste entre recargas)
   const [mailsEnviados, setMailsEnviados] = useState(getMailsEnviados);
   const mailsRestantes = 3 - mailsEnviados.length;
+  const [contador, setContador] = useState("");
+
+  // Contador regresivo + sincronización con localStorage
+  useEffect(() => {
+    const actualizar = () => {
+      // Sincronizar desde localStorage (por si expiraron mails)
+      const actualizados = getMailsEnviados();
+      if (actualizados.length !== mailsEnviados.length) {
+        setMailsEnviados(actualizados);
+        return; // el efecto se reinicia solo con el nuevo state
+      }
+
+      if (mailsEnviados.length === 0) {
+        setContador("");
+        return;
+      }
+
+      const ahora = Date.now();
+      const VENTANA_MS = 10 * 60 * 1000;
+      const masAntiguo = Math.min(...mailsEnviados.map((m) => m.ts));
+      const restante = Math.max(0, VENTANA_MS - (ahora - masAntiguo));
+      const min = Math.floor(restante / 60000);
+      const seg = Math.floor((restante % 60000) / 1000);
+      setContador(`${String(min).padStart(2, "0")}:${String(seg).padStart(2, "0")}`);
+    };
+
+    actualizar();
+    const id = setInterval(actualizar, 1000);
+    return () => clearInterval(id);
+  }, [mailsEnviados]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -71,6 +102,11 @@ export function FormContact() {
     if (emptyField) {
       const labels = { name: "Nombre", addresse: "Email", subject: "Asunto", message: "Mensaje" };
       setErrorMsg(`❌ Completá ${labels[emptyField[0]]}`);
+      return;
+    }
+
+    if (mailsRestantes <= 0) {
+      setErrorMsg(`❌ Sin cupos disponibles. Esperá a que se libere uno (${contador})`);
       return;
     }
 
@@ -131,19 +167,26 @@ export function FormContact() {
         <div className="flex items-center justify-between mb-6 pb-4 border-b border-black/5 dark:border-white/5">
           <div className="flex items-center gap-2">
             <div className={`w-2 h-2 rounded-full ${mailsRestantes > 0 ? "bg-teal-500" : "bg-red-500"}`} />
-            
+            <span className="text-xs font-medium" style={{ color: isDark ? '#d1d5db' : '#4b5563' }}>
+              {mailsRestantes}/3 disponibles
+            </span>
           </div>
-          <div className="flex gap-1">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  i <= mailsEnviados.length
-                    ? "bg-teal-500/40"
-                    : "bg-teal-500"
-                }`}
-              />
-            ))}
+          <div className="flex items-center gap-2">
+            <span className="text-[10px] font-mono opacity-50" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
+              {contador ? `${contador}` : "—"}
+            </span>
+            <div className="flex gap-1">
+              {[1, 2, 3].map((i) => (
+                <div
+                  key={i}
+                  className={`w-2 h-2 rounded-full transition-all ${
+                    i <= mailsEnviados.length
+                      ? "bg-teal-500/40"
+                      : "bg-teal-500"
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
 
@@ -220,7 +263,7 @@ export function FormContact() {
           <div className="pt-2">
             <button
               type="submit"
-              disabled={loadingEmail}
+              disabled={loadingEmail || mailsRestantes <= 0}
               className="w-full py-3 rounded-xl font-semibold text-sm transition-all bg-teal-500 hover:bg-teal-600 text-white disabled:opacity-40 disabled:cursor-not-allowed hover:shadow-lg hover:-translate-y-0.5"
             >
               {loadingEmail ? (
