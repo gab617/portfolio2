@@ -12,6 +12,7 @@ import {
   TABLA_REDONDEADA_116_REDONDEADA,
 } from "./tablas";
 import { ListadoValores116 } from "./components/ListadoValores116";
+import { CalculadoraDiaria } from "./components/CalculadoraDiaria";
 import { Context } from "../../Context/Context";
 
 // Tarjeta informativa para cada herramienta
@@ -98,9 +99,10 @@ export function Credit() {
 
   const sections = [
     { id: 'calculadora', title: 'Calculadora', icon: '🧮', desc: 'Calcula cuotas y intereses' },
+    { id: 'diaria', title: 'Financiación', icon: '📆', desc: 'Diaria, semanal y mensual' },
     { id: 'valores', title: 'Tabla de Valores', icon: '📊', desc: 'Valores por cuota' },
     { id: 'volante', title: 'Volante PDF', icon: '📄', desc: 'Genera volantes imprimibles' },
-    { id: 'financiacion', title: 'Financiación', icon: '💰', desc: 'Cartón de financiación' },
+    { id: 'financiacion', title: 'Cartón', icon: '💰', desc: 'Cartón de financiación' },
   ];
 
   return (
@@ -188,6 +190,17 @@ export function Credit() {
             icon="🧮"
           >
             <Calculadora />
+          </ToolCard>
+        )}
+
+        {/* Financiación Diaria */}
+        {activeSection === 'diaria' && (
+          <ToolCard
+            title="Financiación por período"
+            description="Calculá cuota diaria, semanal y mensual con intereses por día"
+            icon="📆"
+          >
+            <CalculadoraDiaria />
           </ToolCard>
         )}
 
