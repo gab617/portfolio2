@@ -1,58 +1,8 @@
 import { useState, useRef, useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../Context/Context";
-
-import { CurricVitae as CurricVitaeGabriel } from "../CV2/components/CurricVitae";
-import { CurricVitae as CurricVitaeAugusto } from "../CV/components/CurricVitae";
-import { CurricVitae as CurricVitaeAgustina } from "../CVANTO/components/CurricVitae";
-import { FooterCv as FooterCvGabriel } from "../CV2/components/FooterCv";
-import { FooterCv as FooterCvAugusto } from "../CV/components/FooterCv";
-import { FooterCv as FooterCvAgustina } from "../CVANTO/components/FooterCv";
-import { FolletoA4, FooterFolletoA4 } from "../CV/components/FolletoA4";
-import { ListaClientesA4, FooterListaClientes } from "../CV/components/ListaClientesA4";
-
-const cvs = [
-  {
-    id: "gabriel",
-    label: "Gabriel Cabrera",
-    role: "Desarrollador Frontend",
-    desc: "CV profesional con experiencia en React, React Native, Node.js y bases de datos. Proyectos propios desplegados.",
-    Component: CurricVitaeGabriel,
-    Footer: FooterCvGabriel,
-  },
-  {
-    id: "augusto",
-    label: "Augusto Cabrera",
-    role: "Enfermero Profesional",
-    desc: "CV para el ámbito de la salud. Atención directa al paciente, cuidados básicos y administrativos.",
-    Component: CurricVitaeAugusto,
-    Footer: FooterCvAugusto,
-  },
-  {
-    id: "agustina",
-    label: "Carlos Quiroga",
-    role: "Electricista · Refrigeración · Mantenimiento",
-    desc: "CV orientado a servicios técnicos. Electricidad, refrigeración y mantenimiento general.",
-    Component: CurricVitaeAgustina,
-    Footer: FooterCvAgustina,
-  },
-  {
-    id: "folleto",
-    label: "Folleto A4",
-    role: "Plantilla imprimible",
-    desc: "Folleto formato A4 listo para imprimir. Ideal para promocionar servicios o productos.",
-    Component: FolletoA4,
-    Footer: FooterFolletoA4,
-  },
-  {
-    id: "lista",
-    label: "Lista Clientes A4",
-    role: "Planilla para imprimir",
-    desc: "Lista de clientes optimizada para A4 con espacio para 45 registros (nombre, teléfono, forma de pago).",
-    Component: ListaClientesA4,
-    Footer: FooterListaClientes,
-  },
-];
+import { FooterCv } from "./documentos/Footer";
+import cvData from "./data";
 
 export function CvList() {
   const { currentTheme } = useContext(Context);
@@ -60,7 +10,7 @@ export function CvList() {
   const [selected, setSelected] = useState(null);
   const cvRef = useRef(null);
 
-  const activeCv = cvs.find((c) => c.id === selected);
+  const activeCv = cvData.find((c) => c.id === selected);
 
   return (
     <div className="max-w-5xl mx-auto p-4 md:p-6">
@@ -84,7 +34,7 @@ export function CvList() {
 
       {/* Grilla de CVs */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        {cvs.map((cv) => {
+        {cvData.map((cv) => {
           const isActive = selected === cv.id;
           return (
             <button
@@ -116,12 +66,6 @@ export function CvList() {
                 />
                 <h3 className="font-bold text-sm">{cv.label}</h3>
               </div>
-              <p className="text-xs font-medium mb-1" style={{ color: isDark ? '#9ca3af' : '#6b7280' }}>
-                {cv.role}
-              </p>
-              <p className="text-xs" style={{ color: isDark ? '#6b7280' : '#9ca3af' }}>
-                {cv.desc}
-              </p>
             </button>
           );
         })}
@@ -139,7 +83,7 @@ export function CvList() {
           </div>
 
           <activeCv.Component cvRef={cvRef} />
-          <activeCv.Footer cvRef={cvRef} />
+          <FooterCv cvRef={cvRef} label={`Guardar ${activeCv.label} como PDF`} />
         </div>
       )}
 
