@@ -1,0 +1,18 @@
+{
+  "id": "paisaje-02",
+  "component": "paisaje",
+  "title": "Paisaje 02",
+  "image": "paisajes/02/tortuga.png",
+  "summary": "Descripcion corta del escenario 02",
+  "accent": "#0ea5e9",
+  "route": null,
+  "modal": {
+    "type": "paisaje",
+    "description": "Texto manual del escenario 02.",
+    "scenes": [
+      "paisajes/02/escenas/esc01.png",
+      "paisajes/02/escenas/esc02.png",
+      "paisajes/02/escenas/esc03.png"
+    ]
+  }
+}

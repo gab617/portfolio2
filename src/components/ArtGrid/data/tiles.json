@@ -1,0 +1,290 @@
+{
+  "_docs": {
+    "grid.columns": "Casilleros por fila (2 | 3 | 4)",
+    "grid.rows": "Filas por panel. columns * rows = casilleros por panel",
+    "grid.axis": "Eje del arrastre: horizontal | vertical",
+    "grid.gap": "Separacion tailwind: 1 | 2 | 3 | 4",
+    "grid.threshold": "px minimos arrastrados para cambiar de panel",
+    "grid.slop": "px de tolerancia para distinguir tap de drag",
+    "grid.inertiaMs": "duracion del snap en ms",
+    "grid.viewportHeight": "alto del viewport solo si axis = vertical (ej: 60vh)",
+    "tile.component": "plantilla del casillero: project | link | tech",
+    "tile.imageFit": "cover (default) | contain (iconos)",
+    "tile.accent": "color de acento del casillero (barra + glow)",
+    "tile.route.type": "external (href) | internal (to) | null",
+    "tile.modal.type": "project (usa projectsF por projectId) | tech | link | paisaje",
+    "panel": "cada columns*rows tiles = 1 panel (scroll). El orden del array define el panel",
+    "paisaje": "cada paisaje vive en un archivo aparte: data/paisajes/NN.json (1 por casillero, se autocargan) | image: paisajes/NN/portada.ext | modal.scenes: rutas de las escenas del recorrido (paisajes/NN/escenas/01.webp ...)"
+  },
+  "grid": {
+    "columns": 3,
+    "rows": 3,
+    "axis": "horizontal",
+    "gap": 3,
+    "threshold": 60,
+    "slop": 10,
+    "inertiaMs": 320,
+    "viewportHeight": null
+  },
+  "tiles": [
+    {
+      "id": "prize-online",
+      "component": "project",
+      "title": "Prize OnLine",
+      "image": "proys_imgs/prizemedia/1.png",
+      "summary": "Sorteos en tiempo real con tableros dinamicos",
+      "accent": "#14b8a6",
+      "route": { "type": "external", "href": "https://prizeonline.vercel.app/", "label": "Ver proyecto" },
+      "modal": { "type": "project", "projectId": 3 }
+    },
+    {
+      "id": "basic-words",
+      "component": "project",
+      "title": "Basic Words",
+      "image": "proys_imgs/basicWordsmedia/1.png",
+      "summary": "Aprender ingles con imagenes y categorias aleatorias",
+      "accent": "#22c55e",
+      "route": { "type": "external", "href": "https://r-f-traducciones.vercel.app/", "label": "Ver proyecto" },
+      "modal": { "type": "project", "projectId": 0 }
+    },
+    {
+      "id": "dota2-app",
+      "component": "project",
+      "title": "Dota2 App",
+      "image": "proys_imgs/d2media/1.png",
+      "summary": "Heroes de Dota 2 con stats y habilidades",
+      "accent": "#f97316",
+      "route": { "type": "external", "href": "https://dota2-app-front-617.vercel.app/", "label": "Ver proyecto" },
+      "modal": { "type": "project", "projectId": 1 }
+    },
+    {
+      "id": "giphy",
+      "component": "project",
+      "title": "Giphy",
+      "image": "proys_imgs/giphmedia/1.png",
+      "summary": "Buscador de GIFs por categorias via API de Giphy",
+      "accent": "#a855f7",
+      "route": { "type": "external", "href": "https://giphy-react-front-617.vercel.app/", "label": "Ver proyecto" },
+      "modal": { "type": "project", "projectId": 2 }
+    },
+    {
+      "id": "proyectos",
+      "component": "link",
+      "title": "Proyectos",
+      "image": "proys_imgs/giphmedia/3.png",
+      "summary": "Portfolio completo con repos y demos",
+      "accent": "#3b82f6",
+      "route": { "type": "internal", "to": "/projects", "label": "Abrir seccion" },
+      "modal": {
+        "type": "link",
+        "details": [
+          "Proyectos desplegados en Vercel",
+          "Repositorios publicos en GitHub",
+          "Descripcion tecnica de cada desarrollo",
+          "Links a demo y codigo"
+        ]
+      }
+    },
+    {
+      "id": "api-tester",
+      "component": "link",
+      "title": "APIs",
+      "image": "icons_tecs/express-icon.png",
+      "imageFit": "contain",
+      "summary": "Probar endpoints REST y ver respuestas",
+      "accent": "#60a5fa",
+      "route": { "type": "internal", "to": "/api-tester", "label": "Abrir tester" },
+      "modal": {
+        "type": "link",
+        "details": [
+          "Requests GET con parametros configurables",
+          "Respuesta en JSON formateada",
+          "Historial de estado de los endpoints",
+          "Backends de los proyectos en vivo"
+        ]
+      }
+    },
+    {
+      "id": "tools",
+      "component": "link",
+      "title": "Tools",
+      "image": "toolsimg.png",
+      "summary": "Calculadoras de credito y utilidades",
+      "accent": "#eab308",
+      "route": { "type": "internal", "to": "/tools", "label": "Abrir tools" },
+      "modal": {
+        "type": "link",
+        "details": [
+          "Calculadora de cuotas y amortizacion",
+          "Simulador de interes diario",
+          "Tablas de valores y comparativas",
+          "Utilidades para la vida diaria"
+        ]
+      }
+    },
+    {
+      "id": "cv",
+      "component": "link",
+      "title": "CV",
+      "image": "user.png",
+      "imageFit": "contain",
+      "summary": "CV interactivo con documentos descargables",
+      "accent": "#ec4899",
+      "route": { "type": "internal", "to": "/cv", "label": "Ver CV" },
+      "modal": {
+        "type": "link",
+        "details": [
+          "CVs por perfil profesional",
+          "Documentos listos para imprimir",
+          "Experiencia y skills por candidato",
+          "Formato listo para compartir"
+        ]
+      }
+    },
+    {
+      "id": "contacto",
+      "component": "link",
+      "title": "Contacto",
+      "image": "linkedin-icon.png",
+      "imageFit": "contain",
+      "summary": "Formulario de contacto y datos",
+      "accent": "#0ea5e9",
+      "route": { "type": "internal", "to": "/contact", "label": "Escribir" },
+      "modal": {
+        "type": "link",
+        "details": [
+          "Formulario con envio a backend",
+          "Respuesta confirmada en pantalla",
+          "Links directos a redes",
+          "Disponibilidad para proyectos"
+        ]
+      }
+    },
+    {
+      "id": "react",
+      "component": "tech",
+      "title": "React",
+      "image": "icons_tecs/react-icon.png",
+      "imageFit": "contain",
+      "summary": "Componentes, hooks y Context",
+      "accent": "#61dafb",
+      "route": null,
+      "modal": {
+        "type": "tech",
+        "skills": ["Componentes", "React Native", "Hooks / Context", "Manejo de Estado", "React Router"]
+      }
+    },
+    {
+      "id": "tailwind",
+      "component": "tech",
+      "title": "Tailwind",
+      "image": "icons_tecs/tailwind-icon.png",
+      "imageFit": "contain",
+      "summary": "Utility-first CSS",
+      "accent": "#38bdf8",
+      "route": null,
+      "modal": {
+        "type": "tech",
+        "skills": ["Utilidades CSS", "Diseno Responsive", "Customizacion", "Configuracion", "Optimizacion", "Mobile First"]
+      }
+    },
+    {
+      "id": "node",
+      "component": "tech",
+      "title": "Node.js",
+      "image": "icons_tecs/node-icon.png",
+      "imageFit": "contain",
+      "summary": "Backend y streams",
+      "accent": "#83cd29",
+      "route": null,
+      "modal": {
+        "type": "tech",
+        "skills": ["Modulos", "Escalabilidad", "Esquematizacion", "Eventos", "Streams", "Web Sockets"]
+      }
+    },
+    {
+      "id": "express",
+      "component": "tech",
+      "title": "Express",
+      "image": "icons_tecs/express-icon.png",
+      "imageFit": "contain",
+      "summary": "APIs REST y middleware",
+      "accent": "#a0a0a0",
+      "route": null,
+      "modal": {
+        "type": "tech",
+        "skills": ["Middleware", "Enrutamiento", "Requests/Responses", "APIs REST", "Manejo de Errores", "Autenticacion"]
+      }
+    },
+    {
+      "id": "git",
+      "component": "tech",
+      "title": "Git",
+      "image": "icons_tecs/git-icon.png",
+      "imageFit": "contain",
+      "summary": "Control de versiones",
+      "accent": "#f05032",
+      "route": null,
+      "modal": {
+        "type": "tech",
+        "skills": ["Comandos Basicos", "Rebase", "Merge", "Stash", "Cherry-pick"]
+      }
+    },
+    {
+      "id": "github",
+      "component": "tech",
+      "title": "GitHub",
+      "image": "icons_tecs/github-logo.png",
+      "imageFit": "contain",
+      "summary": "Repos, PRs y Actions",
+      "accent": "#e5e7eb",
+      "route": null,
+      "modal": {
+        "type": "tech",
+        "skills": ["Control de Versiones", "Branching", "Pull Requests", "Colaboracion", "GitHub Actions"]
+      }
+    },
+    {
+      "id": "javascript",
+      "component": "tech",
+      "title": "JavaScript",
+      "image": "icons_tecs/js-icon.png",
+      "imageFit": "contain",
+      "summary": "ES6+ y asincronismo",
+      "accent": "#f7df1e",
+      "route": null,
+      "modal": {
+        "type": "tech",
+        "skills": ["ES6+", "Manipulacion del DOM", "JS Asincrono", "Promesas", "Event Loop"]
+      }
+    },
+    {
+      "id": "html",
+      "component": "tech",
+      "title": "HTML",
+      "image": "icons_tecs/html-icon.png",
+      "imageFit": "contain",
+      "summary": "Semantica y accesibilidad",
+      "accent": "#e34f26",
+      "route": null,
+      "modal": {
+        "type": "tech",
+        "skills": ["Semantica", "Formularios", "Accesibilidad", "SEO", "Canvas"]
+      }
+    },
+    {
+      "id": "css",
+      "component": "tech",
+      "title": "CSS",
+      "image": "icons_tecs/css-icon.png",
+      "imageFit": "contain",
+      "summary": "Grid, flexbox y animaciones",
+      "accent": "#1572b6",
+      "route": null,
+      "modal": {
+        "type": "tech",
+        "skills": ["Flexbox", "Grid", "Diseno Responsivo", "Animaciones"]
+      }
+    }
+  ]
+}

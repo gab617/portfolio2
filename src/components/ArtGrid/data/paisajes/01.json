@@ -1,0 +1,18 @@
+{
+  "id": "paisaje-01",
+  "component": "paisaje",
+  "title": "Paisaje 01",
+  "image": "paisajes/01/Oscuro.png",
+  "summary": "Descripcion corta del escenario 01",
+  "accent": "#14b8a6",
+  "route": null,
+  "modal": {
+    "type": "paisaje",
+    "description": "Texto manual del escenario 01.",
+    "scenes": [
+      "paisajes/01/escenas/esc01.jpg",
+      "paisajes/01/escenas/esc02.jpg",
+      "paisajes/01/escenas/esc03.jpg"
+    ]
+  }
+}

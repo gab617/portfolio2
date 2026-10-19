@@ -1,0 +1,18 @@
+{
+  "id": "paisaje-07",
+  "component": "paisaje",
+  "title": "Paisaje 07",
+  "image": "paisajes/07/volador.webp",
+  "summary": "Descripcion corta del escenario 07",
+  "accent": "#f97316",
+  "route": null,
+  "modal": {
+    "type": "paisaje",
+    "description": "Texto manual del escenario 07.",
+    "scenes": [
+      "paisajes/07/escenas/esc01.png",
+      "paisajes/07/escenas/esc02.png",
+      "paisajes/07/escenas/esc03.png"
+    ]
+  }
+}

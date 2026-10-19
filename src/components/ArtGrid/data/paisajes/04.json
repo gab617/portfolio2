@@ -1,0 +1,18 @@
+{
+  "id": "paisaje-04",
+  "component": "paisaje",
+  "title": "Paisaje 04",
+  "image": "paisajes/04/arbolnegro.webp",
+  "summary": "Descripcion corta del escenario 04",
+  "accent": "#0000FF",
+  "route": null,
+  "modal": {
+    "type": "paisaje",
+    "description": "Texto manual del escenario 04.",
+    "scenes": [
+      "paisajes/04/escenas/esc01.png",
+      "paisajes/04/escenas/esc02.png",
+      "paisajes/04/escenas/esc03.png"
+    ]
+  }
+}

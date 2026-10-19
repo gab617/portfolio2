@@ -3,28 +3,31 @@ import { tecnologies_list } from "../../assets/jsonData.json";
 import "./Home.css";
 import { useContext } from "react";
 import { Context } from "../../Context/Context";
+import { ArtGrid } from "../../components/ArtGrid/ArtGrid";
 
 const Hero = () => {
   const { currentTheme } = useContext(Context);
   const isDark = currentTheme.color === "#fff";
 
   return (
-    <div className="flex flex-col md:flex-row items-center justify-center w-full max-w-5xl mx-auto gap-6 md:gap-12 p-6 md:p-8">
-      {/* Imagen con glow sutil */}
-      <div className="order-1 md:order-1 flex-shrink-0 relative group animate-fade-in-left">
-        <div className="absolute -inset-2 bg-gradient-to-br from-teal-400/20 to-blue-500/20 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+    <div className="flex flex-col items-center justify-center w-full max-w-5xl mx-auto gap-8 md:gap-10 p-6 md:p-8">
+      {/* Galeria interactiva sobre el logo de entrada */}
+      <div className="relative w-full max-w-2xl animate-fade-in-left">
+        <div className="absolute -inset-3 bg-gradient-to-br from-teal-400/20 to-blue-500/20 rounded-3xl blur-xl pointer-events-none" />
         <img
-          className="rounded-2xl w-36 sm:w-44 md:w-52 lg:w-56 shadow-xl ring-1 ring-white/10 relative"
+          className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-36 md:w-48 opacity-15 rounded-2xl"
           src="relajo.png"
-          alt="rengav"
+          alt=""
+          aria-hidden="true"
+          draggable="false"
         />
-        <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-teal-500 rounded-full flex items-center justify-center shadow-lg">
-          <span className="text-white text-lg">✦</span>
+        <div className="relative">
+          <ArtGrid />
         </div>
       </div>
 
       {/* Texto */}
-      <div className="order-2 md:order-2  text-center md:text-left flex flex-col gap-3 animate-fade-in-right">
+      <div className="text-center flex flex-col gap-3 animate-fade-in-right">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-3 bg-teal-500/10 text-teal-400 border border-teal-500/20">
             <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
@@ -43,7 +46,7 @@ const Hero = () => {
           </h2>
         </div>
 
-        <div className="flex flex-wrap gap-2 justify-center md:justify-start mt-2">
+{/*         <div className="flex flex-wrap gap-2 justify-center mt-2">
           <a
             href="#sobre-mi"
             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium transition-all hover:-translate-y-0.5 bg-teal-500 hover:bg-teal-600 text-white shadow-lg shadow-teal-500/20"
@@ -72,7 +75,7 @@ const Hero = () => {
             </svg>
             Proyectos
           </a>
-        </div>
+        </div> */}
       </div>
     </div>
   );
@@ -205,13 +208,19 @@ export function Inicio() {
     <section id="inicio" className="sm:text-xl">
       <div className="mt-8 mb-16">
         {/* Hero Section */}
+{/*         <div className="bg-blue-200 p-[10em]">
+            <h1 className="text-blue-600 ">CIRO</h1>
+
+
+
+        </div> */}
         <Hero />
 
         {/* About Me */}
-        <AboutMe />
+        {/* <AboutMe /> */}
 
         {/* Tecnologías */}
-        <Tecnologies />
+        {/* <Tecnologies /> */}
       </div>
     </section>
   );

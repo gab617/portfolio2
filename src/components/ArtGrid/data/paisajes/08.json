@@ -1,0 +1,18 @@
+{
+  "id": "paisaje-08",
+  "component": "paisaje",
+  "title": "Paisaje 08",
+  "image": "paisajes/08/portada.webp",
+  "summary": "Descripcion corta del escenario 08",
+  "accent": "#eab308",
+  "route": null,
+  "modal": {
+    "type": "paisaje",
+    "description": "Texto manual del escenario 08.",
+    "scenes": [
+      "paisajes/08/escenas/esc01.png",
+      "paisajes/08/escenas/esc02.png",
+      "paisajes/08/escenas/esc03.png"
+    ]
+  }
+}

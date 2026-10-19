@@ -1,0 +1,18 @@
+{
+  "id": "paisaje-06",
+  "component": "paisaje",
+  "title": "Paisaje 06",
+  "image": "paisajes/06/portada.webp",
+  "summary": "Descripcion corta del escenario 06",
+  "accent": "#f43f5e",
+  "route": null,
+  "modal": {
+    "type": "paisaje",
+    "description": "Texto manual del escenario 06.",
+    "scenes": [
+      "paisajes/06/escenas/esc01.png",
+      "paisajes/06/escenas/esc02.png",
+      "paisajes/06/escenas/esc03.png"
+    ]
+  }
+}

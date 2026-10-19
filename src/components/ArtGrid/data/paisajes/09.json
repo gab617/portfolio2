@@ -1,0 +1,18 @@
+{
+  "id": "paisaje-09",
+  "component": "paisaje",
+  "title": "Paisaje 09",
+  "image": "paisajes/09/portada.webp",
+  "summary": "Descripcion corta del escenario 09",
+  "accent": "#22c55e",
+  "route": null,
+  "modal": {
+    "type": "paisaje",
+    "description": "Texto manual del escenario 09.",
+    "scenes": [
+      "paisajes/09/escenas/esc01.jpg",
+      "paisajes/09/escenas/esc02.jpg",
+      "paisajes/09/escenas/esc03.jpg"
+    ]
+  }
+}

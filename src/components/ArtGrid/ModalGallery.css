@@ -1,0 +1,41 @@
+.modal-gallery {
+  touch-action: pan-y;
+  user-select: none;
+}
+
+.modal-gallery__img.is-next {
+  animation: gallery-in-right 0.35s ease both;
+}
+
+.modal-gallery__img.is-prev {
+  animation: gallery-in-left 0.35s ease both;
+}
+
+@keyframes gallery-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes gallery-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal-gallery__img.is-next,
+  .modal-gallery__img.is-prev {
+    animation: none;
+  }
+}

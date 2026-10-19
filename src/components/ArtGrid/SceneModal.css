@@ -1,0 +1,45 @@
+.scene-modal__backdrop {
+  animation: scene-backdrop-in 0.25s ease both;
+}
+
+.scene-modal__panel {
+  animation: scene-panel-in 0.3s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes scene-backdrop-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scene-panel-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.scene-modal__scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.scene-modal__scroll::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene-modal__backdrop,
+  .scene-modal__panel {
+    animation: none;
+  }
+}
