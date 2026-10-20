@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Phone, MapPin, Mail } from "lucide-react";
 
 export function CurricVitae({ cvRef }) {

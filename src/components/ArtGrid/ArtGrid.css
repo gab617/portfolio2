@@ -5,41 +5,26 @@
 .artgrid__viewport {
   position: relative;
   width: 100%;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   border-radius: 1rem;
   cursor: grab;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.artgrid__viewport::-webkit-scrollbar {
+  display: none;
 }
 
 .artgrid__viewport.is-dragging {
   cursor: grabbing;
 }
 
-.artgrid__viewport.is-dragging .artgrid__track {
-  will-change: transform;
-}
-
 .artgrid__track {
   display: flex;
-}
-
-.artgrid--horizontal .artgrid__track {
-  flex-direction: row;
-  height: 100%;
-}
-
-.artgrid--horizontal .artgrid__panel {
-  flex: 0 0 100%;
-  min-width: 100%;
-}
-
-.artgrid--vertical .artgrid__track {
-  flex-direction: column;
-  width: 100%;
-}
-
-.artgrid--vertical .artgrid__panel {
-  flex: 0 0 100%;
-  min-height: 100%;
 }
 
 @keyframes artgrid-tile-in {
@@ -53,44 +38,17 @@
   }
 }
 
-.artgrid__panel > * {
+.artgrid__track > * {
   animation: artgrid-tile-in 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) backwards;
 }
 
-.artgrid__panel > *:nth-child(1) {
-  animation-delay: 0.03s;
-}
-.artgrid__panel > *:nth-child(2) {
-  animation-delay: 0.07s;
-}
-.artgrid__panel > *:nth-child(3) {
-  animation-delay: 0.11s;
-}
-.artgrid__panel > *:nth-child(4) {
-  animation-delay: 0.15s;
-}
-.artgrid__panel > *:nth-child(5) {
-  animation-delay: 0.19s;
-}
-.artgrid__panel > *:nth-child(6) {
-  animation-delay: 0.23s;
-}
-.artgrid__panel > *:nth-child(7) {
-  animation-delay: 0.27s;
-}
-.artgrid__panel > *:nth-child(8) {
-  animation-delay: 0.31s;
-}
-.artgrid__panel > *:nth-child(9) {
-  animation-delay: 0.35s;
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .artgrid__panel > * {
+  .artgrid__track > * {
     animation: none;
   }
 
   .artgrid__viewport {
     cursor: default;
+    scroll-snap-type: none;
   }
 }

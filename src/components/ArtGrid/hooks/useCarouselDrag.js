@@ -4,8 +4,6 @@ export function useCarouselDrag({
   axis = "horizontal",
   threshold = 60,
   slop = 10,
-  inertiaMs = 320,
-  pageCount = 1,
   onPanelChange,
   disabled = false,
 }) {
@@ -15,9 +13,13 @@ export function useCarouselDrag({
   const pointerRef = useRef(null);
   const rafRef = useRef(0);
   const pageRef = useRef(0);
+  const pageCountRef = useRef(1);
+  const perRef = useRef(1);
+  const stepRef = useRef(0);
   const reducedMotionRef = useRef(false);
 
   const [page, setPage] = useState(0);
+  const [pageCount, setPageCount] = useState(1);
   const [dragging, setDragging] = useState(false);
 
   const horizontal = axis === "horizontal";
@@ -36,45 +38,84 @@ export function useCarouselDrag({
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  const write = useCallback(
-    (pageIndex, delta, animate) => {
-      const track = trackRef.current;
+  // Una sección = todos los casilleros que entran en pantalla (responsive).
+  const measure = useCallback(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return 1;
+    const size = horizontal ? viewport.clientWidth : viewport.clientHeight;
+    const cells = trackRef.current ? trackRef.current.children : [];
+    const n = cells.length;
+
+    let step = 0;
+    if (n > 1) {
+      step = horizontal
+        ? cells[1].offsetLeft - cells[0].offsetLeft
+        : cells[1].offsetTop - cells[0].offsetTop;
+    } else if (n === 1) {
+      step = horizontal ? cells[0].offsetWidth : cells[0].offsetHeight;
+    }
+
+    let count = 1;
+    if (step > 0) {
+      const per = Math.max(1, Math.floor(size / step));
+      perRef.current = per;
+      stepRef.current = step;
+      count = Math.max(1, Math.ceil(n / per));
+    } else {
+      perRef.current = 1;
+      stepRef.current = 0;
+    }
+
+    pageCountRef.current = count;
+    setPageCount((prev) => (prev === count ? prev : count));
+    if (pageRef.current > count - 1) {
+      pageRef.current = count - 1;
+      setPage(count - 1);
+    }
+    return count;
+  }, [horizontal]);
+
+  const scrollToPage = useCallback(
+    (target, animate) => {
       const viewport = viewportRef.current;
-      if (!track || !viewport) return;
-      const size = horizontal ? viewport.clientWidth : viewport.clientHeight;
-      const offset = -pageIndex * size + delta;
-      track.style.transition =
-        animate && !reducedMotionRef.current
-          ? `transform ${inertiaMs}ms cubic-bezier(0.22, 0.61, 0.36, 1)`
-          : "none";
-      track.style.transform = horizontal
-        ? `translate3d(${offset}px, 0, 0)`
-        : `translate3d(0, ${offset}px, 0)`;
+      if (!viewport) return;
+      const max = Math.max(
+        0,
+        (horizontal
+          ? viewport.scrollWidth - viewport.clientWidth
+          : viewport.scrollHeight - viewport.clientHeight)
+      );
+      const unit = perRef.current * stepRef.current;
+      const left = Math.max(0, Math.min(target * unit, max));
+      viewport.scrollTo({
+        left: horizontal ? left : 0,
+        top: horizontal ? 0 : left,
+        behavior: animate && !reducedMotionRef.current ? "smooth" : "auto",
+      });
     },
-    [horizontal, inertiaMs]
+    [horizontal]
   );
 
-  const schedule = useCallback(() => {
-    if (rafRef.current) return;
-    rafRef.current = requestAnimationFrame(() => {
-      rafRef.current = 0;
-      const pointer = pointerRef.current;
-      if (!pointer) return;
-      write(pageRef.current, pointer.delta, false);
-    });
-  }, [write]);
+  const pageFromPos = useCallback((pos) => {
+    const unit = perRef.current * stepRef.current;
+    if (unit <= 0) return 0;
+    return Math.max(
+      0,
+      Math.min(Math.round(pos / unit), pageCountRef.current - 1)
+    );
+  }, []);
 
   const goTo = useCallback(
     (target) => {
-      const clamped = Math.max(0, Math.min(target, pageCount - 1));
-      write(clamped, 0, true);
+      const clamped = Math.max(0, Math.min(target, pageCountRef.current - 1));
       if (clamped !== pageRef.current) {
         pageRef.current = clamped;
         setPage(clamped);
         onPanelChange?.(clamped);
       }
+      scrollToPage(clamped, true);
     },
-    [pageCount, write, onPanelChange]
+    [scrollToPage, onPanelChange]
   );
 
   const goPrev = useCallback(() => goTo(pageRef.current - 1), [goTo]);
@@ -87,6 +128,40 @@ export function useCarouselDrag({
       rafRef.current = 0;
     }
   }, []);
+
+  const applyDrag = useCallback(() => {
+    const viewport = viewportRef.current;
+    const pointer = pointerRef.current;
+    if (!viewport || !pointer) return;
+    const max = Math.max(
+      0,
+      (horizontal
+        ? viewport.scrollWidth - viewport.clientWidth
+        : viewport.scrollHeight - viewport.clientHeight)
+    );
+    const unit = perRef.current * stepRef.current;
+    let target = pageRef.current * unit - pointer.delta;
+    if (target < 0) target *= 0.35;
+    else if (target > max) target = max + (target - max) * 0.35;
+    if (horizontal) viewport.scrollLeft = target;
+    else viewport.scrollTop = target;
+
+    const next = pageFromPos(target);
+    if (next !== pageRef.current) {
+      pageRef.current = next;
+      setPage(next);
+      onPanelChange?.(next);
+    }
+  }, [horizontal, onPanelChange, pageFromPos]);
+
+  const schedule = useCallback(() => {
+    if (rafRef.current) return;
+    rafRef.current = requestAnimationFrame(() => {
+      rafRef.current = 0;
+      if (!pointerRef.current) return;
+      applyDrag();
+    });
+  }, [applyDrag]);
 
   const onPointerDown = (event) => {
     if (disabled || !event.isPrimary) return;
@@ -129,9 +204,7 @@ export function useCarouselDrag({
       }
     }
 
-    const atStart = pageRef.current === 0 && primary > 0;
-    const atEnd = pageRef.current >= pageCount - 1 && primary < 0;
-    pointer.delta = atStart || atEnd ? primary * 0.35 : primary;
+    pointer.delta = primary;
 
     const now = performance.now();
     const pos = horizontal ? event.clientX : event.clientY;
@@ -152,7 +225,8 @@ export function useCarouselDrag({
     const passed =
       Math.abs(pointer.delta) >= threshold || Math.abs(pointer.velocity) > 0.5;
     let target = pageRef.current;
-    if (passed && pointer.delta < 0 && target < pageCount - 1) target += 1;
+    if (passed && pointer.delta < 0 && target < pageCountRef.current - 1)
+      target += 1;
     else if (passed && pointer.delta > 0 && target > 0) target -= 1;
 
     setDragging(false);
@@ -165,23 +239,51 @@ export function useCarouselDrag({
     resetPointer();
     if (!pointer.decided) return;
     setDragging(false);
-    write(pageRef.current, 0, true);
+    scrollToPage(pageRef.current, true);
   };
 
   useEffect(() => {
-    const onResize = () => write(pageRef.current, 0, false);
-    window.addEventListener("resize", onResize);
+    measure();
+    const viewport = viewportRef.current;
+    if (!viewport || typeof ResizeObserver === "undefined") return undefined;
+    const ro = new ResizeObserver(() => {
+      measure();
+      scrollToPage(pageRef.current, false);
+    });
+    ro.observe(viewport);
+    if (trackRef.current) ro.observe(trackRef.current);
+    return () => ro.disconnect();
+  }, [measure, scrollToPage]);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    if (!viewport) return undefined;
+    const onScroll = () => {
+      if (pointerRef.current) return;
+      const pos = horizontal ? viewport.scrollLeft : viewport.scrollTop;
+      const next = pageFromPos(pos);
+      if (next !== pageRef.current) {
+        pageRef.current = next;
+        setPage(next);
+        onPanelChange?.(next);
+      }
+    };
+    viewport.addEventListener("scroll", onScroll, { passive: true });
+    return () => viewport.removeEventListener("scroll", onScroll);
+  }, [horizontal, onPanelChange, pageFromPos]);
+
+  useEffect(() => {
     return () => {
-      window.removeEventListener("resize", onResize);
       if (rafRef.current) cancelAnimationFrame(rafRef.current);
     };
-  }, [write]);
+  }, []);
 
   return {
     viewportRef,
     trackRef,
     movedRef,
     page,
+    pageCount,
     dragging,
     goPrev,
     goNext,

@@ -18,7 +18,7 @@
   },
   "grid": {
     "columns": 3,
-    "rows": 3,
+    "rows": 2,
     "axis": "horizontal",
     "gap": 3,
     "threshold": 60,
@@ -161,129 +161,27 @@
       }
     },
     {
-      "id": "react",
+      "id": "skills",
       "component": "tech",
-      "title": "React",
-      "image": "icons_tecs/react-icon.png",
+      "title": "Skills",
+      "image": "logo.webp",
       "imageFit": "contain",
-      "summary": "Componentes, hooks y Context",
-      "accent": "#61dafb",
+      "summary": "Todas mis habilidades tecnicas en un casillero",
+      "accent": "#2dd4bf",
       "route": null,
       "modal": {
         "type": "tech",
-        "skills": ["Componentes", "React Native", "Hooks / Context", "Manejo de Estado", "React Router"]
-      }
-    },
-    {
-      "id": "tailwind",
-      "component": "tech",
-      "title": "Tailwind",
-      "image": "icons_tecs/tailwind-icon.png",
-      "imageFit": "contain",
-      "summary": "Utility-first CSS",
-      "accent": "#38bdf8",
-      "route": null,
-      "modal": {
-        "type": "tech",
-        "skills": ["Utilidades CSS", "Diseno Responsive", "Customizacion", "Configuracion", "Optimizacion", "Mobile First"]
-      }
-    },
-    {
-      "id": "node",
-      "component": "tech",
-      "title": "Node.js",
-      "image": "icons_tecs/node-icon.png",
-      "imageFit": "contain",
-      "summary": "Backend y streams",
-      "accent": "#83cd29",
-      "route": null,
-      "modal": {
-        "type": "tech",
-        "skills": ["Modulos", "Escalabilidad", "Esquematizacion", "Eventos", "Streams", "Web Sockets"]
-      }
-    },
-    {
-      "id": "express",
-      "component": "tech",
-      "title": "Express",
-      "image": "icons_tecs/express-icon.png",
-      "imageFit": "contain",
-      "summary": "APIs REST y middleware",
-      "accent": "#a0a0a0",
-      "route": null,
-      "modal": {
-        "type": "tech",
-        "skills": ["Middleware", "Enrutamiento", "Requests/Responses", "APIs REST", "Manejo de Errores", "Autenticacion"]
-      }
-    },
-    {
-      "id": "git",
-      "component": "tech",
-      "title": "Git",
-      "image": "icons_tecs/git-icon.png",
-      "imageFit": "contain",
-      "summary": "Control de versiones",
-      "accent": "#f05032",
-      "route": null,
-      "modal": {
-        "type": "tech",
-        "skills": ["Comandos Basicos", "Rebase", "Merge", "Stash", "Cherry-pick"]
-      }
-    },
-    {
-      "id": "github",
-      "component": "tech",
-      "title": "GitHub",
-      "image": "icons_tecs/github-logo.png",
-      "imageFit": "contain",
-      "summary": "Repos, PRs y Actions",
-      "accent": "#e5e7eb",
-      "route": null,
-      "modal": {
-        "type": "tech",
-        "skills": ["Control de Versiones", "Branching", "Pull Requests", "Colaboracion", "GitHub Actions"]
-      }
-    },
-    {
-      "id": "javascript",
-      "component": "tech",
-      "title": "JavaScript",
-      "image": "icons_tecs/js-icon.png",
-      "imageFit": "contain",
-      "summary": "ES6+ y asincronismo",
-      "accent": "#f7df1e",
-      "route": null,
-      "modal": {
-        "type": "tech",
-        "skills": ["ES6+", "Manipulacion del DOM", "JS Asincrono", "Promesas", "Event Loop"]
-      }
-    },
-    {
-      "id": "html",
-      "component": "tech",
-      "title": "HTML",
-      "image": "icons_tecs/html-icon.png",
-      "imageFit": "contain",
-      "summary": "Semantica y accesibilidad",
-      "accent": "#e34f26",
-      "route": null,
-      "modal": {
-        "type": "tech",
-        "skills": ["Semantica", "Formularios", "Accesibilidad", "SEO", "Canvas"]
-      }
-    },
-    {
-      "id": "css",
-      "component": "tech",
-      "title": "CSS",
-      "image": "icons_tecs/css-icon.png",
-      "imageFit": "contain",
-      "summary": "Grid, flexbox y animaciones",
-      "accent": "#1572b6",
-      "route": null,
-      "modal": {
-        "type": "tech",
-        "skills": ["Flexbox", "Grid", "Diseno Responsivo", "Animaciones"]
+        "skills": [
+          "Componentes", "React Native", "Hooks / Context", "Manejo de Estado", "React Router",
+          "Utilidades CSS", "Diseno Responsive", "Customizacion", "Optimizacion", "Mobile First",
+          "Modulos", "Escalabilidad", "Esquematizacion", "Eventos", "Streams", "Web Sockets",
+          "Middleware", "Enrutamiento", "Requests/Responses", "APIs REST", "Manejo de Errores", "Autenticacion",
+          "Comandos Basicos", "Rebase", "Merge", "Stash", "Cherry-pick",
+          "Control de Versiones", "Branching", "Pull Requests", "Colaboracion", "GitHub Actions",
+          "ES6+", "Manipulacion del DOM", "JS Asincrono", "Promesas", "Event Loop",
+          "Semantica", "Formularios", "Accesibilidad", "SEO", "Canvas",
+          "Flexbox", "Grid", "Animaciones"
+        ]
       }
     }
   ]

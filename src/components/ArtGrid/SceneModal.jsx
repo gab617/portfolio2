@@ -15,6 +15,7 @@ export function SceneModal({
   total,
   onClose,
   onIndexChange,
+  sceneInicial = 0,
 }) {
   const { currentTheme } = useContext(Context);
   const isDark = currentTheme.color === "#fff";
@@ -120,6 +121,7 @@ export function SceneModal({
                 scenes={scenes}
                 accent={tile.accent}
                 title={tile.title}
+                initialScene={sceneInicial}
               />
             </div>
           </div>

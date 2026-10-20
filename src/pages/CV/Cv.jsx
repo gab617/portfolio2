@@ -2,6 +2,18 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../../Context/Context";
 
+const stack = [
+  { name: "React", icon: "icons_tecs/react-icon.png" },
+  { name: "JavaScript", icon: "icons_tecs/js-icon.png" },
+  { name: "Tailwind", icon: "icons_tecs/tailwind-icon.png" },
+  { name: "HTML", icon: "icons_tecs/html-icon.png" },
+  { name: "CSS", icon: "icons_tecs/css-icon.png" },
+  { name: "Node.js", icon: "icons_tecs/node-icon.png" },
+  { name: "Express", icon: "icons_tecs/express-icon.png" },
+  { name: "Git", icon: "icons_tecs/git-icon.png" },
+  { name: "GitHub", icon: "icons_tecs/github-logo.png" },
+];
+
 const skillCategories = [
   {
     title: "Frontend",
@@ -62,6 +74,47 @@ export function Cv() {
         <Link to="/" className="text-sm hover:text-teal-400 transition-colors">
           ← Volver
         </Link>
+      </div>
+
+      {/* Stack visual */}
+      <div
+        className="rounded-xl p-5 mb-4 transition-all hover:-translate-y-0.5"
+        style={{
+          backgroundColor: isDark
+            ? "rgba(30, 30, 30, 0.8)"
+            : "rgba(255, 255, 255, 0.85)",
+          border: `1px solid ${
+            isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)"
+          }`,
+        }}
+      >
+        <h2
+          className="text-sm font-semibold uppercase tracking-widest mb-4"
+          style={{ color: isDark ? "#9ca3af" : "#6b7280" }}
+        >
+          Stack
+        </h2>
+        <div className="flex flex-wrap gap-4">
+          {stack.map((tec) => (
+            <div
+              key={tec.name}
+              className="flex w-16 flex-col items-center gap-1.5"
+            >
+              <img
+                src={tec.icon}
+                alt={tec.name}
+                draggable={false}
+                className="h-10 w-10 object-contain"
+              />
+              <span
+                className="text-center text-[10px]"
+                style={{ color: isDark ? "#9ca3af" : "#6b7280" }}
+              >
+                {tec.name}
+              </span>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Skills por categoría */}

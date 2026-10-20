@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Context } from "../../Context/Context";
 import "./Tile.css";
 
-export function Tile({ tile, index, onSelect, focusable = true }) {
+export function Tile({ tile, index, onSelect, onHover, focusable = true, selected = false }) {
   const { currentTheme } = useContext(Context);
   const isDark = currentTheme.color === "#fff";
   const fit = tile.imageFit === "contain";
@@ -11,10 +11,14 @@ export function Tile({ tile, index, onSelect, focusable = true }) {
   return (
     <button
       type="button"
-      className="artgrid-tile group relative block aspect-square rounded-xl overflow-hidden text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400"
+      className={`artgrid-tile group relative block w-full aspect-[4/3] sm:aspect-square rounded-xl overflow-hidden text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-400 ${
+        selected ? "is-selected" : ""
+      }`}
       style={{ "--tile-accent": tile.accent || "#14b8a6" }}
       onClick={() => onSelect(index)}
+      onMouseEnter={() => onHover?.(index)}
       aria-label={`Abrir ${tile.title}`}
+      aria-pressed={selected}
       tabIndex={focusable ? undefined : -1}
     >
       <img
@@ -35,7 +39,7 @@ export function Tile({ tile, index, onSelect, focusable = true }) {
       <span aria-hidden="true" className="artgrid-tile__shine" />
       <span
         aria-hidden="true"
-        className="absolute left-0 top-0 z-10 h-1 w-full"
+        className="artgrid-tile__accent absolute left-0 top-0 z-10 h-1 w-full"
         style={{ backgroundColor: tile.accent }}
       />
       <span className="absolute inset-x-2 bottom-2 z-10 block">
@@ -55,6 +59,25 @@ export function Tile({ tile, index, onSelect, focusable = true }) {
         </span>
       )}
       {!isDark && <span aria-hidden="true" className="artgrid-tile__light" />}
+      {selected && (
+        <span
+          aria-hidden="true"
+          className="artgrid-tile__selected-badge"
+          style={{ backgroundColor: tile.accent }}
+        >
+          <svg
+            className="h-3.5 w-3.5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#06152f"
+            strokeWidth={3.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M20 6L9 17l-5-5" />
+          </svg>
+        </span>
+      )}
     </button>
   );
 }

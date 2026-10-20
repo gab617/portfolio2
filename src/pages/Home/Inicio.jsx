@@ -1,4 +1,4 @@
-/* eslint-disable react/jsx-key */
+/* eslint-disable react/prop-types */
 import { tecnologies_list } from "../../assets/jsonData.json";
 import "./Home.css";
 import { useContext } from "react";
@@ -10,9 +10,9 @@ const Hero = () => {
   const isDark = currentTheme.color === "#fff";
 
   return (
-    <div className="flex flex-col items-center justify-center w-full max-w-5xl mx-auto gap-8 md:gap-10 p-6 md:p-8">
+    <div className="flex w-full flex-col items-center justify-center gap-8 py-6 md:gap-10 md:py-8">
       {/* Galeria interactiva sobre el logo de entrada */}
-      <div className="relative w-full max-w-2xl animate-fade-in-left">
+      <div className="relative w-full animate-fade-in-left overflow-x-clip">
         <div className="absolute -inset-3 bg-gradient-to-br from-teal-400/20 to-blue-500/20 rounded-3xl blur-xl pointer-events-none" />
         <img
           className="pointer-events-none select-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-36 md:w-48 opacity-15 rounded-2xl"
@@ -27,7 +27,7 @@ const Hero = () => {
       </div>
 
       {/* Texto */}
-      <div className="text-center flex flex-col gap-3 animate-fade-in-right">
+      <div className="flex w-full max-w-5xl flex-col gap-3 px-6 text-center animate-fade-in-right">
         <div>
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-medium mb-3 bg-teal-500/10 text-teal-400 border border-teal-500/20">
             <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
@@ -81,6 +81,7 @@ const Hero = () => {
   );
 };
 
+// eslint-disable-next-line no-unused-vars
 const AboutMe = () => {
   const { currentTheme } = useContext(Context);
   const isDark = currentTheme.color === "#fff";
@@ -176,8 +177,10 @@ const CardTecnologie = ({ tecData, index }) => {
   );
 };
 
+// eslint-disable-next-line no-unused-vars
 const Tecnologies = () => {
   const { currentTheme } = useContext(Context);
+  // eslint-disable-next-line no-unused-vars
   const isDark = currentTheme.color === "#fff";
 
   return (

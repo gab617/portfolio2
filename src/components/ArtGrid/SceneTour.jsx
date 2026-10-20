@@ -6,8 +6,8 @@ import "./SceneTour.css";
 
 const ANIM_MS = 400;
 
-export function SceneTour({ scenes, accent, title }) {
-  const [current, setCurrent] = useState(0);
+export function SceneTour({ scenes, accent, title, initialScene = 0 }) {
+  const [current, setCurrent] = useState(initialScene);
   const [leaving, setLeaving] = useState(-1);
   const [direction, setDirection] = useState("next");
   const [sizes, setSizes] = useState({});

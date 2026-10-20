@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import ReactToPrint from "react-to-print";
 
 export function FooterCv({ cvRef, label = "Guardar como PDF" }) {

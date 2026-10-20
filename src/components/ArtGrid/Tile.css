@@ -20,6 +20,48 @@
   transform: translateY(-1px) scale(0.985);
 }
 
+/* Casillero seleccionado: borde de acento + glow */
+.artgrid-tile.is-selected {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 2.5px var(--tile-accent),
+    0 16px 32px -14px rgba(0, 0, 0, 0.75),
+    0 12px 34px -10px var(--tile-accent),
+    0 0 26px 2px color-mix(in srgb, var(--tile-accent) 55%, transparent);
+}
+
+/* Barra superior más gruesa cuando está seleccionado */
+.artgrid-tile.is-selected .artgrid-tile__accent {
+  height: 0.3rem;
+  transition: height 0.3s ease;
+}
+
+.artgrid-tile__selected-badge {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.4rem;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 1.35rem;
+  width: 1.35rem;
+  border-radius: 9999px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  animation: artgrid-badge-in 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes artgrid-badge-in {
+  from {
+    opacity: 0;
+    transform: scale(0.4);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .artgrid-tile__shine {
   position: absolute;
   inset: 0;
