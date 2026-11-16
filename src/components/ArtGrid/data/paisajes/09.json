@@ -3,16 +3,60 @@
   "component": "paisaje",
   "title": "Paisaje 09",
   "image": "paisajes/09/portada.webp",
-  "summary": "Descripcion corta del escenario 09",
+  "summary": "Sin interacción: sólo imágenes y texto. El caso mínimo del motor.",
   "accent": "#22c55e",
   "route": null,
-  "modal": {
-    "type": "paisaje",
-    "description": "Texto manual del escenario 09.",
-    "scenes": [
-      "paisajes/09/escenas/esc01.jpg",
-      "paisajes/09/escenas/esc02.jpg",
-      "paisajes/09/escenas/esc03.jpg"
-    ]
+  "meta": {
+    "etiqueta": "Paisaje 09 · Sólo lectura",
+    "titulo": "El recorrido mínimo",
+    "bajada": "Sin pasos ni zonas: dos escenas y un cierre con opciones. Es el piso del motor, útil como plantilla para el paisaje que todavía no tiene mecánica propia.",
+    "mostrarArquitectura": false,
+    "nota": "Las imágenes de este paisaje son placeholder: la misma portada repetida en las tres escenas. Reemplazalas por material propio antes de mostrarlo."
+  },
+  "start": "esc01",
+  "scenes": {
+    "esc01": {
+      "src": "paisajes/09/escenas/01.webp",
+      "alt": "Paisaje 09, entrada (placeholder)",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Escena uno",
+        "texto": "Avanzá para ver la siguiente.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "reveal", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc02"
+    },
+    "esc02": {
+      "src": "paisajes/09/escenas/02.webp",
+      "alt": "Paisaje 09, segunda escena (placeholder)",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Escena dos",
+        "texto": "Última parada antes del cierre.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "reveal", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc03"
+    },
+    "esc03": {
+      "src": "paisajes/09/escenas/03.webp",
+      "alt": "Paisaje 09, cierre (placeholder)",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Cierre",
+        "texto": "Sin datos que recolectar: el recorrido se registra por escenas visitadas.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "dialogue", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": null,
+      "choices": [
+        { "label": "Volver al inicio", "to": "esc01" },
+        { "label": "Repetir", "to": "esc02" }
+      ]
+    }
   }
 }

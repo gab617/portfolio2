@@ -1,7 +1,7 @@
 import { Suspense, lazy, useCallback, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../Context/Context";
-import { Pagination } from "./Pagination";
+import { ProgressBar } from "./ProgressBar";
 import { Tile } from "./Tile";
 import { useCarouselDrag } from "./hooks/useCarouselDrag";
 import tilesData from "./data/tiles.json";
@@ -9,19 +9,13 @@ import "./ArtGrid.css";
 import EscenarioMagico from "../media/ActoresIniciales";
 
 const TileModal = lazy(() => import("./TileModal"));
-const SceneModal = lazy(() => import("./SceneModal"));
-
-const paisajeModules = import.meta.glob("./data/paisajes/*.json", {
-  eager: true,
-  import: "default",
-});
-
-const PAISAJES = Object.keys(paisajeModules)
-  .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-  .map((path) => paisajeModules[path]);
 
 const { grid, tiles } = tilesData;
-const TILES = [...tiles, ...PAISAJES];
+// Los paisajes ya no ocupan 9 casilleros: el recorrido vive en /recorrido
+// y en el grid queda un solo casillero ("Recorrido"). Ese casillero está
+// oculto por ahora (`hidden: true`): el recorrido todavía no está completo.
+// Para volver a mostrarlo, alcanza con quitar esa propiedad del JSON.
+const TILES = tiles.filter((tile) => !tile.hidden);
 const AXIS = grid.axis === "vertical" ? "vertical" : "horizontal";
 
 const GAP_CLASS = { 1: "gap-1", 2: "gap-2", 3: "gap-3", 4: "gap-4" };
@@ -31,11 +25,7 @@ export function ArtGrid() {
   const isDark = currentTheme.color === "#fff";
   const navigate = useNavigate();
   const [active, setActive] = useState(-1);
-  const [sceneInicial, setSceneInicial] = useState(0);
-  const [selected, setSelected] = useState(() => {
-    const i = TILES.findIndex((t) => t.modal?.type === "paisaje");
-    return i >= 0 ? i : 0;
-  });
+  const [selected, setSelected] = useState(0);
 
   const {
     viewportRef,
@@ -43,6 +33,8 @@ export function ArtGrid() {
     movedRef,
     page,
     pageCount,
+    progress,
+    thumbRatio,
     dragging,
     goPrev,
     goNext,
@@ -50,7 +42,6 @@ export function ArtGrid() {
     handlers,
   } = useCarouselDrag({
     axis: AXIS,
-    threshold: grid.threshold,
     slop: grid.slop,
   });
 
@@ -66,12 +57,9 @@ export function ArtGrid() {
     (index) => {
       setActive(index);
       setSelected(index);
-      setSceneInicial(0);
-      const cell = trackRef.current?.children[index];
-      const width = viewportRef.current?.clientWidth || 1;
-      if (cell) goTo(Math.round(cell.offsetLeft / width));
+      goTo(index);
     },
-    [goTo, trackRef, viewportRef]
+    [goTo]
   );
 
   const abrirDesdeEscenario = useCallback(
@@ -80,9 +68,6 @@ export function ArtGrid() {
       if (idx < 0) return;
       const tile = TILES[idx];
       if (tile.modal?.type) {
-        setSceneInicial(
-          tile.modal.type === "paisaje" ? actor?.posicion ?? 0 : 0
-        );
         setActive(idx);
       } else if (tile.route?.type === "external") {
         window.open(tile.route.href, "_blank", "noopener,noreferrer");
@@ -119,7 +104,7 @@ export function ArtGrid() {
           {TILES.map((tile, i) => (
             <div
               key={tile.id}
-              className="artgrid__cell w-32 shrink-0 snap-start sm:w-40 lg:w-48"
+              className="artgrid__cell w-32 shrink-0 sm:w-40 lg:w-48"
               style={{ animationDelay: `${(i % 12) * 0.03}s` }}
             >
               <Tile
@@ -138,7 +123,7 @@ export function ArtGrid() {
           type="button"
           onClick={goPrev}
           disabled={page === 0}
-          aria-label="Panel anterior"
+          aria-label="Casillero anterior"
           className={navBtnClass(page === 0)}
           style={navBtnStyle}
         >
@@ -157,18 +142,18 @@ export function ArtGrid() {
           </svg>
         </button>
 
-        <Pagination
-          count={pageCount}
-          current={page}
-          onChange={goTo}
-          label="Panel"
+        <ProgressBar
+          progress={progress}
+          thumbRatio={thumbRatio}
+          accent={TILES[selected]?.accent || grid.accent || "#14b8a6"}
+          label="Desplazamiento de casilleros"
         />
 
         <button
           type="button"
           onClick={goNext}
           disabled={page >= pageCount - 1}
-          aria-label="Panel siguiente"
+          aria-label="Casillero siguiente"
           className={navBtnClass(page >= pageCount - 1)}
           style={navBtnStyle}
         >
@@ -204,17 +189,7 @@ export function ArtGrid() {
             </div>
           }
         >
-          {TILES[active]?.modal?.type === "paisaje" ? (
-            <SceneModal
-              isOpen
-              tile={TILES[active]}
-              index={active}
-              total={TILES.length}
-              sceneInicial={sceneInicial}
-              onClose={() => setActive(-1)}
-              onIndexChange={handleIndexChange}
-            />
-          ) : (
+          {TILES[active]?.modal?.type && (
             <TileModal
               isOpen
               tile={TILES[active]}

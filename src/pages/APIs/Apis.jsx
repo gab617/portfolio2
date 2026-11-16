@@ -4,6 +4,7 @@ import { endPointsProjects } from "../../assets/jsonData.json";
 import { useContext, useState } from "react";
 import { Context } from "../../Context/Context";
 import { ButtonVolver } from "../../components/ButtonVolver";
+import { assetUrl } from "../../utils/assetUrl";
 import "./Apis.css";
 
 // Modal para mostrar respuesta de la API
@@ -381,7 +382,7 @@ export function Apis() {
       >
         <div className="flex justify-between items-center max-w-5xl mx-auto p-4">
           <div className="flex items-center gap-3">
-            <img className="w-10 h-10 rounded-full" src="logo.webp" alt="Logo" />
+            <img className="w-10 h-10 rounded-full" src={assetUrl("logo.webp")} alt="Logo" />
             <h1 className="text-xl font-bold">Documentación de APIs</h1>
           </div>
           <Link to="/">

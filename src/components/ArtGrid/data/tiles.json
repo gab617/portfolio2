@@ -14,7 +14,7 @@
     "tile.route.type": "external (href) | internal (to) | null",
     "tile.modal.type": "project (usa projectsF por projectId) | tech | link | paisaje",
     "panel": "cada columns*rows tiles = 1 panel (scroll). El orden del array define el panel",
-    "paisaje": "cada paisaje vive en un archivo aparte: data/paisajes/NN.json (1 por casillero, se autocargan) | image: paisajes/NN/portada.ext | modal.scenes: rutas de las escenas del recorrido (paisajes/NN/escenas/01.webp ...)"
+    "paisaje": "cada paisaje vive en data/paisajes/NN.json: grafo { start, scenes{} } + meta { etiqueta, titulo, bajada, mostrarArquitectura } para la página | se accede en /recorrido/NN | image: portada del paisaje | ya no llena casilleros del grid (el grid tiene un solo casillero 'Recorrido')"
   },
   "grid": {
     "columns": 3,
@@ -66,6 +66,16 @@
       "accent": "#a855f7",
       "route": { "type": "external", "href": "https://giphy-react-front-617.vercel.app/", "label": "Ver proyecto" },
       "modal": { "type": "project", "projectId": 2 }
+    },
+    {
+      "id": "recorrido",
+      "component": "link",
+      "title": "Recorrido",
+      "image": "paisajes/05/valle.webp",
+      "summary": "Recorrido interactivo: tus respuestas se convierten en datos",
+      "accent": "#d946ef",
+      "hidden": true,
+      "route": { "type": "internal", "to": "/recorrido", "label": "Empezar recorrido" }
     },
     {
       "id": "proyectos",

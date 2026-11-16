@@ -1,4 +1,5 @@
-import React, { useRef, useState, useContext, useEffect } from "react";
+/* eslint-disable react/prop-types */
+import { useRef, useState, useContext, useEffect } from "react";
 import "./Credit.css";
 import { ButtonVolver } from "../../components/ButtonVolver";
 import { Link } from "react-router-dom";
@@ -6,12 +7,11 @@ import { Folleto } from "./Folleto";
 import ReactToPrint from "react-to-print";
 import { Calculadora } from "./Calculadora";
 import {
-  TABLA,
   TABLASEMANAL,
   TABLA_REDONDEADA_116_NO_REDONDEADA,
   TABLA_REDONDEADA_116_REDONDEADA,
 } from "./tablas";
-import { ListadoValores116 } from "./components/ListadoValores116";
+import { CotizadorMontos } from "./components/CotizadorMontos";
 import { CalculadoraDiaria } from "./components/CalculadoraDiaria";
 import { Context } from "../../Context/Context";
 
@@ -74,7 +74,7 @@ export function Credit() {
   const creditsPDFRef = useRef();
   const cartonsitoPDFRef = useRef();
   const [modePay, setModePay] = useState(true);
-  const [usarRedondeada, setUsarRedondeada] = useState(() => {
+  const [usarRedondeada] = useState(() => {
     const saved = localStorage.getItem('nwPortf_usarRedondeada');
     return saved !== null ? saved === 'true' : true;
   });
@@ -100,7 +100,7 @@ export function Credit() {
   const sections = [
     { id: 'calculadora', title: 'Calculadora', icon: '🧮', desc: 'Calcula cuotas y intereses' },
     { id: 'diaria', title: 'Financiación', icon: '📆', desc: 'Diaria, semanal y mensual' },
-    { id: 'valores', title: 'Tabla de Valores', icon: '📊', desc: 'Valores por cuota' },
+    { id: 'valores', title: 'Cotizador', icon: '📊', desc: 'Cotiza varios montos' },
     { id: 'volante', title: 'Volante PDF', icon: '📄', desc: 'Genera volantes imprimibles' },
     { id: 'financiacion', title: 'Cartón', icon: '💰', desc: 'Cartón de financiación' },
   ];
@@ -204,15 +204,14 @@ export function Credit() {
           </ToolCard>
         )}
 
-        {/* Tabla de Valores */}
+        {/* Cotizador por montos */}
         {activeSection === 'valores' && (
-          <ToolCard 
-            title="Tabla de Valores" 
-            description="Valores exactos por cantidad de cuotas"
+          <ToolCard
+            title="Cotizador por montos"
+            description="Compará y copiá plazos para varios montos"
             icon="📊"
           >
-
-            <ListadoValores116 usarRedondeada={usarRedondeada} />
+            <CotizadorMontos />
           </ToolCard>
         )}
 

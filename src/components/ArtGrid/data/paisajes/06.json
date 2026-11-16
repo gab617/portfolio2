@@ -3,16 +3,115 @@
   "component": "paisaje",
   "title": "Paisaje 06",
   "image": "paisajes/06/portada.webp",
-  "summary": "Descripcion corta del escenario 06",
+  "summary": "Tres zonas sobre la imagen, cada una con su propia capa y color.",
   "accent": "#f43f5e",
   "route": null,
-  "modal": {
-    "type": "paisaje",
-    "description": "Texto manual del escenario 06.",
-    "scenes": [
-      "paisajes/06/escenas/esc01.png",
-      "paisajes/06/escenas/esc02.png",
-      "paisajes/06/escenas/esc03.png"
-    ]
+  "meta": {
+    "etiqueta": "Paisaje 06 · Zonas con capas",
+    "titulo": "Tres detalles escondidos",
+    "bajada": "Las zonas no abren modales: encienden capas sobre la misma imagen. Todo el estado vive en el renderer, el JSON sólo declara polígonos y acciones.",
+    "mostrarArquitectura": false
+  },
+  "start": "esc01",
+  "scenes": {
+    "esc01": {
+      "src": "paisajes/06/escenas/esc01.png",
+      "alt": "Paisaje 06, entrada",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Antes de tocar",
+        "texto": "Avanzá y buscá los tres detalles.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "reveal", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc02"
+    },
+    "esc02": {
+      "src": "paisajes/06/escenas/esc02.png",
+      "alt": "Paisaje 06, zonas",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Tres zonas",
+        "texto": "Tocá para encender cada capa. Volvé a tocar la zona para apagarla.",
+        "pos": "top"
+      },
+      "interact": {
+        "type": "hotspots",
+        "params": {
+          "capas": [
+            {
+              "id": "capa-1",
+              "x": 22,
+              "y": 30,
+              "texto": "Arriba a la izquierda",
+              "color": "#fecdd3",
+              "fondo": "rgba(42,6,14,0.9)"
+            },
+            {
+              "id": "capa-2",
+              "x": 50,
+              "y": 52,
+              "texto": "Centro",
+              "color": "#ffe4e6",
+              "fondo": "rgba(42,6,14,0.9)"
+            },
+            {
+              "id": "capa-3",
+              "x": 78,
+              "y": 74,
+              "texto": "Abajo a la derecha",
+              "color": "#fda4af",
+              "fondo": "rgba(42,6,14,0.9)"
+            }
+          ],
+          "zonas": [
+            {
+              "id": "zona-1",
+              "label": "1",
+              "poligono": [[6, 12], [38, 10], [38, 48], [6, 50]],
+              "onTap": [
+                { "action": "mostrarCapa", "params": { "capa": "capa-1" } }
+              ]
+            },
+            {
+              "id": "zona-2",
+              "label": "2",
+              "poligono": [[40, 38], [60, 38], [60, 66], [40, 66]],
+              "onTap": [
+                { "action": "mostrarCapa", "params": { "capa": "capa-2" } }
+              ]
+            },
+            {
+              "id": "zona-3",
+              "label": "3",
+              "poligono": [[64, 60], [94, 58], [94, 90], [64, 92]],
+              "onTap": [
+                { "action": "mostrarCapa", "params": { "capa": "capa-3" } }
+              ]
+            }
+          ]
+        }
+      },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc03"
+    },
+    "esc03": {
+      "src": "paisajes/06/escenas/esc03.png",
+      "alt": "Paisaje 06, cierre",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Cerrado",
+        "texto": "Tres capas, ninguna imagen nueva descargada: todo se compone sobre la escena.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "dialogue", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": null,
+      "choices": [
+        { "label": "Volver a las zonas", "to": "esc02" },
+        { "label": "Reiniciar recorrido", "to": "esc01" }
+      ]
+    }
   }
 }

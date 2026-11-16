@@ -3,16 +3,99 @@
   "component": "paisaje",
   "title": "Paisaje 01",
   "image": "paisajes/01/Oscuro.png",
-  "summary": "Descripcion corta del escenario 01",
+  "summary": "Zonas activas sobre la imagen: cada detalle se enciende cuando lo tocás.",
   "accent": "#14b8a6",
   "route": null,
-  "modal": {
-    "type": "paisaje",
-    "description": "Texto manual del escenario 01.",
-    "scenes": [
-      "paisajes/01/escenas/esc01.jpg",
-      "paisajes/01/escenas/esc02.jpg",
-      "paisajes/01/escenas/esc03.jpg"
-    ]
+  "meta": {
+    "etiqueta": "Paisaje 01 · Zonas activas",
+    "titulo": "Explorá el paisaje por zonas",
+    "bajada": "Sin pasos ni botones grandes: tocá las zonas marcadas sobre la imagen y mirá cómo se enciende cada detalle. El recorrido se registra igual, escena por escena.",
+    "mostrarArquitectura": false
+  },
+  "start": "esc01",
+  "scenes": {
+    "esc01": {
+      "src": "paisajes/01/escenas/esc01.jpg",
+      "alt": "Paisaje 01, primera escena",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Entrá al paisaje",
+        "texto": "Una imagen, tres escenas. Avanzá cuando estés listo.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "reveal", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc02"
+    },
+    "esc02": {
+      "src": "paisajes/01/escenas/esc02.jpg",
+      "alt": "Paisaje 01, zonas activas",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Zonas activas",
+        "texto": "Tocá cada zona marcada para revelar su detalle.",
+        "pos": "top"
+      },
+      "interact": {
+        "type": "hotspots",
+        "params": {
+          "capas": [
+            {
+              "id": "capa-izq",
+              "x": 26,
+              "y": 38,
+              "texto": "Detalle de la izquierda",
+              "color": "#5eead4",
+              "fondo": "rgba(6,32,29,0.88)"
+            },
+            {
+              "id": "capa-der",
+              "x": 72,
+              "y": 62,
+              "texto": "Detalle de la derecha",
+              "color": "#99f6e4",
+              "fondo": "rgba(6,32,29,0.88)"
+            }
+          ],
+          "zonas": [
+            {
+              "id": "zona-izq",
+              "label": "Zona A",
+              "poligono": [[6, 22], [40, 16], [46, 64], [8, 74]],
+              "onTap": [
+                { "action": "mostrarCapa", "params": { "capa": "capa-izq" } }
+              ]
+            },
+            {
+              "id": "zona-der",
+              "label": "Zona B",
+              "poligono": [[54, 38], [92, 30], [94, 82], [52, 88]],
+              "onTap": [
+                { "action": "mostrarCapa", "params": { "capa": "capa-der" } }
+              ]
+            }
+          ]
+        }
+      },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc03"
+    },
+    "esc03": {
+      "src": "paisajes/01/escenas/esc03.jpg",
+      "alt": "Paisaje 01, cierre",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Fin del recorrido",
+        "texto": "Recorriste las dos zonas de la escena. El panel guardó las escenas que visitaste y a qué hora.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "dialogue", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": null,
+      "choices": [
+        { "label": "Volver a explorar", "to": "esc02" },
+        { "label": "Reiniciar recorrido", "to": "esc01" }
+      ]
+    }
   }
 }

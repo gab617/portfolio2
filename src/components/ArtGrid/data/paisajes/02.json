@@ -3,16 +3,100 @@
   "component": "paisaje",
   "title": "Paisaje 02",
   "image": "paisajes/02/tortuga.png",
-  "summary": "Descripcion corta del escenario 02",
+  "summary": "Dos pasos encadenados: uno muestra, el otro pregunta.",
   "accent": "#0ea5e9",
   "route": null,
-  "modal": {
-    "type": "paisaje",
-    "description": "Texto manual del escenario 02.",
-    "scenes": [
-      "paisajes/02/escenas/esc01.png",
-      "paisajes/02/escenas/esc02.png",
-      "paisajes/02/escenas/esc03.png"
-    ]
+  "meta": {
+    "etiqueta": "Paisaje 02 · Dos pasos",
+    "titulo": "Dos paradas y una pregunta",
+    "bajada": "El recorrido más corto del motor: una imagen para mirar y un cuestionario de una sola pregunta. Sirve para probar el avance encadenado sin ruido.",
+    "mostrarArquitectura": false
+  },
+  "start": "esc01",
+  "scenes": {
+    "esc01": {
+      "src": "paisajes/02/escenas/esc01.png",
+      "alt": "Paisaje 02, primera escena",
+      "view": { "mode": "contain", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Primera parada",
+        "texto": "Avanzá para empezar la secuencia de dos pasos.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "reveal", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc02"
+    },
+    "esc02": {
+      "src": "paisajes/02/escenas/esc02.png",
+      "alt": "Paisaje 02, secuencia de pasos",
+      "view": { "mode": "contain", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Secuencia de dos pasos",
+        "texto": "Un paso visible a la vez. El segundo no aparece hasta resolver el primero.",
+        "pos": "top"
+      },
+      "interact": {
+        "type": "taps",
+        "params": {
+          "primero": "tap-1",
+          "taps": [
+            {
+              "id": "tap-1",
+              "pos": { "x": 32, "y": 38 },
+              "label": "Primera parada",
+              "modal": {
+                "tipo": "imagen",
+                "imagen": "paisajes/02/escenas/esc02.png",
+                "titulo": "Detalle ampliado",
+                "texto": "Una imagen sola, sin campos que llenar. Cerrarla desbloquea el paso siguiente."
+              },
+              "desbloquea": "tap-2"
+            },
+            {
+              "id": "tap-2",
+              "pos": { "x": 68, "y": 62 },
+              "label": "Segunda parada",
+              "modal": {
+                "tipo": "cuestionario",
+                "titulo": "Una sola pregunta",
+                "texto": "Elegí la opción que más te cierre.",
+                "preguntas": [
+                  {
+                    "id": "p1",
+                    "label": "¿Qué te llamó más la atención?",
+                    "opciones": [
+                      { "valor": "luz", "label": "La luz" },
+                      { "valor": "formas", "label": "Las formas" },
+                      { "valor": "textura", "label": "La textura" }
+                    ]
+                  }
+                ]
+              },
+              "desbloquea": null
+            }
+          ]
+        }
+      },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc03"
+    },
+    "esc03": {
+      "src": "paisajes/02/escenas/esc03.png",
+      "alt": "Paisaje 02, cierre",
+      "view": { "mode": "contain", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Listo",
+        "texto": "Dos pasos, dos datos guardados en tu navegador.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "dialogue", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": null,
+      "choices": [
+        { "label": "Repetir la secuencia", "to": "esc02" },
+        { "label": "Reiniciar recorrido", "to": "esc01" }
+      ]
+    }
   }
 }

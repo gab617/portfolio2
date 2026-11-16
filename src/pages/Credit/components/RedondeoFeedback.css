@@ -1,0 +1,32 @@
+@keyframes cuota-redondeo-recalculada {
+  0% {
+    background-color: transparent;
+    box-shadow: 0 0 0 0 rgba(20, 184, 166, 0);
+    transform: scale(1);
+  }
+
+  20% {
+    background-color: rgba(20, 184, 166, 0.28);
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.18);
+    transform: scale(1.06);
+  }
+
+  100% {
+    background-color: transparent;
+    box-shadow: 0 0 0 0 rgba(20, 184, 166, 0);
+    transform: scale(1);
+  }
+}
+
+.cuota-redondeo-recalculada {
+  display: inline-block;
+  border-radius: 0.25rem;
+  padding-inline: 0.15rem;
+  animation: cuota-redondeo-recalculada 850ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cuota-redondeo-recalculada {
+    animation: none;
+  }
+}

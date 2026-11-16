@@ -9,7 +9,6 @@
   overflow-y: hidden;
   border-radius: 1rem;
   cursor: grab;
-  scroll-snap-type: x mandatory;
   overscroll-behavior-x: contain;
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -49,6 +48,5 @@
 
   .artgrid__viewport {
     cursor: default;
-    scroll-snap-type: none;
   }
 }

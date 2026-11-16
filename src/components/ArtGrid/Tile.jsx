@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useContext } from "react";
 import { Context } from "../../Context/Context";
+import { assetUrl } from "../../utils/assetUrl";
 import "./Tile.css";
 
 export function Tile({ tile, index, onSelect, onHover, focusable = true, selected = false }) {
@@ -22,7 +23,7 @@ export function Tile({ tile, index, onSelect, onHover, focusable = true, selecte
       tabIndex={focusable ? undefined : -1}
     >
       <img
-        src={tile.image}
+        src={assetUrl(tile.image)}
         alt=""
         aria-hidden="true"
         draggable={false}

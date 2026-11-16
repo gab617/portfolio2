@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
 import { urls_ping } from "./assets/jsonData.json";
 
 import { Inicio } from "./pages/Home/Inicio";
@@ -36,6 +36,10 @@ function App() {
             <Route path="/cv" element={<Cv />} />
             <Route path="/cvs" element={<CvList />} />
             <Route path="/publ" element={<Promos />} />
+            {/* Recorrido oculto temporalmente: no está completo. El código
+                sigue en src/pages/Recorrido y sceneEngine para retomarlo. */}
+            <Route path="/recorrido" element={<Navigate to="/" replace />} />
+            <Route path="/recorrido/*" element={<Navigate to="/" replace />} />
             <Route path="/contact" element={<FormContact urlPing={urls_ping[3]} />} />
           </Routes>
         </main>

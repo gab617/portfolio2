@@ -2,6 +2,7 @@ import { useState, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ThemeSelector } from "../ThemeSelector";
 import { Context } from "../../Context/Context";
+import { assetUrl } from "../../utils/assetUrl";
 
 const navItems = [
   { path: "/", label: "Inicio", hash: "#inicio" },
@@ -30,7 +31,7 @@ export function Navbar() {
         <Link to="/" className="flex items-center gap-2">
           <img 
             className="w-10 h-10 rounded-full border-2 border-teal-400" 
-            src="logo.webp" 
+            src={assetUrl("logo.webp")} 
             alt="Gabriel Cabrera" 
           />
           <span className="hidden sm:block font-bold text-teal-400">

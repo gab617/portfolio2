@@ -3,16 +3,121 @@
   "component": "paisaje",
   "title": "Paisaje 08",
   "image": "paisajes/08/portada.webp",
-  "summary": "Descripcion corta del escenario 08",
+  "summary": "Tres pasos con un cuestionario de dos preguntas en el medio.",
   "accent": "#eab308",
   "route": null,
-  "modal": {
-    "type": "paisaje",
-    "description": "Texto manual del escenario 08.",
-    "scenes": [
-      "paisajes/08/escenas/esc01.png",
-      "paisajes/08/escenas/esc02.png",
-      "paisajes/08/escenas/esc03.png"
-    ]
+  "meta": {
+    "etiqueta": "Paisaje 08 · Cuestionario largo",
+    "titulo": "Tres pasos, dos preguntas",
+    "bajada": "El caso más cercano a un formulario real: un cuestionario con dos preguntas en el mismo modal y respuestas que después se leen en el panel.",
+    "mostrarArquitectura": false
+  },
+  "start": "esc01",
+  "scenes": {
+    "esc01": {
+      "src": "paisajes/08/escenas/esc01.png",
+      "alt": "Paisaje 08, entrada",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Un poco de datos",
+        "texto": "Avanzá para empezar la secuencia.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "reveal", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc02"
+    },
+    "esc02": {
+      "src": "paisajes/08/escenas/esc02.png",
+      "alt": "Paisaje 08, secuencia",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Tres pasos",
+        "texto": "El del medio es el que más pide.",
+        "pos": "top"
+      },
+      "interact": {
+        "type": "taps",
+        "params": {
+          "primero": "tap-1",
+          "taps": [
+            {
+              "id": "tap-1",
+              "pos": { "x": 26, "y": 34 },
+              "label": "Abrir",
+              "modal": {
+                "tipo": "imagen",
+                "imagen": "paisajes/08/escenas/esc01.png",
+                "titulo": "Punto de partida",
+                "texto": "La escena anterior, ampliada."
+              },
+              "desbloquea": "tap-2"
+            },
+            {
+              "id": "tap-2",
+              "pos": { "x": 50, "y": 34 },
+              "label": "Responder",
+              "modal": {
+                "tipo": "cuestionario",
+                "titulo": "Dos preguntas",
+                "texto": "Una opción por pregunta.",
+                "preguntas": [
+                  {
+                    "id": "p1",
+                    "label": "¿Qué te transmite la escena?",
+                    "opciones": [
+                      { "valor": "calma", "label": "Calma" },
+                      { "valor": "tension", "label": "Tensión" },
+                      { "valor": "curiosidad", "label": "Curiosidad" }
+                    ]
+                  },
+                  {
+                    "id": "p2",
+                    "label": "¿La volverías a mirar?",
+                    "opciones": [
+                      { "valor": "si", "label": "Sí" },
+                      { "valor": "no", "label": "No" },
+                      { "valor": "tal-vez", "label": "Tal vez" }
+                    ]
+                  }
+                ]
+              },
+              "desbloquea": "tap-3"
+            },
+            {
+              "id": "tap-3",
+              "pos": { "x": 74, "y": 62 },
+              "label": "Cerrar",
+              "modal": {
+                "tipo": "imagen",
+                "imagen": "paisajes/08/escenas/esc03.png",
+                "titulo": "Último punto",
+                "texto": "Con esto se cierra la secuencia."
+              },
+              "desbloquea": null
+            }
+          ]
+        }
+      },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc03"
+    },
+    "esc03": {
+      "src": "paisajes/08/escenas/esc03.png",
+      "alt": "Paisaje 08, cierre",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Listo",
+        "texto": "Las dos respuestas quedaron guardadas con sus etiquetas legibles.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "dialogue", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": null,
+      "choices": [
+        { "label": "Repetir la secuencia", "to": "esc02" },
+        { "label": "Reiniciar recorrido", "to": "esc01" }
+      ]
+    }
   }
 }

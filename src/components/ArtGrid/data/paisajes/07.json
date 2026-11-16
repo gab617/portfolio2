@@ -3,16 +3,94 @@
   "component": "paisaje",
   "title": "Paisaje 07",
   "image": "paisajes/07/volador.webp",
-  "summary": "Descripcion corta del escenario 07",
+  "summary": "Dos pasos cortos con texto libre y una imagen de cierre.",
   "accent": "#f97316",
   "route": null,
-  "modal": {
-    "type": "paisaje",
-    "description": "Texto manual del escenario 07.",
-    "scenes": [
-      "paisajes/07/escenas/esc01.png",
-      "paisajes/07/escenas/esc02.png",
-      "paisajes/07/escenas/esc03.png"
-    ]
+  "meta": {
+    "etiqueta": "Paisaje 07 · Texto libre",
+    "titulo": "Dos pasos y una frase tuya",
+    "bajada": "Un paso de lectura y uno de escritura. Sirve para probar cómo se guarda texto multilínea y cómo se muestra después en el panel.",
+    "mostrarArquitectura": false
+  },
+  "start": "esc01",
+  "scenes": {
+    "esc01": {
+      "src": "paisajes/07/escenas/esc01.png",
+      "alt": "Paisaje 07, entrada",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Algo para decir",
+        "texto": "Avanzá cuando quieras empezar.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "reveal", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc02"
+    },
+    "esc02": {
+      "src": "paisajes/07/escenas/esc02.png",
+      "alt": "Paisaje 07, secuencia",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Dos pasos",
+        "texto": "El primero se cierra solo. El segundo espera tu texto.",
+        "pos": "top"
+      },
+      "interact": {
+        "type": "taps",
+        "params": {
+          "primero": "tap-1",
+          "taps": [
+            {
+              "id": "tap-1",
+              "pos": { "x": 34, "y": 42 },
+              "label": "Mirar",
+              "modal": {
+                "tipo": "imagen",
+                "imagen": "paisajes/07/escenas/esc02.png",
+                "titulo": "Un detalle",
+                "texto": "Nada que completar: la imagen es el contenido."
+              },
+              "desbloquea": "tap-2"
+            },
+            {
+              "id": "tap-2",
+              "pos": { "x": 66, "y": 58 },
+              "label": "Escribir",
+              "modal": {
+                "tipo": "texto",
+                "titulo": "Una frase",
+                "texto": "Qué te sugiere esta escena, en una o dos líneas.",
+                "campo": {
+                  "label": "Tu frase",
+                  "placeholder": "Escribí lo que se te venga…",
+                  "multilinea": true
+                }
+              },
+              "desbloquea": null
+            }
+          ]
+        }
+      },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc03"
+    },
+    "esc03": {
+      "src": "paisajes/07/escenas/esc03.png",
+      "alt": "Paisaje 07, cierre",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Guardado",
+        "texto": "Tu frase quedó en el panel, con la hora exacta en que la escribiste.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "dialogue", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": null,
+      "choices": [
+        { "label": "Repetir la secuencia", "to": "esc02" },
+        { "label": "Reiniciar recorrido", "to": "esc01" }
+      ]
+    }
   }
 }

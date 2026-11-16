@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { ThemeSelector } from "../../components/ThemeSelector";
+import { assetUrl } from "../../utils/assetUrl";
 
 export function Header() {
   return (
@@ -28,7 +29,7 @@ export function Header() {
                 md:w-10 
                 xl:w-16"
         >
-          <img className="rounded-full" src="logo.webp" alt="" />
+          <img className="rounded-full" src={assetUrl("logo.webp")} alt="" />
         </div>
         <ul
           className="

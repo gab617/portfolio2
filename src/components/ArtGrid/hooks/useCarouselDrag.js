@@ -2,7 +2,6 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 export function useCarouselDrag({
   axis = "horizontal",
-  threshold = 60,
   slop = 10,
   onPanelChange,
   disabled = false,
@@ -14,12 +13,14 @@ export function useCarouselDrag({
   const rafRef = useRef(0);
   const pageRef = useRef(0);
   const pageCountRef = useRef(1);
-  const perRef = useRef(1);
   const stepRef = useRef(0);
+  const maxRef = useRef(0);
   const reducedMotionRef = useRef(false);
 
   const [page, setPage] = useState(0);
   const [pageCount, setPageCount] = useState(1);
+  const [progress, setProgress] = useState(0);
+  const [thumbRatio, setThumbRatio] = useState(1);
   const [dragging, setDragging] = useState(false);
 
   const horizontal = axis === "horizontal";
@@ -38,11 +39,10 @@ export function useCarouselDrag({
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  // Una sección = todos los casilleros que entran en pantalla (responsive).
+  // Un paso = un casillero (desplazamiento fino, uno por uno).
   const measure = useCallback(() => {
     const viewport = viewportRef.current;
     if (!viewport) return 1;
-    const size = horizontal ? viewport.clientWidth : viewport.clientHeight;
     const cells = trackRef.current ? trackRef.current.children : [];
     const n = cells.length;
 
@@ -55,14 +55,19 @@ export function useCarouselDrag({
       step = horizontal ? cells[0].offsetWidth : cells[0].offsetHeight;
     }
 
+    const total = horizontal ? viewport.scrollWidth : viewport.scrollHeight;
+    const size = horizontal ? viewport.clientWidth : viewport.clientHeight;
+    const max = Math.max(0, total - size);
+    maxRef.current = max;
+    const tr = total > 0 ? Math.max(0.12, Math.min(size / total, 1)) : 1;
+    setThumbRatio((prev) => (Math.abs(prev - tr) < 0.001 ? prev : tr));
+
     let count = 1;
     if (step > 0) {
-      const per = Math.max(1, Math.floor(size / step));
-      perRef.current = per;
       stepRef.current = step;
-      count = Math.max(1, Math.ceil(n / per));
+      const last = Math.max(0, Math.floor(max / step));
+      count = last + 1;
     } else {
-      perRef.current = 1;
       stepRef.current = 0;
     }
 
@@ -75,35 +80,49 @@ export function useCarouselDrag({
     return count;
   }, [horizontal]);
 
+  const positionOfPage = useCallback(
+    (index) => {
+      const last = pageCountRef.current - 1;
+      const unit = stepRef.current;
+      const pos = index >= last ? maxRef.current : index * unit;
+      return Math.max(0, Math.min(pos, maxRef.current));
+    },
+    []
+  );
+
   const scrollToPage = useCallback(
     (target, animate) => {
       const viewport = viewportRef.current;
       if (!viewport) return;
-      const max = Math.max(
-        0,
-        (horizontal
-          ? viewport.scrollWidth - viewport.clientWidth
-          : viewport.scrollHeight - viewport.clientHeight)
-      );
-      const unit = perRef.current * stepRef.current;
-      const left = Math.max(0, Math.min(target * unit, max));
+      const left = positionOfPage(target);
       viewport.scrollTo({
         left: horizontal ? left : 0,
         top: horizontal ? 0 : left,
         behavior: animate && !reducedMotionRef.current ? "smooth" : "auto",
       });
     },
-    [horizontal]
+    [horizontal, positionOfPage]
   );
 
-  const pageFromPos = useCallback((pos) => {
-    const unit = perRef.current * stepRef.current;
-    if (unit <= 0) return 0;
-    return Math.max(
-      0,
-      Math.min(Math.round(pos / unit), pageCountRef.current - 1)
-    );
-  }, []);
+  const pageFromPos = useCallback(
+    (pos) => {
+      const last = pageCountRef.current - 1;
+      if (last <= 0) return 0;
+      const unit = stepRef.current;
+      if (unit <= 0) return 0;
+      let best = 0;
+      let bestDist = Infinity;
+      for (let i = 0; i <= last; i++) {
+        const dist = Math.abs(pos - positionOfPage(i));
+        if (dist < bestDist) {
+          bestDist = dist;
+          best = i;
+        }
+      }
+      return best;
+    },
+    [positionOfPage]
+  );
 
   const goTo = useCallback(
     (target) => {
@@ -121,6 +140,33 @@ export function useCarouselDrag({
   const goPrev = useCallback(() => goTo(pageRef.current - 1), [goTo]);
   const goNext = useCallback(() => goTo(pageRef.current + 1), [goTo]);
 
+  // Salta a una posición concreta (px) alineada a un casillero y sincroniza el índice.
+  const snapToPos = useCallback(
+    (pos) => {
+      const viewport = viewportRef.current;
+      if (!viewport) return;
+      const idx = pageFromPos(pos);
+      const aligned = positionOfPage(idx);
+      if (idx !== pageRef.current) {
+        pageRef.current = idx;
+        setPage(idx);
+        onPanelChange?.(idx);
+      }
+      viewport.scrollTo({
+        left: horizontal ? aligned : 0,
+        top: horizontal ? 0 : aligned,
+        behavior: !reducedMotionRef.current ? "smooth" : "auto",
+      });
+    },
+    [horizontal, pageFromPos, positionOfPage, onPanelChange]
+  );
+
+  const setProgressFromPos = useCallback((pos) => {
+    const max = maxRef.current;
+    const ratio = max > 0 ? Math.max(0, Math.min(pos / max, 1)) : 1;
+    setProgress((prev) => (Math.abs(prev - ratio) < 0.001 ? prev : ratio));
+  }, []);
+
   const resetPointer = useCallback(() => {
     pointerRef.current = null;
     if (rafRef.current) {
@@ -133,26 +179,14 @@ export function useCarouselDrag({
     const viewport = viewportRef.current;
     const pointer = pointerRef.current;
     if (!viewport || !pointer) return;
-    const max = Math.max(
-      0,
-      (horizontal
-        ? viewport.scrollWidth - viewport.clientWidth
-        : viewport.scrollHeight - viewport.clientHeight)
-    );
-    const unit = perRef.current * stepRef.current;
-    let target = pageRef.current * unit - pointer.delta;
+    const max = maxRef.current;
+    let target = pointer.startScroll - pointer.delta;
     if (target < 0) target *= 0.35;
     else if (target > max) target = max + (target - max) * 0.35;
     if (horizontal) viewport.scrollLeft = target;
     else viewport.scrollTop = target;
-
-    const next = pageFromPos(target);
-    if (next !== pageRef.current) {
-      pageRef.current = next;
-      setPage(next);
-      onPanelChange?.(next);
-    }
-  }, [horizontal, onPanelChange, pageFromPos]);
+    setProgressFromPos(target);
+  }, [horizontal, setProgressFromPos]);
 
   const schedule = useCallback(() => {
     if (rafRef.current) return;
@@ -166,6 +200,7 @@ export function useCarouselDrag({
   const onPointerDown = (event) => {
     if (disabled || !event.isPrimary) return;
     if (event.pointerType === "mouse" && event.button !== 0) return;
+    const viewport = viewportRef.current;
     movedRef.current = false;
     pointerRef.current = {
       id: event.pointerId,
@@ -173,8 +208,12 @@ export function useCarouselDrag({
       startY: event.clientY,
       delta: 0,
       decided: false,
-      lastPos: horizontal ? event.clientX : event.clientY,
-      lastTime: performance.now(),
+      startScroll: viewport
+        ? horizontal
+          ? viewport.scrollLeft
+          : viewport.scrollTop
+        : 0,
+      samples: [],
       velocity: 0,
     };
   };
@@ -206,12 +245,16 @@ export function useCarouselDrag({
 
     pointer.delta = primary;
 
+    // Velocidad como promedio de los últimos ~100ms (menos ruido).
     const now = performance.now();
     const pos = horizontal ? event.clientX : event.clientY;
-    const dt = now - pointer.lastTime;
-    if (dt > 0) pointer.velocity = (pos - pointer.lastPos) / dt;
-    pointer.lastPos = pos;
-    pointer.lastTime = now;
+    pointer.samples.push({ pos, time: now });
+    while (pointer.samples.length > 2 && now - pointer.samples[0].time > 100) {
+      pointer.samples.shift();
+    }
+    const first = pointer.samples[0];
+    const dt = now - first.time;
+    pointer.velocity = dt > 0 ? (pos - first.pos) / dt : 0;
 
     schedule();
   };
@@ -222,15 +265,22 @@ export function useCarouselDrag({
     resetPointer();
     if (!pointer.decided) return;
 
-    const passed =
-      Math.abs(pointer.delta) >= threshold || Math.abs(pointer.velocity) > 0.5;
-    let target = pageRef.current;
-    if (passed && pointer.delta < 0 && target < pageCountRef.current - 1)
-      target += 1;
-    else if (passed && pointer.delta > 0 && target > 0) target -= 1;
+    const viewport = viewportRef.current;
+    const current = viewport
+      ? horizontal
+        ? viewport.scrollLeft
+        : viewport.scrollTop
+      : pointer.startScroll;
+    const max = maxRef.current;
+
+    // Proyección por velocidad (momentum): un flick rápido sigue varios casilleros,
+    // un arrastre suave sólo se alinea a la celda más cercana.
+    const FLICK = 0.003;
+    const projected = current - pointer.velocity * FLICK;
+    const clamped = Math.max(0, Math.min(projected, max));
 
     setDragging(false);
-    goTo(target);
+    snapToPos(clamped);
   };
 
   const onPointerCancel = (event) => {
@@ -245,22 +295,27 @@ export function useCarouselDrag({
   useEffect(() => {
     measure();
     const viewport = viewportRef.current;
+    if (viewport) {
+      setProgressFromPos(horizontal ? viewport.scrollLeft : viewport.scrollTop);
+    }
     if (!viewport || typeof ResizeObserver === "undefined") return undefined;
     const ro = new ResizeObserver(() => {
       measure();
       scrollToPage(pageRef.current, false);
+      setProgressFromPos(horizontal ? viewport.scrollLeft : viewport.scrollTop);
     });
     ro.observe(viewport);
     if (trackRef.current) ro.observe(trackRef.current);
     return () => ro.disconnect();
-  }, [measure, scrollToPage]);
+  }, [measure, scrollToPage, setProgressFromPos, horizontal]);
 
   useEffect(() => {
     const viewport = viewportRef.current;
     if (!viewport) return undefined;
     const onScroll = () => {
-      if (pointerRef.current) return;
       const pos = horizontal ? viewport.scrollLeft : viewport.scrollTop;
+      setProgressFromPos(pos);
+      if (pointerRef.current) return;
       const next = pageFromPos(pos);
       if (next !== pageRef.current) {
         pageRef.current = next;
@@ -270,7 +325,7 @@ export function useCarouselDrag({
     };
     viewport.addEventListener("scroll", onScroll, { passive: true });
     return () => viewport.removeEventListener("scroll", onScroll);
-  }, [horizontal, onPanelChange, pageFromPos]);
+  }, [horizontal, onPanelChange, pageFromPos, setProgressFromPos]);
 
   useEffect(() => {
     return () => {
@@ -284,6 +339,8 @@ export function useCarouselDrag({
     movedRef,
     page,
     pageCount,
+    progress,
+    thumbRatio,
     dragging,
     goPrev,
     goNext,

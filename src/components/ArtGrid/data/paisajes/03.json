@@ -3,16 +3,64 @@
   "component": "paisaje",
   "title": "Paisaje 03",
   "image": "paisajes/03/espejo.png",
-  "summary": "Descripcion corta del escenario 03",
+  "summary": "Sin pasos: la navegación la deciden las opciones que elegís.",
   "accent": "#3b82f6",
   "route": null,
-  "modal": {
-    "type": "paisaje",
-    "description": "Texto manual del escenario 03.",
-    "scenes": [
-      "paisajes/03/escenas/esc01.png",
-      "paisajes/03/escenas/esc02.png",
-      "paisajes/03/escenas/esc03.png"
-    ]
+  "meta": {
+    "etiqueta": "Paisaje 03 · Ramas",
+    "titulo": "El recorrido lo elegís vos",
+    "bajada": "Acá no hay secuencia de pasos. Cada opción es una rama del grafo: elegís por dónde seguir y el motor sólo obedece el dato.",
+    "mostrarArquitectura": false
+  },
+  "start": "esc01",
+  "scenes": {
+    "esc01": {
+      "src": "paisajes/03/escenas/esc01.png",
+      "alt": "Paisaje 03, entrada",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Dos caminos",
+        "texto": "Avanzá y elegí por dónde seguir.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "reveal", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc02"
+    },
+    "esc02": {
+      "src": "paisajes/03/escenas/esc02.png",
+      "alt": "Paisaje 03, bifurcación",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "¿Por dónde seguimos?",
+        "texto": "Las dos opciones llevan a la misma escena final, pero podés volver atrás cuando quieras.",
+        "pos": "top"
+      },
+      "interact": { "type": "dialogue", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": null,
+      "choices": [
+        { "label": "Por el borde", "to": "esc03" },
+        { "label": "Por el centro", "to": "esc03" },
+        { "label": "Volver al inicio", "to": "esc01" }
+      ]
+    },
+    "esc03": {
+      "src": "paisajes/03/escenas/esc03.png",
+      "alt": "Paisaje 03, cierre",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "Llegaste",
+        "texto": "El grafo no distingue caminos cortos ni largos: sólo escenas y nexos.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "dialogue", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": null,
+      "choices": [
+        { "label": "Volver a la bifurcación", "to": "esc02" },
+        { "label": "Reiniciar recorrido", "to": "esc01" }
+      ]
+    }
   }
 }

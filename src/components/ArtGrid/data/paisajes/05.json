@@ -3,16 +3,128 @@
   "component": "paisaje",
   "title": "Paisaje 05",
   "image": "paisajes/05/valle.webp",
-  "summary": "Descripcion corta del escenario 05",
+  "summary": "Recorrido por el valle: tres momentos que se descubren al tocar.",
   "accent": "#d946ef",
   "route": null,
-  "modal": {
-    "type": "paisaje",
-    "description": "Texto manual del escenario 05.",
-    "scenes": [
-      "paisajes/05/escenas/esc01.png",
-      "paisajes/05/escenas/esc02.png",
-      "paisajes/05/escenas/esc03.png"
-    ]
+  "meta": {
+    "etiqueta": "Paisaje 05 · Datos + UX",
+    "titulo": "Tu recorrido por el valle",
+    "bajada": "Cuatro pasos, una respuesta por paso. Todo lo que elegís y escribís se guarda en tu navegador y se convierte en el panel de la derecha.",
+    "mostrarArquitectura": true
+  },
+  "start": "esc01",
+  "scenes": {
+    "esc01": {
+      "src": "paisajes/05/escenas/esc01.png",
+      "alt": "Valle al amanecer",
+      "view": { "mode": "contain", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "El valle despierta",
+        "texto": "Tocá para avanzar y descubrir qué se esconde en el paisaje.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "reveal", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": "esc02"
+    },
+    "esc02": {
+      "src": "paisajes/05/escenas/esc02.png",
+      "alt": "Detalle del valle",
+      "view": { "mode": "contain", "focus": "50% 45%" },
+      "overlay": {
+        "titulo": "Explorá la escena",
+        "texto": "Tocá los puntos para descubrir cada detalle.",
+        "pos": "top"
+      },
+      "interact": {
+        "type": "taps",
+        "params": {
+          "primero": "tap-1",
+          "taps": [
+            {
+              "id": "tap-1",
+              "pos": { "x": 20, "y": 80 },
+              "label": "Abajo izquierda",
+              "modal": {
+                "tipo": "imagen",
+                "imagen": "paisajes/05/escenas/esc01.png",
+                "titulo": "Primer hallazgo",
+                "texto": "Una descripción de lo que se ve en este punto del valle."
+              },
+              "desbloquea": "tap-2"
+            },
+            {
+              "id": "tap-2",
+              "pos": { "x": 80, "y": 20 },
+              "label": "Arriba derecha",
+              "modal": {
+                "tipo": "cuestionario",
+                "titulo": "¿Qué ves?",
+                "texto": "Elegí la opción que mejor describa la escena.",
+                "preguntas": [
+                  {
+                    "id": "p1",
+                    "label": "¿Qué predomina en la imagen?",
+                    "opciones": [
+                      { "valor": "a", "label": "El paisaje natural" },
+                      { "valor": "b", "label": "La estructura" },
+                      { "valor": "c", "label": "La figura humana" }
+                    ]
+                  }
+                ]
+              },
+              "desbloquea": "tap-3"
+            },
+            {
+              "id": "tap-3",
+              "pos": { "x": 20, "y": 80 },
+              "label": "Abajo izquierda",
+              "modal": {
+                "tipo": "texto",
+                "titulo": "Contanos",
+                "texto": "¿Qué te sugiere este lugar?",
+                "campo": {
+                  "label": "Tu impresión",
+                  "placeholder": "Escribí acá…",
+                  "multilinea": true
+                }
+              },
+              "desbloquea": "tap-4"
+            },
+            {
+              "id": "tap-4",
+              "pos": { "x": 50, "y": 50 },
+              "label": "Centro",
+              "modal": {
+                "tipo": "imagen",
+                "imagen": "paisajes/05/escenas/esc03.png",
+                "titulo": "El horizonte",
+                "texto": "El recorrido termina donde empieza la memoria del lugar."
+              },
+              "desbloquea": null
+            }
+          ]
+        }
+      },
+      "transition": { "in": "zoom", "out": "fade" },
+      "next": "esc03"
+    },
+    "esc03": {
+      "src": "paisajes/05/escenas/esc03.png",
+      "alt": "Panorámica del valle",
+      "view": { "mode": "cover", "focus": "50% 50%" },
+      "overlay": {
+        "titulo": "El horizonte",
+        "texto": "El recorrido termina donde empieza la memoria del lugar.",
+        "pos": "bottom"
+      },
+      "interact": { "type": "dialogue", "params": {} },
+      "transition": { "in": "fade", "out": "fade" },
+      "next": null,
+      "choices": [
+        { "label": "Volver a explorar", "to": "esc02" },
+        { "label": "Reiniciar recorrido", "to": "esc01" }
+      ]
+    }
   }
 }

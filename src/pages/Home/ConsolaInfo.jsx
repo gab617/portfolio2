@@ -103,7 +103,7 @@ const ProyectInfo = ({ refreshResquests, reqData, k }) => {
     <div className="flex gap-2 items-center">
       <h1 className="">{reqData.title}</h1>
       {loader ? (
-        <div class=" w-4 h-4 border-4 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
+        <div className="h-4 w-4 animate-spin rounded-full border-4 border-gray-300 border-t-blue-500"></div>
       ) : (
         <p>✅</p>
       )}

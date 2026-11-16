@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef, useState } from "react";
 import { projectsF } from "../../assets/jsonData.json";
+import { assetUrl } from "../../utils/assetUrl";
 
 const buildActores = (tile) => {
   if (!tile) return [];
@@ -65,17 +66,21 @@ const enFilasDe2 = (lista) => {
 export default function EscenarioMagico({ tile, onSeleccionar }) {
   const [actorActivo, setActorActivo] = useState(null);
   const [dims, setDims] = useState({});
+  const [imgsCargadas, setImgsCargadas] = useState({});
 
   const actores = buildActores(tile);
 
-  // Al cambiar de casillero seleccionado volvemos a estado sin actor.
+  // Al cambiar de casillero seleccionado volvemos a estado sin actor
+  // y reseteamos los estados de carga/imagen para mostrar el loader.
   useEffect(() => {
     setActorActivo(null);
+    setImgsCargadas({});
   }, [tile]);
 
   const registrarDims = (id) => (e) => {
     const w = e.target.naturalWidth;
     const h = e.target.naturalHeight;
+    setImgsCargadas((prev) => (prev[id] ? prev : { ...prev, [id]: true }));
     if (!w || !h) return;
     setDims((prev) =>
       prev[id]?.w === w && prev[id]?.h === h ? prev : { ...prev, [id]: { w, h } }
@@ -83,6 +88,7 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
   };
 
   const fallaDims = (id) => () => {
+    setImgsCargadas((prev) => (prev[id] ? prev : { ...prev, [id]: true }));
     setDims((prev) =>
       prev[id] ? prev : { ...prev, [id]: { w: 1600, h: 900 } }
     );
@@ -120,6 +126,16 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
     (f) => dims[f.id] && dims[f.id].h > dims[f.id].w
   );
   const anchas = fotos.filter((f) => dims[f.id] && dims[f.id].h <= dims[f.id].w);
+
+  // ¿Todavía hay imágenes sin resolver (medir/cargar)? Para reservar altura
+  // por tipo y evitar el salto de layout en la primera carga.
+  const imgsPendientes = actores.filter(
+    (a) => a.imagen && !imgsCargadas[a.id]
+  ).length;
+  const cargandoInicial = imgsPendientes > 0;
+
+  // Altura reservada según el tipo de casillero (estimada mientras carga).
+  const alturaReservada = esTech || tipo === "link" ? 420 : esPaisaje ? 720 : 510;
 
   // Estado del carrusel de fotos horizontales (proyectos).
   const [fotoIdx, setFotoIdx] = useState(0);
@@ -210,12 +226,21 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
     const seleccionado = actorActivo === actor.id;
     const esVertical = modo === "vertical";
     const esNeutral = modo === "neutral";
+    const cargada = !!imgsCargadas[actor.id];
 
     const tamClase = esVertical
       ? "max-h-52 max-w-[46vw] sm:max-h-64 sm:max-w-[44vw] lg:max-h-72"
       : esNeutral
         ? "max-h-44 max-w-[46vw] sm:max-h-64 sm:max-w-2xl"
         : "max-h-40 max-w-full sm:max-h-64 sm:max-w-5xl";
+
+    // Tamaño del shimmer mientras la imagen (object-contain) no cargó,
+    // ya que sin la imagen el contenedor colapsaría.
+    const shimmerTamanio = esVertical
+      ? "h-52 w-[30vw] sm:h-64 sm:w-[30vw] lg:h-72"
+      : esNeutral
+        ? "h-44 w-[46vw] sm:h-64 sm:w-[40rem]"
+        : "h-40 w-full sm:h-64 sm:w-[64rem]";
 
     const labelClase = esVertical
       ? "max-w-[46vw] sm:max-w-[44vw]"
@@ -235,8 +260,8 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
       >
         <span
           className={`relative block overflow-hidden rounded-2xl border bg-black/30 transition-all duration-500 ${
-            seleccionado ? "scale-[1.03]" : "group-hover:-translate-y-1"
-          }`}
+            cargada ? "" : shimmerTamanio
+          } ${seleccionado ? "scale-[1.03]" : "group-hover:-translate-y-1"}`}
           style={{
             borderColor: seleccionado ? actor.color : "rgba(255,255,255,0.14)",
             boxShadow: seleccionado
@@ -244,13 +269,16 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
               : "0 12px 30px rgba(0,0,0,0.45)",
           }}
         >
+          {!cargada && <span aria-hidden="true" className="img-shimmer" />}
           <img
-            src={actor.imagen}
+            src={assetUrl(actor.imagen)}
             alt={actor.nombre}
             loading="lazy"
             onLoad={registrarDims(actor.id)}
             onError={fallaDims(actor.id)}
-            className={`block object-contain transition-transform duration-500 group-hover:scale-[1.03] ${tamClase}`}
+            className={`block object-contain transition-[opacity,transform] duration-700 ease-out group-hover:scale-[1.03] ${tamClase} ${
+              cargada ? "opacity-100 scale-100" : "absolute inset-0 opacity-0"
+            }`}
           />
         </span>
         <span
@@ -316,6 +344,7 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
         >
           {lista.map((actor) => {
             const seleccionado = actorActivo === actor.id;
+            const cargada = !!imgsCargadas[actor.id];
             return (
               <button
                 key={actor.id}
@@ -328,8 +357,8 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
               >
                 <span
                   className={`relative flex w-full items-center justify-center overflow-hidden rounded-2xl border bg-black/30 transition-all duration-500 ${
-                    seleccionado ? "scale-[1.02]" : "group-hover:-translate-y-1"
-                  }`}
+                    esPaisajeVar && !cargada ? "h-[56vw] sm:h-72" : ""
+                  } ${seleccionado ? "scale-[1.02]" : "group-hover:-translate-y-1"}`}
                   style={{
                     borderColor: seleccionado
                       ? actor.color
@@ -337,19 +366,25 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
                     boxShadow: seleccionado
                       ? `0 0 26px ${actor.color}66`
                       : "0 12px 30px rgba(0,0,0,0.45)",
+                    aspectRatio: esPaisajeVar ? undefined : "16 / 10",
                   }}
                 >
+                  {!cargada && <span aria-hidden="true" className="img-shimmer" />}
                   <img
-                    src={actor.imagen}
+                    src={assetUrl(actor.imagen)}
                     alt={actor.nombre}
                     loading="lazy"
                     onLoad={registrarDims(actor.id)}
                     onError={fallaDims(actor.id)}
-                    className={
+                    className={`${
                       esPaisajeVar
-                        ? "block max-h-[62vw] w-full object-contain sm:max-h-80"
-                        : "block aspect-[16/10] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                    }
+                        ? "w-full object-contain sm:max-h-80"
+                        : "aspect-[16/10] w-full object-cover"
+                    } transition-[opacity,transform] duration-700 ease-out group-hover:scale-[1.03] ${
+                      cargada
+                        ? "block opacity-100 scale-100"
+                        : "absolute inset-0 opacity-0"
+                    } ${esPaisajeVar && cargada ? "max-h-[62vw]" : ""}`}
                   />
                 </span>
                 <span
@@ -441,7 +476,19 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
     : [...filasVerticales, columnaAnchas].filter(Boolean);
 
   return (
-    <section className="relative isolate flex min-h-[420px] w-full flex-col overflow-hidden rounded-3xl bg-[#06152f]">
+    <section
+      className="relative isolate flex min-h-[420px] w-full flex-col overflow-hidden rounded-3xl bg-[#06152f] transition-[min-height] duration-700 ease-out"
+      style={cargandoInicial ? { minHeight: `${alturaReservada}px` } : undefined}
+    >
+      {/* Barra de carga inicial (sutil) */}
+      {cargandoInicial && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-0 z-20 h-0.5 overflow-hidden"
+        >
+          <span className="block h-full w-1/3 animate-[cargaInicial_1.4s_ease-in-out_infinite] bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent" />
+        </div>
+      )}
       {/* Fondo atmosférico */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_45%,rgba(37,99,235,0.30),transparent_65%)]" />
 
@@ -491,7 +538,7 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
             />
             {tile?.image ? (
               <img
-                src={tile.image}
+                src={assetUrl(tile.image)}
                 alt=""
                 aria-hidden="true"
                 loading="lazy"
@@ -664,6 +711,39 @@ export default function EscenarioMagico({ tile, onSeleccionar }) {
         @keyframes subir {
           from { opacity: 0; transform: translateY(14px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes brillo {
+          from { transform: translateX(-120%); }
+          to { transform: translateX(220%); }
+        }
+
+        .img-shimmer {
+          position: absolute;
+          inset: 0;
+          overflow: hidden;
+          pointer-events: none;
+          background:
+            radial-gradient(ellipse at 50% 120%, rgba(103,232,249,0.10), transparent 60%),
+            rgba(255,255,255,0.02);
+        }
+
+        .img-shimmer::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          width: 45%;
+          background: linear-gradient(
+            100deg,
+            transparent,
+            rgba(255,255,255,0.10) 45%,
+            rgba(255,255,255,0.22) 50%,
+            rgba(255,255,255,0.10) 55%,
+            transparent
+          );
+          animation: brillo 1.6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
         }
 
         @media (prefers-reduced-motion: reduce) {

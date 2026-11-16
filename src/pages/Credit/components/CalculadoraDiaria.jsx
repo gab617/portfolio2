@@ -1,5 +1,7 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import { Context } from "../../../Context/Context";
+import { PlazosRapidos } from "./PlazosRapidos";
+import { calcularCuotaDiaria, redondearCuota } from "./calculosFinanciacion";
 
 const STORAGE_KEY = "nwPortf_calcDiaria";
 
@@ -40,6 +42,7 @@ export const CalculadoraDiaria = () => {
   const [diasInput, setDiasInput] = useState("30");
   const [resultados, setResultados] = useState(null);
   const [redondeo, setRedondeo] = useState("500");
+  const [periodoMovil, setPeriodoMovil] = useState("diario");
 
   // Flag para evitar loop entre mensualInput y porcentajeInput
   const mensualSyncing = useRef(false);
@@ -80,21 +83,15 @@ export const CalculadoraDiaria = () => {
     );
   }, [monto, porcentajeInput, mensualInput, diasInput, redondeo, resultados]);
 
-  const redondearCuota = (valor, redondeoActual) => {
-    if (redondeoActual === "exacto") return valor;
-    const multiplos = { "100": 100, "500": 500, "1000": 1000 };
-    const multiplo = multiplos[redondeoActual] || 500;
-    return Math.ceil(valor / multiplo) * multiplo;
-  };
-
   const ejecutarCalculo = (montoNum, tasa, redondeoOverride) => {
     const redondeoActual = redondeoOverride || redondeo;
-    const total = montoNum * (1 + tasa * dias);
+    const { total, cuotaDiariaExacta, cuotaDiaria } = calcularCuotaDiaria(
+      montoNum,
+      tasa,
+      dias,
+      redondeoActual
+    );
     const periodos = getPeriodos(dias);
-
-    // La cuota diaria es la BASE — con o sin redondeo
-    const cuotaDiariaExacta = total / dias;
-    const cuotaDiaria = redondearCuota(cuotaDiariaExacta, redondeoActual);
 
     const fullWeeks = Math.floor(dias / 7);
     const remainingDays = dias % 7;
@@ -116,7 +113,10 @@ export const CalculadoraDiaria = () => {
         if (remainingDays === 0) {
           totalRedondeado = cuotaFull * fullWeeks;
         } else {
-          const cuotaLast = redondearCuota(cuotaDiaria * remainingDays, redondeoActual);
+          const cuotaLast = redondearCuota(
+            cuotaDiaria * remainingDays,
+            redondeoActual
+          );
           totalRedondeado = cuotaFull * fullWeeks + cuotaLast;
           extras.lastWeekCuota = cuotaLast;
           extras.remainingDays = remainingDays;
@@ -200,6 +200,87 @@ export const CalculadoraDiaria = () => {
       cuotasLabel;
     navigator.clipboard.writeText(msg);
   };
+
+  const renderTarjetaResultado = (p) => (
+    <div
+      className="p-3 text-center flex flex-col items-center gap-1 sm:p-4"
+      style={{
+        backgroundColor: isDark
+          ? "rgba(30, 30, 30, 0.8)"
+          : "rgba(255, 255, 255, 0.85)",
+      }}
+    >
+      <span
+        className="text-xs font-semibold uppercase tracking-wider"
+        style={{ color: isDark ? "#6b7280" : "#9ca3af" }}
+      >
+        {p.label}
+      </span>
+      <span
+        className="text-[10px] mb-2"
+        style={{ color: isDark ? "#4b5563" : "#adb5bd" }}
+      >
+        {p.subLabel}
+      </span>
+
+      {p.id === "semanal" && p.remainingDays > 0 && (
+        <span
+          className="text-[10px] mb-2 -mt-1"
+          style={{ color: isDark ? "#f59e0b" : "#d97706" }}
+        >
+          última semana: ${formatear(p.lastWeekCuota)} ({p.remainingDays}d)
+        </span>
+      )}
+
+      <div className="mb-1">
+        <div className="text-[10px]" style={{ color: isDark ? "#6b7280" : "#adb5bd" }}>
+          Cuota
+        </div>
+        <div className="text-xl font-bold text-teal-500">
+          ${formatear(p.cuota)}
+        </div>
+      </div>
+
+      <div className="mb-1">
+        <div className="text-[10px]" style={{ color: isDark ? "#6b7280" : "#adb5bd" }}>
+          Total
+        </div>
+        <div className="text-sm font-semibold">
+          ${formatear(p.totalRedondeado)}
+        </div>
+      </div>
+
+      <div>
+        <div className="text-[10px]" style={{ color: isDark ? "#6b7280" : "#adb5bd" }}>
+          Interés
+        </div>
+        <div
+          className="text-xs font-medium"
+          style={{ color: isDark ? "#f59e0b" : "#d97706" }}
+        >
+          ${formatear(p.interesRedondeado)}
+        </div>
+      </div>
+
+      <div className="mt-3 flex w-full gap-1.5">
+        <button
+          onClick={() => copiarSimple(p)}
+          className="min-h-10 flex-1 rounded-lg bg-teal-500 px-2 py-1.5 text-xs font-semibold text-white shadow-sm transition-all hover:bg-teal-600"
+        >
+          📋 Simple
+        </button>
+        <button
+          onClick={() => copiarMensaje(p)}
+          className="min-h-10 flex-1 rounded-lg bg-teal-500/15 px-2 py-1.5 text-xs font-medium text-teal-500 transition-all hover:bg-teal-500/25"
+          title="Copia con tasas e intereses"
+        >
+          +Info
+        </button>
+      </div>
+    </div>
+  );
+
+  const resultadoMovil = resultados?.find((p) => p.id === periodoMovil) || resultados?.[0];
 
   return (
     <div>
@@ -433,7 +514,7 @@ export const CalculadoraDiaria = () => {
         >
           {/* Header del préstamo */}
           <div
-            className="p-3 text-center border-b"
+            className="p-2 text-center border-b sm:p-3"
             style={{
               borderColor: isDark
                 ? "rgba(255,255,255,0.06)"
@@ -459,98 +540,62 @@ export const CalculadoraDiaria = () => {
             </p>
           </div>
 
-          {/* Grilla 3 períodos */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x" style={{ 
-            divideColor: isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.06)'
+          {/* Mobile: selector por período y una tarjeta visible */}
+          <div className="sm:hidden">
+            <div
+              className="grid grid-cols-3 gap-1 border-b p-2"
+              role="group"
+              aria-label="Período de financiación"
+              style={{ borderColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)" }}
+            >
+              {resultados.map((p) => {
+                const seleccionado = periodoMovil === p.id;
+
+                return (
+                  <button
+                    key={p.id}
+                    type="button"
+                    aria-pressed={seleccionado}
+                    onClick={() => setPeriodoMovil(p.id)}
+                    className={`min-h-12 rounded-lg px-1 py-1.5 text-xs font-semibold transition ${
+                      seleccionado
+                        ? "bg-teal-500 text-white shadow-sm"
+                        : isDark
+                          ? "bg-gray-700 text-gray-200 hover:bg-gray-600"
+                          : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                    }`}
+                  >
+                    <span className="block">{p.label}</span>
+                    <span className={`mt-0.5 block text-[10px] ${seleccionado ? "text-white/80" : "opacity-70"}`}>
+                      {p.id === "mensual" ? "1 pago" : `${p.cuotas} cuotas`}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+            {resultadoMovil && (
+              <div>
+                {renderTarjetaResultado(resultadoMovil)}
+              </div>
+            )}
+          </div>
+
+          {/* Desktop: conserva las tres tarjetas visibles */}
+          <div className="hidden sm:grid sm:grid-cols-3 sm:divide-x" style={{
+            divideColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)",
           }}>
             {resultados.map((p) => (
-              <div
-                key={p.id}
-                className="p-3 sm:p-4 text-center flex flex-col items-center gap-1"
-                style={{
-                  backgroundColor: isDark
-                    ? "rgba(30, 30, 30, 0.8)"
-                    : "rgba(255, 255, 255, 0.85)",
-                }}
-              >
-                {/* Label */}
-                <span
-                  className="text-xs font-semibold uppercase tracking-wider"
-                  style={{ color: isDark ? "#6b7280" : "#9ca3af" }}
-                >
-                  {p.label}
-                </span>
-                <span
-                  className="text-[10px] mb-2"
-                  style={{ color: isDark ? "#4b5563" : "#adb5bd" }}
-                >
-                  {p.subLabel}
-                </span>
-
-                {/* Última semana parcial (solo semanal) */}
-                {p.id === "semanal" && p.remainingDays > 0 && (
-                  <span
-                    className="text-[10px] mb-2 -mt-1"
-                    style={{ color: isDark ? "#f59e0b" : "#d97706" }}
-                  >
-                    última semana: ${formatear(p.lastWeekCuota)} ({p.remainingDays}d)
-                  </span>
-                )}
-
-                {/* Cuota */}
-                <div className="mb-1">
-                  <div className="text-[10px]" style={{ color: isDark ? "#6b7280" : "#adb5bd" }}>
-                    Cuota
-                  </div>
-                  <div className="text-xl font-bold text-teal-500">
-                    ${formatear(p.cuota)}
-                  </div>
-                </div>
-
-                {/* Total */}
-                <div className="mb-1">
-                  <div className="text-[10px]" style={{ color: isDark ? "#6b7280" : "#adb5bd" }}>
-                    Total
-                  </div>
-                  <div className="text-sm font-semibold">
-                    ${formatear(p.totalRedondeado)}
-                  </div>
-                </div>
-
-                {/* Interés */}
-                <div>
-                  <div className="text-[10px]" style={{ color: isDark ? "#6b7280" : "#adb5bd" }}>
-                    Interés
-                  </div>
-                  <div
-                    className="text-xs font-medium"
-                    style={{ color: isDark ? "#f59e0b" : "#d97706" }}
-                  >
-                    ${formatear(p.interesRedondeado)}
-                  </div>
-                </div>
-
-                {/* Copiar */}
-                <div className="mt-3 flex gap-1.5">
-                  <button
-                    onClick={() => copiarSimple(p)}
-                    className="flex-1 text-xs px-2 py-1.5 rounded-lg bg-teal-500 text-white hover:bg-teal-600 transition-all font-semibold shadow-sm"
-                  >
-                    📋 Simple
-                  </button>
-                  <button
-                    onClick={() => copiarMensaje(p)}
-                    className="flex-1 text-xs px-2 py-1.5 rounded-lg bg-teal-500/15 text-teal-500 hover:bg-teal-500/25 transition-all font-medium"
-                    title="Copia con tasas e intereses"
-                  >
-                    +Info
-                  </button>
-                </div>
-              </div>
+              <div key={p.id}>{renderTarjetaResultado(p)}</div>
             ))}
           </div>
         </div>
       )}
+
+      <PlazosRapidos
+        monto={monto}
+        tasaDiaria={porcentaje / 100}
+        redondeo={redondeo}
+      />
     </div>
   );
 };
